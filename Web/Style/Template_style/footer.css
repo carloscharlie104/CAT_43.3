@@ -1,0 +1,58 @@
+/* footer.css */
+footer {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 60px 80px;
+    display: flex;
+    gap: 100px;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.logo-footer {
+    width: 60px;
+    height: 60px;
+    color: #999;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons svg {
+    width: 25px;
+    height: 25px;
+    color: #999;
+}
+
+.footer-links-section {
+    display: flex;
+    gap: 60px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-column h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.footer-column a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.footer-divider {
+    width: 1px;
+    background-color: #fff;
+}
