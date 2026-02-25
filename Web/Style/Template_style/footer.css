@@ -6,6 +6,9 @@ footer {
     display: flex;
     gap: 100px;
     margin-top: auto;
+
+    /* Fijar tamaño base para que sea consistente en todas las páginas */
+    font-size: 16px;
 }
 
 .footer-left {
@@ -23,12 +26,6 @@ footer {
 .social-icons {
     display: flex;
     gap: 15px;
-}
-
-.social-icons svg {
-    width: 25px;
-    height: 25px;
-    color: #999;
 }
 
 .footer-links-section {
@@ -56,4 +53,38 @@ footer {
 .footer-divider {
     width: 1px;
     background-color: #fff;
+}
+
+/* ===== Normalización interna del footer (evita tamaños distintos entre páginas) ===== */
+footer h4 {
+    margin: 0 0 5px 0;
+    line-height: 1.2;
+}
+
+footer a {
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* ===== SVG aspas del footer (tamaño controlado, no depende de otros CSS) ===== */
+footer .icon-x {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Tamaño del logo */
+footer .logo-footer .icon-x {
+    width: 60px;
+    height: 60px;
+    color: #999;
+}
+
+/* Tamaño de redes */
+footer .social-icons .icon-x {
+    width: 25px;
+    height: 25px;
+    color: #999;
 }
