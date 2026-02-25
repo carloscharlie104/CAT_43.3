@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Reserva Datos Coche</title>
+
+    <link rel="stylesheet" href="../Style/Template_style/header.css">
+    <link rel="stylesheet" href="../Style/Template_style/footer.css">
+    <link rel="stylesheet" href="../Style/Pages_style/carData.css">
 </head>
 <body>
 
+<div id="header-placeholder"></div>
+
+<main class="page">
+    <section class="reservation-card" aria-label="Creación de datos de coche para reserva">
+        <!-- Columna izquierda (placeholder imagen coche) -->
+        <div class="reservation-media">
+            <h2 class="reservation-title">Lorem Ipsum</h2>
+            <div class="media-box" aria-hidden="true">
+                <svg class="media-x" viewBox="0 0 100 100">
+                    <line x1="15" y1="15" x2="85" y2="85"></line>
+                    <line x1="85" y1="15" x2="15" y2="85"></line>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Columna derecha (datos / formulario) -->
+        <div class="reservation-data">
+            <form class="reservation-form" action="#" method="post">
+                <div class="reservation-info" role="group" aria-label="Datos de la reserva">
+                    <p class="info-line">Lorem Ipsum</p>
+                    <p class="info-line">Lorem Ipsum</p>
+                    <p class="info-line">Lorem Ipsum</p>
+                    <p class="info-line">Lorem Ipsum</p>
+
+                    <a class="cta" href="#" role="button">Lorem Ipsum</a>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    function loadComponent(id, file) {
+        fetch(file)
+            .then(response => {
+                if (!response.ok) throw new Error('Error cargando ' + file);
+                return response.text();
+            })
+            .then(data => document.getElementById(id).innerHTML = data)
+            .catch(error => console.error('Hubo un problema con la petición fetch:', error));
+    }
+
+    // Cargamos los componentes usando rutas relativas desde carData.html hacia la carpeta Template
+    loadComponent('header-placeholder', 'Template/header.html');
+    loadComponent('footer-placeholder', 'Template/footer.html');
+
+</script>
 </body>
 </html>
