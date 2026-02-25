@@ -5,6 +5,7 @@ footer {
     padding: 60px 80px;
     display: flex;
     gap: 100px;
+    margin-top: auto;
 }
 
 .footer-left {

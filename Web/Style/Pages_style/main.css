@@ -4,7 +4,18 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+html, body {
+    height: 100%;
+}
 
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.page main{
+    flex: 1;
+}
 body {
     background-color: #ffffff;
     color: #000000;
