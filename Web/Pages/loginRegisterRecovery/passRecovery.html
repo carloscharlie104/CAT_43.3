@@ -1,10 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Recuperar contraseña</title>
+
+    <!-- CSS del template -->
+    <link rel="stylesheet" href="../../Style/Template_style/auth-card.css">
+    <link rel="stylesheet" href="../../Style/Template_style/footer.css">
+    <link rel="stylesheet" href="../../Style/Template_style/header.css">
+    <!-- CSS específico -->
+    <link rel="stylesheet" href="../../Style/Pages_style/loginRegisterRecovery/passRecovery.css">
 </head>
+
 <body>
+
+<div id = "header-placeholder"></div>
+
+<main class="auth">
+    <section class="auth-card" aria-labelledby="recover-title">
+        <h1 id="recover-title" class="auth-card__title">
+            Recuperar contraseña
+        </h1>
+
+        <!-- Texto explicativo -->
+        <p class="auth-card__description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Lorem ipsum dolor sit amet, consectetur.
+        </p>
+
+        <form class="auth-card__form" action="./login.html" method="get">
+
+            <!-- Email -->
+            <div class="field">
+                <span class="field__icon-left" aria-hidden="true">×</span>
+
+                <label class="field__label" for="recover-email">
+                    Correo electrónico
+                </label>
+
+                <input
+                        id="recover-email"
+                        class="field__input"
+                        type="email"
+                        placeholder="Introduce tu correo"
+                        autocomplete="email"
+                        required
+                />
+
+                <button class="field__clear" type="button" aria-label="Borrar email"></button>
+            </div>
+
+            <!-- Repetir E-Mail -->
+            <div class="field">
+                <span class="field__icon-left" aria-hidden="true">×</span>
+
+                <label class="field__label" for="recover-email-2">Repetir correo electrónico</label>
+                <input
+                        id="recover-email-2"
+                        class="field__input"
+                        type="email"
+                        placeholder="Repite tu correo"
+                        autocomplete="email"
+                        required
+                />
+
+                <button class="field__clear" type="button" aria-label="Borrar repetición de email"></button>
+            </div>
+
+            <!-- Botón -->
+            <button class="auth-card__btn" type="submit">
+                Enviar
+            </button>
+
+            <!-- Volver -->
+            <a class="auth-card__link" href="./login.html">
+                Volver al inicio de sesión
+            </a>
+
+        </form>
+    </section>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    function loadComponent(id, file) {
+        fetch(file)
+            .then(response => {
+                if (!response.ok) throw new Error('Error cargando ' + file);
+                return response.text();
+            })
+            .then(data => document.getElementById(id).innerHTML = data)
+            .catch(error => console.error('Hubo un problema con fetch:', error));
+    }
+
+    // Footer
+    loadComponent('footer-placeholder', '../Template/footer.html');
+    // Header
+    loadComponent('header-placeholder', '../Template/header.html');
+
+    // Clear buttons (idéntico a login.html)
+    document.querySelectorAll('.field').forEach(field => {
+        const input = field.querySelector('.field__input');
+        const clearBtn = field.querySelector('.field__clear');
+
+        const toggleClear = () => {
+            const hasValue = input.value.trim().length > 0;
+            clearBtn.classList.toggle('is-visible', hasValue);
+        };
+
+        toggleClear();
+        input.addEventListener('input', toggleClear);
+        input.addEventListener('blur', toggleClear);
+        input.addEventListener('focus', toggleClear);
+
+        clearBtn.addEventListener('click', () => {
+            input.value = '';
+            toggleClear();
+            input.focus();
+        });
+    });
+</script>
 
 </body>
 </html>
