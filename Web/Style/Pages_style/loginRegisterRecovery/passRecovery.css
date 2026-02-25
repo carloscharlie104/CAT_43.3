@@ -20,3 +20,7 @@ main.auth {
     line-height: 1.4;
 }
 
+.icon-x {
+    stroke: currentColor;
+    stroke-linecap: round;
+}

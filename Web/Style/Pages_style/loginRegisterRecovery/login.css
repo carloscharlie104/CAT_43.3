@@ -11,3 +11,8 @@ main.auth {
     min-height: auto;
 
 }
+
+.icon-x {
+    stroke: currentColor;
+    stroke-linecap: round;
+}
