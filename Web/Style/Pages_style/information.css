@@ -13,14 +13,6 @@ body {
     min-height: 100vh;
 }
 
-.icon-x {
-    width: 100%;
-    height: 100%;
-    stroke: currentColor;
-    stroke-width: 6;
-    stroke-linecap: round;
-}
-
 main {
     padding: 40px;
     max-width: 1200px;

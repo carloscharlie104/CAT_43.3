@@ -24,11 +24,6 @@ body {
     min-height: 100vh;
 }
 
-.icon-x {
-    stroke: currentColor;
-    stroke-linecap: round;
-}
-
 main {
     flex-grow: 1;
     padding: 40px;
