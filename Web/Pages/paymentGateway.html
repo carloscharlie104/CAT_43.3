@@ -1,10 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Información</title>
+
+    <link rel="stylesheet" href="../Style/Pages_style/paymentGateway.css">
+    <link rel="stylesheet" href="../Style/Template_style/footer.css">
 </head>
 <body>
 
+<main>
+    <section class="card">
+
+        <div class="contact-header">
+            <h1 class="contact-title">Lorem Ipsum</h1>
+        </div>
+
+        <form class="contact-form">
+
+                <div class="form-group1">
+                    <label class="form-label">Lorem Ipsum</label>
+                    <input class="form-input" type="text">
+                </div>
+
+                <div class="form-group1">
+                    <label class="form-label">Lorem Ipsum</label>
+                    <input class="form-input" type="text">
+                </div>
+
+            <div class="form-group2">
+                <label class="form-label">Lorem Ipsum</label>
+                <input class="form-input" type="text">
+            </div>
+
+            <div class="form-group3">
+                <label class="form-label">Lorem Ipsum</label>
+                <input class="form-input" type="text">
+
+            </div>
+
+            <div class="form-group3">
+                <label class="form-label">Lorem Ipsum</label>
+                <input class="form-input" type="text">
+            </div>
+
+        </form>
+
+        <div class="bottom-action">
+            <button class="btn-pink">Lorem Ipsum</button>
+        </div>
+
+    </section>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    function loadComponent(id, file) {
+        fetch(file)
+            .then(response => {
+                if (!response.ok) throw new Error('Error cargando ' + file);
+                return response.text();
+            })
+            .then(data => document.getElementById(id).innerHTML = data)
+            .catch(error => console.error('Hubo un problema con la petición fetch:', error));
+    }
+
+    loadComponent('footer-placeholder', 'Template/footer.html');
+</script>
 </body>
 </html>
