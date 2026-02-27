@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+
+    <link rel="stylesheet" href="../Style/Pages_style/information.css">
+    <link rel="stylesheet" href="../Style/Template_style/header.css">
+    <link rel="stylesheet" href="../Style/Template_style/footer.css">
+    <link rel="stylesheet" href="../Style/Pages_style/faq.css">
+    <link rel="stylesheet" href="../Style/Pages_style/main.css">
+</head>
+
+<body>
+
+<div id="header-placeholder"></div>
+
+<main class="faq-page">
+    <div class="faq-container">
+
+        <!-- Desplegables -->
+        <section class="accordion" aria-label="Preguntas frecuentes">
+            <details class="acc-item" open>
+                <summary class="acc-summary">
+                    <span class="acc-title">Lorem Ipsum</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="acc-panel">
+                    <div class="acc-content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                        Sed do eiusmod tempor incididunt ut labore dolore magna.<br>
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco.<br>
+                        Laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                </div>
+            </details>
+
+            <details class="acc-item">
+                <summary class="acc-summary">
+                    <span class="acc-title">Lorem Ipsum</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="acc-panel">
+                    <div class="acc-content">
+                        Lorem Ipsum.
+                    </div>
+                </div>
+            </details>
+
+            <details class="acc-item">
+                <summary class="acc-summary">
+                    <span class="acc-title">Lorem Ipsum</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="acc-panel">
+                    <div class="acc-content">
+                        Lorem Ipsum.
+                    </div>
+                </div>
+            </details>
+
+            <details class="acc-item">
+                <summary class="acc-summary">
+                    <span class="acc-title">Lorem Ipsum</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="acc-panel">
+                    <div class="acc-content">
+                        Lorem Ipsum.
+                    </div>
+                </div>
+            </details>
+
+        </section>
+
+    </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    function loadComponent(id, file) {
+        fetch(file)
+            .then(response => {
+                if (!response.ok) throw new Error('Error cargando ' + file);
+                return response.text();
+            })
+            .then(data => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = data;
+            })
+            .catch(error => console.error('Hubo un problema con la petición fetch:', error));
+    }
+
+    loadComponent('header-placeholder', 'Template/header.html');
+    loadComponent('footer-placeholder', 'Template/footer.html');
+</script>
+
+</body>
+</html>
