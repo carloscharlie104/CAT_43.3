@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reserva Datos Coche</title>
 
+    <link rel="stylesheet" href="../Style/Template_style/header.css">
+    <link rel="stylesheet" href="../Style/Template_style/footer.css">
+    <link rel="stylesheet" href="../Style/Pages_style/carData.css">
+</head>
+
+<body>
+<div id="header-placeholder"></div>
+
+<!-- main = contenedor de página (como Contact) -->
+<main class="carData-main">
+    <!-- Columna izquierda -->
+    <section class="carData-left">
+        <h1 class="carData-title">Lorem Ipsum</h1>
+
+        <div class="media-box">
+            <svg class="icon-x" viewBox="0 0 100 100" aria-hidden="true">
+                <line x1="10" y1="10" x2="90" y2="90"></line>
+                <line x1="90" y1="10" x2="10" y2="90"></line>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Columna derecha -->
+    <section class="carData-right">
+        <p class="info-line">Lorem ipsum</p>
+        <p class="info-line">Lorem ipsum</p>
+        <p class="info-line">Lorem ipsum</p>
+        <p class="info-line">Lorem ipsum</p>
+    </section>
+
+    <!-- CTA -->
+    <a class="cta" href="#">Lorem Ipsum</a>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    function loadComponent(id, file) {
+        fetch(file)
+            .then(r => { if (!r.ok) throw new Error("Error cargando " + file); return r.text(); })
+            .then(html => document.getElementById(id).innerHTML = html)
+            .catch(err => console.error("Hubo un problema:", err));
+    }
+
+    loadComponent("header-placeholder", "Template/header.html");
+    loadComponent("footer-placeholder", "Template/footer.html");
+</script>
 </body>
 </html>

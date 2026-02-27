@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Template Auth-Card</title>
+  <link rel="stylesheet" href="../../Style/Template_style/auth-card.css">
+</head>
+
+<body>
+
+<main class="auth">
+  <section class="auth-card" aria-labelledby="card-title">
+    <h1 id="card-title" class="auth-card__title">Lorem Ipsum</h1>
+
+    <form class="auth-card__form" action="#" method="post">
+
+      <!-- Input 1 -->
+      <div class="field">
+        <span class="field__icon-left" aria-hidden="true">×</span>
+
+        <label class="field__label" for="field-1">Usuario</label>
+        <input
+                id="field-1"
+                class="field__input"
+                type="text"
+                placeholder="Ingresa tu usuario"
+                autocomplete="username"
+        />
+
+        <!-- Botón clear sin texto: la X se dibuja con CSS -->
+        <button class="field__clear" type="button" aria-label="Borrar usuario"></button>
+      </div>
+
+      <!-- Input 2 -->
+      <div class="field">
+        <span class="field__icon-left" aria-hidden="true">×</span>
+
+        <label class="field__label" for="field-2">Contraseña</label>
+        <input
+                id="field-2"
+                class="field__input"
+                type="password"
+                placeholder="Introduce tu contraseña"
+                autocomplete="current-password"
+        />
+
+        <!-- Botón clear sin texto: la X se dibuja con CSS -->
+        <button class="field__clear" type="button" aria-label="Borrar contraseña"></button>
+      </div>
+
+      <!-- Checkbox -->
+      <label class="check">
+        <input class="check__input" type="checkbox" />
+        <span class="check__text">Lorem Ipsum</span>
+      </label>
+
+      <!-- Botón -->
+      <button class="auth-card__btn" type="submit">Lorem Ipsum</button>
+
+      <!-- Link -->
+      <a class="auth-card__link" href="#">Lorem Ipsum</a>
+    </form>
+  </section>
+</main>
+
+<script>
+  // Mostrar/ocultar el botón de borrar y limpiar el input al hacer click
+  document.querySelectorAll('.field').forEach(field => {
+    const input = field.querySelector('.field__input');
+    const clearBtn = field.querySelector('.field__clear');
+
+    const toggleClear = () => {
+      const hasValue = input.value.trim().length > 0;
+      clearBtn.classList.toggle('is-visible', hasValue);
+    };
+
+    // Inicial
+    toggleClear();
+
+    // Cambios en input
+    input.addEventListener('input', toggleClear);
+    input.addEventListener('blur', toggleClear);
+    input.addEventListener('focus', toggleClear);
+
+    // Borrar
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      toggleClear();
+      input.focus();
+    });
+  });
+</script>
+
+</body>
+</html>

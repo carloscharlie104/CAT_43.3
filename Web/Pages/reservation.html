@@ -1,10 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva</title>
+
+    <link rel="stylesheet" href="../Style/Pages_style/reservation.css">
+    <link rel="stylesheet" href="../Style/Template_style/header.css">
+    <link rel="stylesheet" href="../Style/Template_style/footer.css">
+    <link rel="stylesheet" href="../Style/Template_style/offertCard.css">
 </head>
 <body>
 
+<div id="header-placeholder"></div>
+
+<main class="reservation-main">
+
+    <section class="reservation-form">
+        <h1 class="form-main-title">Lorem Ipsum</h1>
+
+        <div class="input-group">
+            <label>
+                <input type="text" class="input-full" disabled>
+            </label>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group-half">
+                <label>Lorem Ipsum
+                <input type="text" class="input-half" disabled>
+                </label>
+            </div>
+            <div class="input-group-half">
+                <label>Lorem Ipsum
+                <input type="text" class="input-half" disabled>
+                </label>
+            </div>
+        </div>
+
+        <div class="submit-container">
+            <button class="btn-pink">Lorem Ipsum</button>
+        </div>
+    </section>
+
+    <section class="reservation-gallery">
+        <div class="gallery-border-container">
+            <div class="cards-grid">
+
+                <div class="grid-item">
+                    <h3 class="item-title">Lorem Ipsum</h3>
+                    <div class="card-placeholder"></div>
+                </div>
+
+                <div class="grid-item">
+                    <h3 class="item-title">Lorem Ipsum</h3>
+                    <div class="card-placeholder"></div>
+                </div>
+
+                <div class="grid-item">
+                    <h3 class="item-title">Lorem Ipsum</h3>
+                    <div class="card-placeholder"></div>
+                </div>
+
+                <div class="grid-item">
+                    <h3 class="item-title">Lorem Ipsum</h3>
+                    <div class="card-placeholder"></div>
+                </div>
+
+                <div class="grid-item">
+                    <h3 class="item-title">Lorem Ipsum</h3>
+                    <div class="card-placeholder"></div>
+                </div>
+
+                <div class="grid-item">
+                    <h3 class="item-title">Lorem Ipsum</h3>
+                    <div class="card-placeholder"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    function loadComponent(id, file) {
+        fetch(file)
+            .then(response => {
+                if (!response.ok) throw new Error('Error cargando ' + file);
+                return response.text();
+            })
+            .then(data => document.getElementById(id).innerHTML = data)
+            .catch(error => console.error('Hubo un problema:', error));
+    }
+
+    function loadRepeatedComponent(className, file) {
+        fetch(file)
+            .then(response => {
+                if (!response.ok) throw new Error('Error cargando ' + file);
+                return response.text();
+            })
+            .then(data => {
+                const elements = document.querySelectorAll('.' + className);
+                elements.forEach(el => el.innerHTML = data);
+            })
+            .catch(error => console.error('Hubo un problema:', error));
+    }
+
+    loadComponent('header-placeholder', 'Template/header.html');
+    loadComponent('footer-placeholder', 'Template/footer.html');
+    loadRepeatedComponent('card-placeholder', 'Template/offertCard.html');
+</script>
 </body>
 </html>

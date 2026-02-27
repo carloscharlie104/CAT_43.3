@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de Contacto</title>
+
+    <link rel="stylesheet" href="../Style/Template_style/header.css">
+    <link rel="stylesheet" href="../Style/Template_style/footer.css">
+    <link rel="stylesheet" href="../Style/Pages_style/contact.css">
 </head>
+
 <body>
+
+<div id="header-placeholder"></div>
+
+<main class="contact-container">
+
+    <div class="contact-header">
+        <h1 class="contact-title">Lorem ipsum</h1>
+        <p class="contact-description">Lorem ipsum...</p>
+    </div>
+
+    <form id="contactForm" class="contact-form" action="#" method="post">
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label" for="name">Lorem ipsum</label>
+                <input id="name" name="name" class="form-input" type="text" placeholder="Lorem ipsum" autocomplete="given-name">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="surname">Lorem ipsum</label>
+                <input id="surname" name="surname" class="form-input" type="text" placeholder="Lorem ipsum" autocomplete="family-name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="email">Lorem ipsum</label>
+            <input id="email" name="email" class="form-input" type="email" placeholder="Lorem ipsum" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="message">Lorem ipsum</label>
+            <textarea id="message" name="message" class="form-textarea" placeholder="Lorem ipsum"></textarea>
+        </div>
+
+    </form>
+
+    <div class="bottom-action">
+        <button class="btn-pink" type="submit" form="contactForm">Lorem ipsum</button>
+    </div>
+
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    function loadComponent(id, file) {
+        fetch(file)
+            .then(r => {
+                if (!r.ok) throw new Error("Error cargando " + file);
+                return r.text();
+            })
+            .then(html => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = html;
+            })
+            .catch(err => console.error("Fetch error:", err));
+    }
+
+    loadComponent('header-placeholder', 'Template/header.html');
+    loadComponent('footer-placeholder', 'Template/footer.html');
+</script>
 
 </body>
 </html>

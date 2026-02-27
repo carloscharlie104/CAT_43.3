@@ -1,10 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login</title>
+
+
+    <link rel="stylesheet" href="../../Style/Template_style/auth-card.css">
+    <link rel="stylesheet" href="../../Style/Template_style/footer.css">
+    <link rel="stylesheet" href="../../Style/Template_style/header.css"/>
+    <link rel="stylesheet" href="../../Style/Pages_style/loginRegisterRecovery/login.css">
+
 </head>
+
 <body>
+
+<div id="header-placeholder"></div>
+
+<main class="auth">
+    <section class="auth-card" aria-labelledby="login-title">
+        <h1 id="login-title" class="auth-card__title">Lorem Ipsum</h1>
+
+        <form class="auth-card__form" action="../main.html" method="get">
+
+            <!-- Usuario -->
+            <div class="field">
+                <span class="field__icon-left" aria-hidden="true">×</span>
+
+                <label class="field__label" for="login-user">Usuario</label>
+                <input
+                        id="login-user"
+                        class="field__input"
+                        type="text"
+                        placeholder="Lorem Ipsum"
+                        autocomplete="username"
+                />
+
+                <button class="field__clear" type="button" aria-label="Borrar usuario"></button>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="field">
+                <span class="field__icon-left" aria-hidden="true">×</span>
+
+                <label class="field__label" for="login-pass">Contraseña</label>
+                <input
+                        id="login-pass"
+                        class="field__input"
+                        type="password"
+                        placeholder="Lorem Ipsum"
+                        autocomplete="current-password"
+                />
+
+                <button class="field__clear" type="button" aria-label="Borrar contraseña"></button>
+            </div>
+
+            <!-- Recordarme -->
+            <label class="check">
+                <input class="check__input" type="checkbox"/>
+                <span class="check__text">Lorem Ipsum</span>
+            </label>
+
+            <!-- Botón -->
+            <button class="auth-card__btn" type="submit">Lorem Ipsum</button>
+
+            <!-- Link -->
+            <a class="auth-card__link" href="./passRecovery.html">¿Lorem Ipsum?</a>
+
+        </form>
+    </section>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    function loadComponent(id, file) {
+        fetch(file)
+            .then(response => {
+                if (!response.ok) throw new Error('Error cargando ' + file);
+                return response.text();
+            })
+            .then(data => document.getElementById(id).innerHTML = data)
+            .catch(error => console.error('Hubo un problema con la petición fetch:', error));
+    }
+
+    // Footer
+    loadComponent('footer-placeholder', '../Template/footer.html');
+    // Header
+    loadComponent('header-placeholder', '../Template/header.html');
+
+    // Botón para hacer clear en los text-fields
+    document.querySelectorAll('.field').forEach(field => {
+        const input = field.querySelector('.field__input');
+        const clearBtn = field.querySelector('.field__clear');
+
+        const toggleClear = () => {
+            const hasValue = input.value.trim().length > 0;
+            clearBtn.classList.toggle('is-visible', hasValue);
+        };
+
+        toggleClear();
+        input.addEventListener('input', toggleClear);
+        input.addEventListener('blur', toggleClear);
+        input.addEventListener('focus', toggleClear);
+
+        clearBtn.addEventListener('click', () => {
+            input.value = '';
+            toggleClear();
+            input.focus();
+        });
+    });
+</script>
 
 </body>
 </html>

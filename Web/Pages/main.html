@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+
+    <link rel="stylesheet" href="../Style/Pages_style/main.css">
+    <link rel="stylesheet" href="../Style/Template_style/header.css">
+    <link rel="stylesheet" href="../Style/Template_style/footer.css">
+    <link rel="stylesheet" href="../Style/Template_style/offertCard.css">
 </head>
 <body>
 
+<div id="header-placeholder"></div>
+
+<main>
+    <section class="gallery-section">
+
+        <div class="gallery-col small-col">
+            <h2 class="col-title">Lorem Ipsum</h2>
+            <div class="card-placeholder"></div>
+        </div>
+
+        <div class="gallery-col large-col">
+            <h1 class="main-title">Lorem Ipsum</h1>
+            <div class="card-placeholder"></div>
+        </div>
+
+        <div class="gallery-col small-col">
+            <h2 class="col-title">Lorem Ipsum</h2>
+            <div class="card-placeholder"></div>
+        </div>
+
+    </section>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    function loadComponent(id, file) {
+        fetch(file)
+            .then(response => {
+                if (!response.ok) throw new Error('Error cargando ' + file);
+                return response.text();
+            })
+            .then(data => document.getElementById(id).innerHTML = data)
+            .catch(error => console.error('Hubo un problema:', error));
+    }
+
+    function loadRepeatedComponent(className, file) {
+        fetch(file)
+            .then(response => {
+                if (!response.ok) throw new Error('Error cargando ' + file);
+                return response.text();
+            })
+            .then(data => {
+                const elements = document.querySelectorAll('.' + className);
+                elements.forEach(el => el.innerHTML = data);
+            })
+            .catch(error => console.error('Hubo un problema:', error));
+    }
+
+    loadComponent('header-placeholder', 'Template/header.html');
+    loadComponent('footer-placeholder', 'Template/footer.html');
+    loadRepeatedComponent('card-placeholder', 'Template/offertCard.html');
+</script>
 </body>
 </html>

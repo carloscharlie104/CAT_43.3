@@ -1,0 +1,18 @@
+/* Estructura para tener "sticky footer" */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+main.auth {
+    flex: 1;
+    min-height: auto;
+
+}
+
+.icon-x {
+    stroke: currentColor;
+    stroke-linecap: round;
+}
