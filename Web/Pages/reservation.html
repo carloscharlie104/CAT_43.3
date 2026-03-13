@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<div id="header-placeholder"></div>
+<div id="header-placeholder" data-include="../Template/header.html"></div>
 
 <main class="reservation-main">
 
@@ -49,32 +49,32 @@
 
                 <div class="grid-item">
                     <h3 class="item-title">Lorem Ipsum</h3>
-                    <div class="card-placeholder"></div>
+                    <div class="card-placeholder" data-include="../Template/offertCard.html"></div>
                 </div>
 
                 <div class="grid-item">
                     <h3 class="item-title">Lorem Ipsum</h3>
-                    <div class="card-placeholder"></div>
+                    <div class="card-placeholder" data-include="../Template/offertCard.html"></div>
                 </div>
 
                 <div class="grid-item">
                     <h3 class="item-title">Lorem Ipsum</h3>
-                    <div class="card-placeholder"></div>
+                    <div class="card-placeholder" data-include="../Template/offertCard.html"></div>
                 </div>
 
                 <div class="grid-item">
                     <h3 class="item-title">Lorem Ipsum</h3>
-                    <div class="card-placeholder"></div>
+                    <div class="card-placeholder" data-include="../Template/offertCard.html"></div>
                 </div>
 
                 <div class="grid-item">
                     <h3 class="item-title">Lorem Ipsum</h3>
-                    <div class="card-placeholder"></div>
+                    <div class="card-placeholder" data-include="../Template/offertCard.html"></div>
                 </div>
 
                 <div class="grid-item">
                     <h3 class="item-title">Lorem Ipsum</h3>
-                    <div class="card-placeholder"></div>
+                    <div class="card-placeholder" data-include="../Template/offertCard.html"></div>
                 </div>
 
             </div>
@@ -83,35 +83,8 @@
 
 </main>
 
-<div id="footer-placeholder"></div>
+<div id="footer-placeholder" data-include="../Template/footer.html"></div>
 
-<script>
-    function loadComponent(id, file) {
-        fetch(file)
-            .then(response => {
-                if (!response.ok) throw new Error('Error cargando ' + file);
-                return response.text();
-            })
-            .then(data => document.getElementById(id).innerHTML = data)
-            .catch(error => console.error('Hubo un problema:', error));
-    }
-
-    function loadRepeatedComponent(className, file) {
-        fetch(file)
-            .then(response => {
-                if (!response.ok) throw new Error('Error cargando ' + file);
-                return response.text();
-            })
-            .then(data => {
-                const elements = document.querySelectorAll('.' + className);
-                elements.forEach(el => el.innerHTML = data);
-            })
-            .catch(error => console.error('Hubo un problema:', error));
-    }
-
-    loadComponent('header-placeholder', 'Template/header.html');
-    loadComponent('footer-placeholder', 'Template/footer.html');
-    loadRepeatedComponent('card-placeholder', 'Template/offertCard.html');
-</script>
+<script src="../Scripts/site.js" defer></script>
 </body>
 </html>

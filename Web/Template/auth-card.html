@@ -64,33 +64,7 @@
   </section>
 </main>
 
-<script>
-  // Mostrar/ocultar el botón de borrar y limpiar el input al hacer click
-  document.querySelectorAll('.field').forEach(field => {
-    const input = field.querySelector('.field__input');
-    const clearBtn = field.querySelector('.field__clear');
-
-    const toggleClear = () => {
-      const hasValue = input.value.trim().length > 0;
-      clearBtn.classList.toggle('is-visible', hasValue);
-    };
-
-    // Inicial
-    toggleClear();
-
-    // Cambios en input
-    input.addEventListener('input', toggleClear);
-    input.addEventListener('blur', toggleClear);
-    input.addEventListener('focus', toggleClear);
-
-    // Borrar
-    clearBtn.addEventListener('click', () => {
-      input.value = '';
-      toggleClear();
-      input.focus();
-    });
-  });
-</script>
+<script src="../Scripts/site.js" defer></script>
 
 </body>
 </html>

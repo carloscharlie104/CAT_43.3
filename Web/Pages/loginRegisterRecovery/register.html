@@ -16,7 +16,7 @@
 
 <body>
 
-<div id="header-placeholder"></div>
+<div id="header-placeholder" data-include="../../Template/header.html"></div>
 
 <main class="auth">
     <section class="auth-card" aria-labelledby="register-title">
@@ -119,45 +119,9 @@
     </section>
 </main>
 
-<div id="footer-placeholder"></div>
+<div id="footer-placeholder" data-include="../../Template/footer.html"></div>
 
-<script>
-    function loadComponent(id, file) {
-        fetch(file)
-            .then(response => {
-                if (!response.ok) throw new Error('Error cargando ' + file);
-                return response.text();
-            })
-            .then(data => document.getElementById(id).innerHTML = data)
-            .catch(error => console.error('Hubo un problema con fetch:', error));
-    }
-
-    // Header y Footer (rutas correctas desde Pages/loginRegisterRecovery/)
-    loadComponent('header-placeholder', '../Template/header.html');
-    loadComponent('footer-placeholder', '../Template/footer.html');
-
-    // Clear buttons (idéntico a login.html)
-    document.querySelectorAll('.field').forEach(field => {
-        const input = field.querySelector('.field__input');
-        const clearBtn = field.querySelector('.field__clear');
-
-        const toggleClear = () => {
-            const hasValue = input.value.trim().length > 0;
-            clearBtn.classList.toggle('is-visible', hasValue);
-        };
-
-        toggleClear();
-        input.addEventListener('input', toggleClear);
-        input.addEventListener('blur', toggleClear);
-        input.addEventListener('focus', toggleClear);
-
-        clearBtn.addEventListener('click', () => {
-            input.value = '';
-            toggleClear();
-            input.focus();
-        });
-    });
-</script>
+<script src="../../Scripts/site.js" defer></script>
 
 </body>
 </html>
