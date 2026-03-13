@@ -12,10 +12,10 @@
 </head>
 <body>
 
-<div id="header-placeholder"></div>
+<div id="header-placeholder" data-include="../Template/header.html"></div>
 
 <main>
-    <div id="cards-placeholder"></div>
+    <div id="cards-placeholder" data-include="../Template/cards.html"></div>
 
     <section class="bottom-action">
         <p class="bottom-quote">"Lorem Ipsum dolor sit amet, consectetur.."</p>
@@ -25,22 +25,8 @@
     </section>
 </main>
 
-<div id="footer-placeholder"></div>
+<div id="footer-placeholder" data-include="../Template/footer.html"></div>
 
-<script>
-    function loadComponent(id, file) {
-        fetch(file)
-            .then(response => {
-                if (!response.ok) throw new Error('Error cargando ' + file);
-                return response.text();
-            })
-            .then(data => document.getElementById(id).innerHTML = data)
-            .catch(error => console.error('Hubo un problema con la petición fetch:', error));
-    }
-
-    loadComponent('header-placeholder', 'Template/header.html');
-    loadComponent('cards-placeholder', 'Template/cards.html');
-    loadComponent('footer-placeholder', 'Template/footer.html');
-</script>
+<script src="../Scripts/site.js" defer></script>
 </body>
 </html>

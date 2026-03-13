@@ -14,7 +14,7 @@
 
 <body>
 
-<div id="header-placeholder"></div>
+<div id="header-placeholder" data-include="../Template/header.html"></div>
 
 <main class="faq-page">
     <div class="faq-container">
@@ -77,25 +77,9 @@
     </div>
 </main>
 
-<div id="footer-placeholder"></div>
+<div id="footer-placeholder" data-include="../Template/footer.html"></div>
 
-<script>
-    function loadComponent(id, file) {
-        fetch(file)
-            .then(response => {
-                if (!response.ok) throw new Error('Error cargando ' + file);
-                return response.text();
-            })
-            .then(data => {
-                const el = document.getElementById(id);
-                if (el) el.innerHTML = data;
-            })
-            .catch(error => console.error('Hubo un problema con la petición fetch:', error));
-    }
-
-    loadComponent('header-placeholder', 'Template/header.html');
-    loadComponent('footer-placeholder', 'Template/footer.html');
-</script>
+<script src="../Scripts/site.js" defer></script>
 
 </body>
 </html>
