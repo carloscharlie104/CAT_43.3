@@ -39,6 +39,28 @@ body {
     gap: 16px;
 }
 
+/* ============ Mensajes de formulario ============ */
+.form-message {
+    font-size: 13px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #d7d7d7;
+    background: #f7f7f7;
+    color: #111;
+}
+
+.form-message--error {
+    border-color: #c0392b;
+    background: #fbeaea;
+    color: #8e1b0f;
+}
+
+.form-message--success {
+    border-color: #2e7d32;
+    background: #eaf6ea;
+    color: #1b5e20;
+}
+
 /* ============ Campo (icono izq + input + clear) ============ */
 .field {
     position: relative;
@@ -99,6 +121,18 @@ body {
 .field__input:focus {
     border-color: #6b6b6b;
     box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+}
+
+.field--error .field__input {
+    border-color: #c0392b;
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.15);
+}
+
+.field__error {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    color: #8e1b0f;
+    margin: 2px 0 0 56px;
 }
 
 /* ============ Botón clear profesional (X dibujada) ============ */

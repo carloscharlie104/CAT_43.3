@@ -21,7 +21,7 @@
     <section class="auth-card" aria-labelledby="login-title">
         <h1 id="login-title" class="auth-card__title">Lorem Ipsum</h1>
 
-        <form class="auth-card__form" action="../main.html" method="get">
+        <form class="auth-card__form" action="../main.html" method="get" novalidate>
 
             <!-- Usuario -->
             <div class="field">
@@ -34,6 +34,7 @@
                         type="text"
                         placeholder="Lorem Ipsum"
                         autocomplete="username"
+                        required
                 />
 
                 <button class="field__clear" type="button" aria-label="Borrar usuario"></button>
@@ -50,6 +51,7 @@
                         type="password"
                         placeholder="Lorem Ipsum"
                         autocomplete="current-password"
+                        required
                 />
 
                 <button class="field__clear" type="button" aria-label="Borrar contraseña"></button>
@@ -74,6 +76,7 @@
 <div id="footer-placeholder" data-include="../../Template/footer.html"></div>
 
 <script src="../../Scripts/site.js" defer></script>
+<script src="../../Scripts/auth.js" defer></script>
 
 </body>
 </html>
