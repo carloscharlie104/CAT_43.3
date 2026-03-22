@@ -133,3 +133,16 @@ summary:focus-visible {
     outline: 3px solid #2563eb;
     outline-offset: 3px;
 }
+
+/* ===== Media Query ==== */
+@media (max-width: 768px) {
+    /* movil */
+}
+
+@media (min-width: 1024px) {
+    /* estilos para PC */
+    /* este debería ser el base sin tocar nada*/
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    /*tablet*/
+}

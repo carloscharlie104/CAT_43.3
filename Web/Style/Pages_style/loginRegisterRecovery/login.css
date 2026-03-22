@@ -5,14 +5,32 @@ body {
     flex-direction: column;
 }
 
-
 main.auth {
     flex: 1;
     min-height: auto;
 
 }
-
 .icon-x {
     stroke: currentColor;
     stroke-linecap: round;
+}
+
+
+/* Login - Móvil*/
+@media (max-width: 768px) {
+    body {
+        background: #fff;
+    }
+
+    main.auth {
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding-bottom: 90px;
+    }
+
+    .auth {
+        min-height: auto;
+        padding: 10px;
+    }
 }

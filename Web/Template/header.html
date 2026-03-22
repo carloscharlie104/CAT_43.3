@@ -1,18 +1,85 @@
 <header>
-    <div class="header-container">
-        <div class="logo-header">
-            <svg class="icon-x" viewBox="0 0 100 100"><line x1="10" y1="10" x2="90" y2="90"/><line x1="90" y1="10" x2="10" y2="90"/></svg>
-        </div>
+    <!-- Desktop / tablet -->
+    <div class="header-desktop">
+        <div class="header-container">
+            <div class="logo-header">
+                <svg class="icon-x" viewBox="0 0 100 100" aria-hidden="true">
+                    <line x1="10" y1="10" x2="90" y2="90"></line>
+                    <line x1="90" y1="10" x2="10" y2="90"></line>
+                </svg>
+            </div>
 
-        <nav class="nav-links">
-            <a href="#" class="nav-pill">Lorem Ipsum</a>
-            <a href="#" class="nav-pill">Lorem Ipsum</a>
-            <a href="#" class="nav-pill">Lorem Ipsum</a>
-            <a href="#" class="nav-pill">Lorem Ipsum</a>
-        </nav>
+            <nav class="nav-links" aria-label="Navegación principal">
+                <a href="../Pages/main.html" class="nav-pill">Inicio</a>
+                <a href="../Pages/information.html" class="nav-pill">Información</a>
+                <a href="../Pages/reservation.html" class="nav-pill">Reserva</a>
+                <a href="../Pages/contact.html" class="nav-pill">Contacto</a>
+            </nav>
 
-        <div class="nav-actions">
-            <a href="#" class="nav-pill yellow">Lorem Ipsum</a>
+            <div class="nav-actions">
+                <a href="../Pages/loginRegisterRecovery/login.html" class="nav-pill">Acceso</a>
+                <a href="../Pages/loginRegisterRecovery/register.html" class="nav-pill yellow">Registro</a>
+            </div>
         </div>
     </div>
+
+    <!-- Móvil: cabecera superior -->
+    <div class="header-mobile-top">
+        <a href="../Pages/main.html" class="mobile-top-btn mobile-top-btn--logo" aria-label="Inicio">
+            <svg class="icon-x" viewBox="0 0 100 100" aria-hidden="true">
+                <line x1="10" y1="10" x2="90" y2="90"></line>
+                <line x1="90" y1="10" x2="10" y2="90"></line>
+            </svg>
+        </a>
+
+        <a href="../Pages/loginRegisterRecovery/login.html" class="mobile-top-btn mobile-top-btn--user" aria-label="Acceso o registro">
+            <svg class="icon-x" viewBox="0 0 100 100" aria-hidden="true">
+                <line x1="10" y1="10" x2="90" y2="90"></line>
+                <line x1="90" y1="10" x2="10" y2="90"></line>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Móvil: barra inferior fija -->
+    <nav class="mobile-bottom-nav" aria-label="Navegación móvil">
+        <a href="../Pages/main.html" class="mobile-bottom-item">
+            <span class="mobile-bottom-icon">
+                <svg class="icon-x" viewBox="0 0 100 100" aria-hidden="true">
+                    <line x1="10" y1="10" x2="90" y2="90"></line>
+                    <line x1="90" y1="10" x2="10" y2="90"></line>
+                </svg>
+            </span>
+            <span class="mobile-bottom-text">Inicio</span>
+        </a>
+
+        <a href="../Pages/information.html" class="mobile-bottom-item">
+            <span class="mobile-bottom-icon">
+                <svg class="icon-x" viewBox="0 0 100 100" aria-hidden="true">
+                    <line x1="10" y1="10" x2="90" y2="90"></line>
+                    <line x1="90" y1="10" x2="10" y2="90"></line>
+                </svg>
+            </span>
+            <span class="mobile-bottom-text">Info</span>
+        </a>
+
+        <a href="../Pages/reservation.html" class="mobile-bottom-item">
+            <span class="mobile-bottom-icon">
+                <svg class="icon-x" viewBox="0 0 100 100" aria-hidden="true">
+                    <line x1="10" y1="10" x2="90" y2="90"></line>
+                    <line x1="90" y1="10" x2="10" y2="90"></line>
+                </svg>
+            </span>
+            <span class="mobile-bottom-text">Reserva</span>
+        </a>
+
+        <a href="../Pages/contact.html" class="mobile-bottom-item">
+            <span class="mobile-bottom-icon">
+                <svg class="icon-x" viewBox="0 0 100 100" aria-hidden="true">
+                    <line x1="10" y1="10" x2="90" y2="90"></line>
+                    <line x1="90" y1="10" x2="10" y2="90"></line>
+                </svg>
+            </span>
+            <span class="mobile-bottom-text">Contacto</span>
+        </a>
+    </nav>
 </header>
