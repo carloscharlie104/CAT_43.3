@@ -146,3 +146,12 @@ summary:focus-visible {
 @media (min-width: 768px) and (max-width: 1023px) {
     /*tablet*/
 }
+
+#footer-placeholder {
+    margin-top: auto;
+    width : 100%;
+}
+
+#header-placeholder {
+    width: 100%;
+}

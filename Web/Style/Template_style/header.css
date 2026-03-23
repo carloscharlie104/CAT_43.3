@@ -150,8 +150,5 @@ header {
         display: block;
     }
 
-    /* Para que la barra fija no tape contenido */
-    body {
-        padding-bottom: 100px;
-    }
+
 }
