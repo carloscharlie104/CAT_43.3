@@ -119,37 +119,50 @@ function renderCars(cars, categories, locations) {
 }
 
 function setupInputs() {
-    const fullInput = document.querySelector(".input-full");
+    const fullInputs = document.querySelectorAll(".input-full");
     const halfInputs = document.querySelectorAll(".input-half");
+    const todayIso = new Date().toISOString().split("T")[0];
 
-    if (fullInput) {
+    if (fullInputs[0]) {
         const islandSelect = document.createElement("select");
         islandSelect.className = "input-full";
         islandSelect.id = "islandSelect";
-        fullInput.replaceWith(islandSelect);
+        islandSelect.disabled = false;
+        fullInputs[0].replaceWith(islandSelect);
+    }
+
+    if (fullInputs[1]) {
+        const locationSelect = document.createElement("select");
+        locationSelect.className = "input-full";
+        locationSelect.id = "locationSelect";
+        locationSelect.disabled = true;
+        fullInputs[1].replaceWith(locationSelect);
     }
 
     if (halfInputs[0]) {
-        const locationSelect = document.createElement("select");
-        locationSelect.className = "input-half";
-        locationSelect.id = "locationSelect";
-        locationSelect.disabled = true;
-        halfInputs[0].replaceWith(locationSelect);
+        halfInputs[0].type = "date";
+        halfInputs[0].disabled = false;
+        halfInputs[0].min = todayIso;
     }
 
     if (halfInputs[1]) {
         halfInputs[1].type = "date";
+        halfInputs[1].disabled = false;
+        halfInputs[1].min = todayIso;
     }
 }
 
 function setupTexts() {
     const title = document.querySelector(".form-main-title");
-    const labels = document.querySelectorAll(".input-group-half label");
+    const fullLabels = document.querySelectorAll(".input-group label");
+    const halfLabels = document.querySelectorAll(".input-group-half label");
     const button = document.querySelector(".btn-pink");
 
     if (title) title.textContent = "Reserva tu vehículo";
-    if (labels[0]) labels[0].childNodes[0].textContent = "Recogida ";
-    if (labels[1]) labels[1].childNodes[0].textContent = "Devolución ";
+    if (fullLabels[0]) fullLabels[0].childNodes[0].textContent = "Recogida ";
+    if (fullLabels[1]) fullLabels[1].childNodes[0].textContent = "Lugar de recogida ";
+    if (halfLabels[0]) halfLabels[0].childNodes[0].textContent = "Fecha inicio ";
+    if (halfLabels[1]) halfLabels[1].childNodes[0].textContent = "Fecha fin ";
     if (button) button.textContent = "Explorar coches";
 }
 
