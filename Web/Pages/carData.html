@@ -15,11 +15,9 @@
 <body>
 <div id="header-placeholder" data-include="../Template/header.html"></div>
 
-<!-- main = contenedor de página (como Contact) -->
-<main class="carData-main">
-    <!-- Columna izquierda -->
+<main class="carData-main" id="carData-container">
     <section class="carData-left">
-        <h1 class="carData-title">Lorem Ipsum</h1>
+        <h1 class="carData-title">Cargando vehículo...</h1>
 
         <div class="media-box">
             <svg class="icon-x" viewBox="0 0 100 100" aria-hidden="true">
@@ -29,20 +27,16 @@
         </div>
     </section>
 
-    <!-- Columna derecha -->
     <section class="carData-right">
-        <p class="info-line">Lorem ipsum</p>
-        <p class="info-line">Lorem ipsum</p>
-        <p class="info-line">Lorem ipsum</p>
-        <p class="info-line">Lorem ipsum</p>
+        <p class="info-line">Cargando información...</p>
     </section>
 
-    <!-- CTA -->
-    <a class="cta" href="#">Lorem Ipsum</a>
+    <a class="cta" href="#" id="carData-cta">Reservar</a>
 </main>
 
 <div id="footer-placeholder" data-include="../Template/footer.html"></div>
 
 <script src="../Scripts/site.js" defer></script>
+<script src="../Scripts/carData.js" defer></script>
 </body>
 </html>

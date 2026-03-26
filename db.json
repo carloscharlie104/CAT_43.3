@@ -10,5 +10,252 @@
     "whatsapp": "+34 600 123 456",
     "address": "Calle León y Castillo 150, Las Palmas de Gran Canaria",
     "schedule": "Lunes a sábado, de 08:00 a 20:00"
-  }
+  },
+  "locations": [
+    {
+      "id": "1",
+      "name": "Aeropuerto de Gran Canaria",
+      "Island": "Gran Canaria",
+      "isAirport": true
+    },
+    {
+      "id": "2",
+      "name": "Puerto de la Luz",
+      "Island": "Gran Canaria",
+      "isAirport": false
+    },
+    {
+      "id": "3",
+      "name": "Aeropuerto de Tenerife Sur",
+      "Island": "Tenerife",
+      "isAirport": true
+    },
+    {
+      "id": "4",
+      "name": "Aeropuerto de Tenerife Norte",
+      "Island": "Tenerife",
+      "isAirport": true
+    },
+    {
+      "id": "5",
+      "name": "Aeropuerto de Cesar Manrique",
+      "Island": "Lanzarote",
+      "isAirport": true
+    },
+    {
+      "id": "7",
+      "name": "Puerto de arrecife",
+      "Island": "Lanzarote",
+      "isAirport": false
+    },
+    {
+      "id": "8",
+      "name": "Aeropuerto de Fuerteventura",
+      "Island": "Fuerteventura",
+      "isAirport": true
+    }
+
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Economy",
+      "label": "Económico",
+      "description": "Vehículos compactos y eficientes para uso urbano y trayectos cortos."
+    },
+    {
+      "id": "2",
+      "name": "Compact",
+      "label": "Compacto",
+      "description": "Equilibrio entre comodidad, consumo y capacidad."
+    },
+    {
+      "id": "3",
+      "name": "SUV",
+      "label": "SUV",
+      "description": "Mayor altura, espacio y versatilidad para carretera e isla."
+    },
+    {
+      "id": "4",
+      "name": "Premium",
+      "label": "Premium",
+      "description": "Conducción más confortable y equipamiento superior."
+    }
+  ],
+  "cars": [
+    {
+      "id": "1",
+      "slug": "toyota-yaris",
+      "brand": "Toyota",
+      "model": "Yaris",
+      "fullName": "Toyota Yaris",
+      "categoryId": "1",
+      "locationIds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "pricePerDay": 29,
+      "priceText": "Desde 29 €/día",
+      "transmission": "Manual",
+      "fuel": "Gasolina",
+      "seats": 5,
+      "airConditioning": true,
+      "luggage": 2,
+      "image": "../Assets/cars/toyota-yaris.png",
+      "shortDescription": "Ideal para ciudad, consumo reducido y conducción sencilla.",
+      "description": "El Toyota Yaris es una opción económica y funcional para moverse con agilidad por ciudad y trayectos interurbanos.",
+      "conditions": "Kilometraje estándar incluido. Edad mínima del conductor: 21 años."
+    },
+    {
+      "id": "2",
+      "slug": "seat-ibiza",
+      "brand": "SEAT",
+      "model": "Ibiza",
+      "fullName": "SEAT Ibiza",
+      "categoryId": "1",
+      "locationIds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "pricePerDay": 31,
+      "priceText": "Desde 31 €/día",
+      "transmission": "Manual",
+      "fuel": "Gasolina",
+      "seats": 5,
+      "airConditioning": true,
+      "luggage": 2,
+      "image": "../Assets/cars/seat-ibiza.png",
+      "shortDescription": "Compacto, ágil y perfecto para uso diario.",
+      "description": "El SEAT Ibiza ofrece equilibrio entre consumo, tamaño y comodidad, ideal para desplazamientos turísticos.",
+      "conditions": "Kilometraje estándar incluido. Edad mínima del conductor: 21 años."
+    },
+    {
+      "id": "3",
+      "slug": "volkswagen-golf",
+      "brand": "Volkswagen",
+      "model": "Golf",
+      "fullName": "Volkswagen Golf",
+      "categoryId": "2",
+      "locationIds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "pricePerDay": 38,
+      "priceText": "Desde 38 €/día",
+      "transmission": "Automático",
+      "fuel": "Diésel",
+      "seats": 5,
+      "airConditioning": true,
+      "luggage": 3,
+      "image": "../Assets/cars/volkswagen-golf.png",
+      "shortDescription": "Más confort y mejor respuesta para trayectos largos.",
+      "description": "El Golf es una referencia compacta con un extra de confort, ideal para quien busca una experiencia más completa.",
+      "conditions": "Kilometraje estándar incluido. Edad mínima del conductor: 23 años."
+    },
+    {
+      "id": "4",
+      "slug": "peugeot-3008",
+      "brand": "Peugeot",
+      "model": "3008",
+      "fullName": "Peugeot 3008",
+      "categoryId": "3",
+      "locationIds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "pricePerDay": 52,
+      "priceText": "Desde 52 €/día",
+      "transmission": "Automático",
+      "fuel": "Híbrido",
+      "seats": 5,
+      "airConditioning": true,
+      "luggage": 4,
+      "image": "../Assets/cars/peugeot-3008.png",
+      "shortDescription": "SUV cómodo, amplio y muy versátil.",
+      "description": "Una opción muy completa para viajes en pareja o familia, con más maletero y una conducción cómoda.",
+      "conditions": "Kilometraje estándar incluido. Edad mínima del conductor: 25 años."
+    },
+    {
+      "id": "5",
+      "slug": "kia-sportage",
+      "brand": "Kia",
+      "model": "Sportage",
+      "fullName": "Kia Sportage",
+      "categoryId": "3",
+      "locationIds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "pricePerDay": 55,
+      "priceText": "Desde 55 €/día",
+      "transmission": "Manual",
+      "fuel": "Diésel",
+      "seats": 5,
+      "airConditioning": true,
+      "luggage": 4,
+      "image": "../Assets/cars/kia-sportage.png",
+      "shortDescription": "SUV robusto para quien necesita espacio.",
+      "description": "El Kia Sportage ofrece una buena altura de conducción y amplitud para viajes más largos.",
+      "conditions": "Kilometraje estándar incluido. Edad mínima del conductor: 25 años."
+    },
+    {
+      "id": "6",
+      "slug": "bmw-serie-3",
+      "brand": "BMW",
+      "model": "Serie 3",
+      "fullName": "BMW Serie 3",
+      "categoryId": "4",
+      "locationIds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "pricePerDay": 79,
+      "priceText": "Desde 79 €/día",
+      "transmission": "Automático",
+      "fuel": "Gasolina",
+      "seats": 5,
+      "airConditioning": true,
+      "luggage": 3,
+      "image": "../Assets/cars/bmw-serie-3.png",
+      "shortDescription": "Gama premium para una experiencia superior.",
+      "description": "El BMW Serie 3 está orientado a usuarios que valoran acabados, confort y prestaciones.",
+      "conditions": "Kilometraje estándar incluido. Edad mínima del conductor: 27 años."
+    }
+  ]
 }
