@@ -116,3 +116,44 @@ body {
     stroke-width: 3;
     display: block;
 }
+.reservation-card {
+    background-color: #d9d9d9;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.reservation-card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+.reservation-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+}
+
+.reservation-card-category,
+.reservation-card-price,
+.reservation-card-location {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.reservation-card-link {
+    margin-top: 8px;
+    text-decoration: none;
+    color: #000000;
+    font-weight: 600;
+}
+
+.reservation-empty {
+    grid-column: 1 / -1;
+    font-size: 1.1rem;
+}

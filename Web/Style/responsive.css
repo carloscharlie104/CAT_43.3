@@ -1,4 +1,4 @@
-/* MOVIL */
+/* ===== Mobile ===== */
 @media (max-width: 768px) {
     :root {
         --page-padding-inline: 16px;
@@ -31,44 +31,34 @@
         grid-template-columns: 1fr;
     }
 
-    .cards-section {
+    .card {
+        padding: 16px;
+    }
+
+    /* RESERVATION */
+    .reservation-main {
         flex-direction: column;
         gap: 32px;
-        align-items: center;
+        padding: 20px 16px;
     }
 
-    .card-wrapper {
+    .reservation-form,
+    .reservation-gallery {
         width: 100%;
+        max-width: none;
     }
 
-    .card {
-        padding: 28px 20px;
-        min-height: auto;
-    }
-
-    .bottom-action {
+    .input-row {
         flex-direction: column;
-        align-items: stretch;
-        justify-content: center;
-        gap: 20px;
-        padding: 8px 0 0 0;
-        text-align: left;
+        gap: 16px;
     }
 
-    .bottom-quote {
-        width: 100%;
-        font-size: 1.1rem;
-        text-align: left;
+    .gallery-border-container {
+        padding: 20px;
     }
 
-    .bottom-btn-container {
-        width: 100%;
-        justify-content: flex-end;
-    }
-
-    .btn-pink {
-        padding: 10px 18px;
-        font-size: 1rem;
+    .submit-container {
+        justify-content: flex-start;
     }
 }
 

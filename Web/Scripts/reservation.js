@@ -12,23 +12,38 @@ function createCarCard(car, categories, locations) {
     const carLocations = getLocationsByIds(locations, car.locationIds);
     const fallback = createImageFallback(car.fullName);
     const mainLocation = carLocations[0]?.name || "Ubicación pendiente";
+    const imageSrc = getImageSource(car.image, car.fullName);
 
     return `
-        <div class="gallery-box">
-            <div class="image-placeholder">
+        <article class="grid-item">
+            <h3 class="item-title">${car.fullName}</h3>
+
+            <div class="reservation-card">
                 <img
-                    src="${getImageSource(car.image, car.fullName)}"
+                    class="reservation-card-image"
+                    src="${imageSrc || fallback}"
                     alt="${car.fullName}"
-                    style="width: 100%; height: 100%; object-fit: cover;"
-                    onerror="this.onerror=null;this.src='${fallback}';"
                 >
+
+                <div class="reservation-card-body">
+                    <p class="reservation-card-category">
+                        ${category ? category.label : "Sin categoría"}
+                    </p>
+
+                    <p class="reservation-card-price">
+                        ${formatPrice(car.pricePerDay)}
+                    </p>
+
+                    <p class="reservation-card-location">
+                        ${mainLocation}
+                    </p>
+
+                    <a class="reservation-card-link" href="./carData.html?id=${car.id}">
+                        Ver detalle
+                    </a>
+                </div>
             </div>
-            <p><strong>${car.fullName}</strong></p>
-            <p>${category ? category.label : "Sin categoría"}</p>
-            <p><strong>${formatPrice(car.pricePerDay)}</strong></p>
-            <p>${mainLocation}</p>
-            <a href="./carData.html?id=${car.id}" class="box-link">Ver detalle</a>
-        </div>
+        </article>
     `;
 }
 
@@ -93,18 +108,14 @@ function renderCars(cars, categories, locations) {
     if (!container) return;
 
     if (!cars.length) {
-        container.innerHTML = "<p>No hay coches disponibles</p>";
+        container.innerHTML = `<p class="reservation-empty">No hay coches disponibles</p>`;
         return;
     }
 
-    container.innerHTML = cars.slice(0, 6).map(car => `
-        <div class="grid-item">
-            <h3 class="item-title">${car.fullName}</h3>
-            <div class="card-placeholder">
-                ${createCarCard(car, categories, locations)}
-            </div>
-        </div>
-    `).join("");
+    container.innerHTML = cars
+        .slice(0, 6)
+        .map(car => createCarCard(car, categories, locations))
+        .join("");
 }
 
 function setupInputs() {
