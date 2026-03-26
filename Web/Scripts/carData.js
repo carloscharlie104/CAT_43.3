@@ -70,7 +70,7 @@ function renderCarData(car, category) {
     `;
 
     cta.textContent = "Reservar vehículo";
-    cta.href = `../Pages/reservation.html?id=${car.id}`;
+    cta.href = `../Pages/paymentGateway.html`;
 }
 
 function renderError(message) {

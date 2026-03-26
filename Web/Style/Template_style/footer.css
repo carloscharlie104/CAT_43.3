@@ -87,7 +87,43 @@ footer .social-icons .icon-x {
     height: 25px;
     color: #999;
 }
+/* añadir a footer.css */
 
+.logo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 14px;
+}
+
+.footer-main-logo {
+    width: 88px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.social-logo {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    display: block;
+}
 /* === Móvil ===*/
 @media (max-width: 768px) {
     footer {

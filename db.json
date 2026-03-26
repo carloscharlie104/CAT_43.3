@@ -43,18 +43,17 @@
       "isAirport": true
     },
     {
-      "id": "7",
+      "id": "6",
       "name": "Puerto de arrecife",
       "Island": "Lanzarote",
       "isAirport": false
     },
     {
-      "id": "8",
+      "id": "7",
       "name": "Aeropuerto de Fuerteventura",
       "Island": "Fuerteventura",
       "isAirport": true
     }
-
   ],
   "categories": [
     {
@@ -82,6 +81,35 @@
       "description": "Conducción más confortable y equipamiento superior."
     }
   ],
+  "offers": [
+    {
+      "id": "1",
+      "title": "Oferta fin de semana",
+      "subtitle": "Compactos desde 34 €/día",
+      "description": "Reserva de viernes a domingo con tarifa promocional en vehículos compactos.",
+      "image": "/Web/Assets/offers/offer-compact-weekend.jpg",
+      "ctaText": "Ver vehículos",
+      "ctaLink": "./reservation.html"
+    },
+    {
+      "id": "2",
+      "title": "Recogida en aeropuerto",
+      "subtitle": "Más rápido, más cómodo",
+      "description": "Recoge tu vehículo directamente al aterrizar en Gran Canaria o Tenerife Sur.",
+      "image": "/Web/Assets/offers/offer-airport.jpg",
+      "ctaText": "Reservar ahora",
+      "ctaLink": "./reservation.html"
+    },
+    {
+      "id": "3",
+      "title": "SUV para escapadas",
+      "subtitle": "Más espacio para tu viaje",
+      "description": "Modelos SUV preparados para familia, equipaje y trayectos largos.",
+      "image": "/Web/Assets/offers/offer-suv.jpg",
+      "ctaText": "Descubrir",
+      "ctaLink": "./reservation.html"
+    }
+  ],
   "cars": [
     {
       "id": "1",
@@ -89,6 +117,7 @@
       "brand": "Toyota",
       "model": "Yaris",
       "fullName": "Toyota Yaris",
+      "featured": true,
       "categoryId": "1",
       "locationIds": [
         "1",
@@ -97,8 +126,7 @@
         "4",
         "5",
         "6",
-        "7",
-        "8"
+        "7"
       ],
       "pricePerDay": 29,
       "priceText": "Desde 29 €/día",
@@ -124,10 +152,7 @@
         "2",
         "3",
         "4",
-        "5",
-        "6",
-        "7",
-        "8"
+        "5"
       ],
       "pricePerDay": 31,
       "priceText": "Desde 31 €/día",
@@ -154,9 +179,7 @@
         "3",
         "4",
         "5",
-        "6",
-        "7",
-        "8"
+        "6"
       ],
       "pricePerDay": 38,
       "priceText": "Desde 38 €/día",
@@ -178,14 +201,9 @@
       "fullName": "Peugeot 3008",
       "categoryId": "3",
       "locationIds": [
-        "1",
-        "2",
-        "3",
-        "4",
         "5",
         "6",
-        "7",
-        "8"
+        "7"
       ],
       "pricePerDay": 52,
       "priceText": "Desde 52 €/día",
@@ -207,14 +225,11 @@
       "fullName": "Kia Sportage",
       "categoryId": "3",
       "locationIds": [
-        "1",
         "2",
         "3",
         "4",
         "5",
-        "6",
-        "7",
-        "8"
+        "6"
       ],
       "pricePerDay": 55,
       "priceText": "Desde 55 €/día",
@@ -234,16 +249,12 @@
       "brand": "BMW",
       "model": "Serie 3",
       "fullName": "BMW Serie 3",
+      "featured": true,
       "categoryId": "4",
       "locationIds": [
         "1",
         "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8"
+        "7"
       ],
       "pricePerDay": 79,
       "priceText": "Desde 79 €/día",
@@ -257,5 +268,101 @@
       "description": "El BMW Serie 3 está orientado a usuarios que valoran acabados, confort y prestaciones.",
       "conditions": "Kilometraje estándar incluido. Edad mínima del conductor: 27 años."
     }
-  ]
+  ],
+  "reviews": [
+    {
+      "id": "1",
+      "carId": 1,
+      "author": "Laura M.",
+      "rating": 4,
+      "comment": "Muy práctico para movernos por la ciudad y fácil de aparcar."
+    },
+    {
+      "id": "2",
+      "carId": 4,
+      "author": "David R.",
+      "rating": 5,
+      "comment": "Muy cómodo para viajar por la isla con equipaje."
+    },
+    {
+      "id": "3",
+      "carId": 6,
+      "author": "Paula G.",
+      "rating": 5,
+      "comment": "Experiencia muy buena y coche en perfecto estado."
+    }
+  ],
+  "faqs": [
+    {
+      "id": "1",
+      "question": "¿Qué necesito para reservar un vehículo?",
+      "answer": "Necesitas indicar fechas, lugar de recogida y aportar tus datos básicos de contacto."
+    },
+    {
+      "id": "2",
+      "question": "¿Puedo recoger el coche en el aeropuerto?",
+      "answer": "Sí, disponemos de recogida en aeropuerto en varias localizaciones."
+    },
+    {
+      "id": "3",
+      "question": "¿Se pueden añadir extras a la reserva?",
+      "answer": "Sí, puedes añadir GPS, silla infantil, conductor adicional o seguro ampliado."
+    },
+    {
+      "id": "4",
+      "question": "¿La reserva se confirma al instante?",
+      "answer": "La solicitud queda registrada y se confirma según disponibilidad final del vehículo."
+    }
+  ],
+  "contactMessages": [
+    {
+      "name": "",
+      "surname": "",
+      "email": "",
+      "message": "",
+      "createdAt": "2026-03-26T15:36:10.502Z",
+      "id": "3bMhQXQBmrw"
+    },
+    {
+      "name": "",
+      "surname": "",
+      "email": "",
+      "message": "",
+      "createdAt": "2026-03-26T16:25:14.504Z",
+      "id": "PIfz5HfE_x8"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "1",
+      "carId": 1,
+      "pickupLocationId": 1,
+      "returnLocationId": 1,
+      "startDate": "2026-03-25",
+      "endDate": "2026-03-29",
+      "customerName": "Usuario Demo",
+      "customerEmail": "demo@catrenting.com",
+      "customerPhone": "+34 600 000 000",
+      "extraIds": [
+        1,
+        4
+      ],
+      "notes": "Reserva de ejemplo para pruebas.",
+      "status": "pending",
+      "totalPrice": 148
+    }
+  ],
+  "paymentMethods": [
+    {
+      "id": "1",
+      "name": "Tarjeta bancaria",
+      "enabled": true
+    },
+    {
+      "id": "2",
+      "name": "Pago en oficina",
+      "enabled": true
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

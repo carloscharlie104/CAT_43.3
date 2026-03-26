@@ -1,3 +1,6 @@
+import { injectHeaderData } from "./header.js";
+import { injectFooterData } from "./footer.js";
+
 function fetchPartial(path) {
     if (!fetchPartial.cache[path]) {
         fetchPartial.cache[path] = fetch(path).then((response) => {
@@ -7,10 +10,25 @@ function fetchPartial(path) {
             return response.text();
         });
     }
+
     return fetchPartial.cache[path];
 }
 
 fetchPartial.cache = {};
+
+function isExternalPath(value) {
+    if (!value) return true;
+
+    return (
+        value.startsWith("http://") ||
+        value.startsWith("https://") ||
+        value.startsWith("//") ||
+        value.startsWith("#") ||
+        value.startsWith("mailto:") ||
+        value.startsWith("tel:") ||
+        value.startsWith("data:")
+    );
+}
 
 function resolveIncludeAssetUrls(node, includePath) {
     const templateUrl = new URL(includePath, window.location.href);
@@ -19,17 +37,7 @@ function resolveIncludeAssetUrls(node, includePath) {
     elementsWithHref.forEach((element) => {
         const href = element.getAttribute("href");
 
-        if (!href) return;
-        if (
-            href.startsWith("http://") ||
-            href.startsWith("https://") ||
-            href.startsWith("//") ||
-            href.startsWith("#") ||
-            href.startsWith("mailto:") ||
-            href.startsWith("tel:")
-        ) {
-            return;
-        }
+        if (isExternalPath(href)) return;
 
         element.setAttribute("href", new URL(href, templateUrl).href);
     });
@@ -38,40 +46,30 @@ function resolveIncludeAssetUrls(node, includePath) {
     elementsWithSrc.forEach((element) => {
         const src = element.getAttribute("src");
 
-        if (!src) return;
-        if (
-            src.startsWith("http://") ||
-            src.startsWith("https://") ||
-            src.startsWith("//") ||
-            src.startsWith("data:")
-        ) {
-            return;
-        }
+        if (isExternalPath(src)) return;
 
         element.setAttribute("src", new URL(src, templateUrl).href);
     });
 }
 
-function loadIncludes() {
+async function loadIncludes() {
     const includeNodes = document.querySelectorAll("[data-include]");
 
-    includeNodes.forEach((node) => {
+    const tasks = Array.from(includeNodes).map(async (node) => {
         const path = node.dataset.include;
 
-        if (!path) {
-            return;
-        }
+        if (!path) return;
 
-        fetchPartial(path)
-            .then((html) => {
-                node.innerHTML = html;
-                resolveIncludeAssetUrls(node, path);
-                initializeFieldClearButtons(node);
-            })
-            .catch((error) =>
-                console.error("Hubo un problema con la petición fetch:", error)
-            );
+        try {
+            const html = await fetchPartial(path);
+            node.innerHTML = html;
+            resolveIncludeAssetUrls(node, path);
+        } catch (error) {
+            console.error(`Hubo un problema cargando el include ${path}:`, error);
+        }
     });
+
+    await Promise.all(tasks);
 }
 
 function initializeFieldClearButtons(root = document) {
@@ -97,6 +95,7 @@ function initializeFieldClearButtons(root = document) {
         };
 
         toggleClear();
+
         input.addEventListener("input", toggleClear);
         input.addEventListener("blur", toggleClear);
         input.addEventListener("focus", toggleClear);
@@ -124,66 +123,41 @@ function initializeReservationDateLimits() {
 
     startDate.min = todayIso;
     endDate.min = todayIso;
-}
 
-function initializeHomeMobileCarousel() {
-    const heroCard = document.querySelector(".hero-card");
-    const prevButton = document.querySelector(".main-card-arrow--left");
-    const nextButton = document.querySelector(".main-card-arrow--right");
+    startDate.addEventListener("change", () => {
+        if (startDate.value) {
+            endDate.min = startDate.value;
 
-    if (!heroCard || !prevButton || !nextButton) {
-        return;
-    }
-
-    const offers = [
-        {
-            linkText: "Lorem Ipsum"
-        },
-        {
-            linkText: "Lorem Ipsum"
-        },
-        {
-            linkText: "Lorem Ipsum"
-        },
-        {
-            linkText: "Lorem Ipsum"
+            if (endDate.value && endDate.value < startDate.value) {
+                endDate.value = "";
+            }
+        } else {
+            endDate.min = todayIso;
         }
-    ];
-
-    let currentIndex = 0;
-
-    function renderOffer() {
-        const currentOffer = offers[currentIndex];
-
-        heroCard.innerHTML = `
-            <div class="gallery-box">
-                <div class="image-placeholder">
-                    <svg class="icon-x" viewBox="0 0 100 100" aria-hidden="true">
-                        <line x1="10" y1="10" x2="90" y2="90"></line>
-                        <line x1="90" y1="10" x2="10" y2="90"></line>
-                    </svg>
-                </div>
-                <a href="#" class="box-link">${currentOffer.linkText}</a>
-            </div>
-        `;
-    }
-
-    prevButton.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + offers.length) % offers.length;
-        renderOffer();
     });
-
-    nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % offers.length;
-        renderOffer();
-    });
-
-    renderOffer();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    loadIncludes();
+async function initializeGlobalComponents() {
+    await loadIncludes();
+
+    if (document.querySelector("header")) {
+        await injectHeaderData();
+    }
+
+    if (document.querySelector("footer")) {
+        await injectFooterData();
+    }
+
     initializeFieldClearButtons();
     initializeReservationDateLimits();
-    initializeHomeMobileCarousel();
+
+    document.dispatchEvent(new CustomEvent("site:ready"));
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        await initializeGlobalComponents();
+    } catch (error) {
+        console.error("Error inicializando los componentes globales:", error);
+    }
 });
