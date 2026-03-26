@@ -102,6 +102,13 @@ header {
         stroke-width: 7;
     }
 
+    .header-mobile-icon {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+        display: block;
+    }
+
     .mobile-bottom-nav {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -144,6 +151,13 @@ header {
         width: 18px;
         height: 18px;
         stroke-width: 7;
+    }
+
+    .mobile-bottom-icon-image {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+        display: block;
     }
 
     .mobile-bottom-text {

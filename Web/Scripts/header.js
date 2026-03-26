@@ -10,15 +10,45 @@ function createXIcon() {
 }
 
 function getHeaderConfig(company) {
+    const fallbackIcons = {
+        home: "../Assets/Logos/inicio.png",
+        info: "../Assets/Logos/Logo Info.jpg",
+        reservation: "../Assets/Logos/reservar.jpg",
+        contact: "../Assets/Logos/contacto.webp",
+        profile: "../Assets/Logos/perfil.png"
+    };
+    const mobileIcons = { ...fallbackIcons, ...(company?.mobileIcons || {}) };
+
     return {
         logoAlt: company?.name || "CAT Car Renting Service",
         homeHref: "../Pages/main.html",
         profileHref: "../Pages/loginRegisterRecovery/login.html",
+        mobileIcons,
         navItems: [
-            { label: "Inicio", shortLabel: "Inicio", href: "../Pages/main.html" },
-            { label: "Información", shortLabel: "Info", href: "../Pages/information.html" },
-            { label: "Reserva", shortLabel: "Reserva", href: "../Pages/reservation.html" },
-            { label: "Contacto", shortLabel: "Contacto", href: "../Pages/contact.html" }
+            {
+                label: "Inicio",
+                shortLabel: "Inicio",
+                href: "../Pages/main.html",
+                iconSrc: mobileIcons.home
+            },
+            {
+                label: "Información",
+                shortLabel: "Info",
+                href: "../Pages/information.html",
+                iconSrc: mobileIcons.info
+            },
+            {
+                label: "Reserva",
+                shortLabel: "Reserva",
+                href: "../Pages/reservation.html",
+                iconSrc: mobileIcons.reservation
+            },
+            {
+                label: "Contacto",
+                shortLabel: "Contacto",
+                href: "../Pages/contact.html",
+                iconSrc: mobileIcons.contact
+            }
         ]
     };
 }
@@ -66,7 +96,9 @@ function injectMobileTop(header, config) {
 
     if (mobileUser) {
         mobileUser.href = config.profileHref;
-        mobileUser.innerHTML = createXIcon();
+        mobileUser.innerHTML = config.mobileIcons?.profile
+            ? `<img src="${config.mobileIcons.profile}" alt="Perfil" class="header-mobile-icon">`
+            : createXIcon();
     }
 }
 
@@ -80,7 +112,10 @@ function injectMobileBottom(header, config) {
             (item) => `
                 <a href="${item.href}" class="mobile-bottom-item">
                     <span class="mobile-bottom-icon">
-                        ${createXIcon()}
+                        ${item.iconSrc
+                            ? `<img src="${item.iconSrc}" alt="${item.label}" class="mobile-bottom-icon-image">`
+                            : createXIcon()
+                        }
                     </span>
                     <span class="mobile-bottom-text">${item.shortLabel}</span>
                 </a>

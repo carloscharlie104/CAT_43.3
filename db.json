@@ -9,7 +9,14 @@
     "phone": "+34 928 000 111",
     "whatsapp": "+34 600 123 456",
     "address": "Calle León y Castillo 150, Las Palmas de Gran Canaria",
-    "schedule": "Lunes a sábado, de 08:00 a 20:00"
+    "schedule": "Lunes a sábado, de 08:00 a 20:00",
+    "mobileIcons": {
+      "home": "../Assets/Logos/inicio.png",
+      "info": "../Assets/Logos/Logo Info.jpg",
+      "reservation": "../Assets/Logos/reservar.jpg",
+      "contact": "../Assets/Logos/contacto.webp",
+      "profile": "../Assets/Logos/perfil.png"
+    }
   },
   "locations": [
     {
