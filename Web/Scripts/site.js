@@ -65,7 +65,23 @@ function initializeFieldClearButtons(root = document) {
     });
 }
 
+function initializeReservationDateLimits() {
+    const startDate = document.querySelector("#reservation-start-date");
+    const endDate = document.querySelector("#reservation-end-date");
+
+    if (!startDate || !endDate) {
+        return;
+    }
+
+    const today = new Date();
+    const todayIso = today.toISOString().split("T")[0];
+
+    startDate.min = todayIso;
+    endDate.min = todayIso;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     loadIncludes();
     initializeFieldClearButtons();
+    initializeReservationDateLimits();
 });
