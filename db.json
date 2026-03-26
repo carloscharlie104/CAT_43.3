@@ -1,0 +1,14 @@
+{
+  "company": {
+    "id": 1,
+    "name": "CAT Car Renting Service",
+    "tagline": "Renting automotriz simple, dinámico y eficaz.",
+    "about": "CAT Car Renting Service es una propuesta digital de renting automotriz centrada en la claridad, la rapidez y la facilidad de uso. Nuestro objetivo es que el usuario encuentre vehículo, compare opciones y formalice su solicitud de forma intuitiva.",
+    "history": "Nacemos como una solución digital pensada para simplificar el proceso de alquiler y renting de vehículos turísticos, priorizando la experiencia del usuario por encima de funciones innecesarias.",
+    "email": "info@catrenting.com",
+    "phone": "+34 928 000 111",
+    "whatsapp": "+34 600 123 456",
+    "address": "Calle León y Castillo 150, Las Palmas de Gran Canaria",
+    "schedule": "Lunes a sábado, de 08:00 a 20:00"
+  }
+}
