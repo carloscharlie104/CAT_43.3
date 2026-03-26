@@ -15,6 +15,18 @@ main.auth {
     stroke-linecap: round;
 }
 
+.auth-card__links-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 6px;
+}
+
+.auth-card__link--register {
+    margin-left: auto;
+    padding-right: 2px;
+}
+
 
 /* Login - Móvil*/
 @media (max-width: 768px) {
@@ -34,3 +46,4 @@ main.auth {
         padding: 10px;
     }
 }
+
