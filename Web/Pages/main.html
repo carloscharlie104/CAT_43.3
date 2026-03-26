@@ -12,13 +12,12 @@
     <link rel="stylesheet" href="../Style/Template_style/offertCard.css">
     <link rel="stylesheet" href="../Style/responsive.css">
 </head>
-<body>
 
+<body>
 <div id="header-placeholder" data-include="../Template/header.html"></div>
 
 <main>
     <section class="gallery-section">
-
         <div class="gallery-col small-col">
             <h2 class="col-title">Lorem Ipsum</h2>
             <div class="card-placeholder" data-include="../Template/offertCard.html"></div>
@@ -26,14 +25,24 @@
 
         <div class="gallery-col large-col">
             <h1 class="main-title">Lorem Ipsum</h1>
-            <div class="card-placeholder" data-include="../Template/offertCard.html"></div>
+
+            <div class="main-card-shell">
+                <button class="main-card-arrow main-card-arrow--left" type="button" aria-label="Oferta anterior">
+                    &#8249;
+                </button>
+
+                <div class="card-placeholder hero-card"></div>
+
+                <button class="main-card-arrow main-card-arrow--right" type="button" aria-label="Oferta siguiente">
+                    &#8250;
+                </button>
+            </div>
         </div>
 
         <div class="gallery-col small-col">
             <h2 class="col-title">Lorem Ipsum</h2>
             <div class="card-placeholder" data-include="../Template/offertCard.html"></div>
         </div>
-
     </section>
 </main>
 
