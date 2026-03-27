@@ -35,7 +35,57 @@
         padding: 16px;
     }
 
-    /* RESERVATION */
+    /* ---------- INFORMATION ---------- */
+
+    .cards-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        padding: 16px 8px 32px;
+    }
+
+    .card-wrapper {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 0;
+    }
+
+    .card-title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 6px;
+    }
+
+    .card-box {
+        width: 100%;
+        padding: 20px;
+        border-radius: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .card-box p {
+        text-align: center;
+        font-size: 1.05rem;
+        line-height: 1.45;
+        margin: 0;
+    }
+
+    .card-icon {
+        width: 90px;
+        height: auto;
+    }
+
+    .card-footer {
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    /* ---------- RESERVATION ---------- */
+
     .reservation-main {
         flex-direction: column;
         gap: 32px;
@@ -59,6 +109,113 @@
 
     .submit-container {
         justify-content: flex-start;
+    }
+
+    .information-footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+
+    .information-footer button,
+    .information-footer .contact-button,
+    .information-footer a {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+        width: auto;
+        max-width: 160px;
+    }
+
+    /* ---------- INFORMATION BOTTOM ACTION ---------- */
+
+    .bottom-action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        padding: 0 16px 24px;
+    }
+
+    .bottom-quote {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    .bottom-btn-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-pink {
+        width: auto;
+        min-width: 120px;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+    }
+
+    /* ---------- PAYMENT GATEWAY ---------- */
+
+    main {
+        padding: 24px 12px;
+    }
+
+    .contact-header {
+        margin-bottom: 12px;
+    }
+
+    .contact-title {
+        font-size: 1.5rem;
+        line-height: 1.2;
+    }
+
+    .contact-form {
+        width: 100%;
+        gap: 16px;
+    }
+
+    .form-group1,
+    .form-group2,
+    .form-group3 {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        margin-top: 0;
+    }
+
+    .form-label {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 10px 12px;
+        border-width: 2px;
+        font-size: 1rem;
+    }
+
+    .form-group3 .form-input {
+        width: 100%;
+    }
+
+    .bottom-action {
+        position: static;
+        margin-top: 16px;
+    }
+
+    .bottom-btn-container {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-pink {
+        width: 100%;
+        max-width: 220px;
+        min-width: unset;
+        padding: 12px 18px;
+        font-size: 1rem;
     }
 }
 
@@ -90,6 +247,51 @@
 
     .card {
         padding: 18px;
+    }
+
+    /* ---------- PAYMENT GATEWAY ---------- */
+
+    main {
+        padding: 32px 20px;
+    }
+
+    .contact-header {
+        margin-bottom: 20px;
+    }
+
+    .contact-title {
+        font-size: 1.9rem;
+    }
+
+    .contact-form {
+        width: 100%;
+        max-width: 100%;
+        gap: 18px;
+    }
+
+    .form-group1,
+    .form-group2,
+    .form-group3 {
+        gap: 20px;
+        margin-top: 0;
+    }
+
+    .form-label {
+        width: 150px;
+        flex-shrink: 0;
+    }
+
+    .form-group3 .form-input {
+        width: 100%;
+    }
+
+    .bottom-action {
+        gap: 20px;
+    }
+
+    .btn-pink {
+        padding: 12px 22px;
+        font-size: 1rem;
     }
 }
 
