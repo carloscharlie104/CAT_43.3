@@ -1,72 +1,56 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Template Auth-Card</title>
-  <link rel="stylesheet" href="../Style/Template_style/auth-card.css">
-</head>
+<section class="auth-card" aria-labelledby="auth-title">
+  <h1 id="auth-title" class="auth-card__title" data-auth-title></h1>
 
-<body>
+  <p class="auth-card__description" data-auth-description hidden></p>
 
-<main class="auth">
-  <section class="auth-card" aria-labelledby="card-title">
-    <h1 id="card-title" class="auth-card__title">Lorem Ipsum</h1>
+  <form class="auth-card__form" data-auth-form novalidate>
+    <div class="field" data-auth-field="user" hidden>
+      <span class="field__icon-left" aria-hidden="true">×</span>
+      <label class="field__label">Usuario</label>
+      <input class="field__input" type="text" />
+      <button class="field__clear" type="button" aria-label="Borrar usuario"></button>
+    </div>
 
-    <form class="auth-card__form" action="#" method="post">
+    <div class="field" data-auth-field="email" hidden>
+      <span class="field__icon-left" aria-hidden="true">×</span>
+      <label class="field__label">Correo electrónico</label>
+      <input class="field__input" type="email" />
+      <button class="field__clear" type="button" aria-label="Borrar correo"></button>
+    </div>
 
-      <!-- Input 1 -->
-      <div class="field">
-        <span class="field__icon-left" aria-hidden="true">×</span>
+    <div class="field" data-auth-field="email-repeat" hidden>
+      <span class="field__icon-left" aria-hidden="true">×</span>
+      <label class="field__label">Repetir correo electrónico</label>
+      <input class="field__input" type="email" />
+      <button class="field__clear" type="button" aria-label="Borrar repetición de correo"></button>
+    </div>
 
-        <label class="field__label" for="field-1">Usuario</label>
-        <input
-                id="field-1"
-                class="field__input"
-                type="text"
-                placeholder="Ingresa tu usuario"
-                autocomplete="username"
-        />
+    <div class="field" data-auth-field="password" hidden>
+      <span class="field__icon-left" aria-hidden="true">×</span>
+      <label class="field__label">Contraseña</label>
+      <input class="field__input" type="password" />
+      <button class="field__clear" type="button" aria-label="Borrar contraseña"></button>
+    </div>
 
-        <!-- Botón clear sin texto: la X se dibuja con CSS -->
-        <button class="field__clear" type="button" aria-label="Borrar usuario"></button>
-      </div>
+    <div class="field" data-auth-field="password-repeat" hidden>
+      <span class="field__icon-left" aria-hidden="true">×</span>
+      <label class="field__label">Repetir contraseña</label>
+      <input class="field__input" type="password" />
+      <button class="field__clear" type="button" aria-label="Borrar repetición de contraseña"></button>
+    </div>
 
-      <!-- Input 2 -->
-      <div class="field">
-        <span class="field__icon-left" aria-hidden="true">×</span>
+    <label class="check" data-auth-check-wrapper hidden>
+      <input class="check__input" type="checkbox" />
+      <span class="check__text" data-auth-check></span>
+    </label>
 
-        <label class="field__label" for="field-2">Contraseña</label>
-        <input
-                id="field-2"
-                class="field__input"
-                type="password"
-                placeholder="Introduce tu contraseña"
-                autocomplete="current-password"
-        />
+    <button class="auth-card__btn" type="submit" data-auth-submit></button>
 
-        <!-- Botón clear sin texto: la X se dibuja con CSS -->
-        <button class="field__clear" type="button" aria-label="Borrar contraseña"></button>
-      </div>
+    <div class="auth-card__links-row" data-auth-links-row hidden>
+      <a class="auth-card__link" data-auth-link-primary hidden></a>
+      <a class="auth-card__link auth-card__link--register" data-auth-link-secondary hidden></a>
+    </div>
 
-      <!-- Checkbox -->
-      <label class="check">
-        <input class="check__input" type="checkbox" />
-        <span class="check__text">Lorem Ipsum</span>
-      </label>
-
-      <!-- Botón -->
-      <button class="auth-card__btn" type="submit">Lorem Ipsum</button>
-
-      <!-- Link -->
-      <a class="auth-card__link" href="#">Lorem Ipsum</a>
-      <!-- Link ~ Registrarse -->
-      <a class="auth-card__link__register" href="#">Registrarse</a>
-    </form>
-  </section>
-</main>
-
-<script src="../Scripts/site.js" defer></script>
-
-</body>
-</html>
+    <a class="auth-card__link" data-auth-back hidden></a>
+  </form>
+</section>

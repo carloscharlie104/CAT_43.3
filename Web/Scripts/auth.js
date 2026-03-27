@@ -29,9 +29,7 @@ function setSession(user) {
 }
 
 function clearFieldError(field) {
-    if (!field) {
-        return;
-    }
+    if (!field) return;
 
     field.classList.remove("field--error");
     const error = field.querySelector(".field__error");
@@ -41,24 +39,22 @@ function clearFieldError(field) {
 }
 
 function setFieldError(field, message) {
-    if (!field) {
-        return;
-    }
+    if (!field) return;
 
     field.classList.add("field--error");
+
     let error = field.querySelector(".field__error");
     if (!error) {
         error = document.createElement("div");
         error.className = "field__error";
         field.appendChild(error);
     }
+
     error.textContent = message;
 }
 
 function getFormMessage(form) {
-    if (!form) {
-        return null;
-    }
+    if (!form) return null;
 
     let message = form.querySelector(".form-message");
     if (!message) {
@@ -71,15 +67,16 @@ function getFormMessage(form) {
 
 function setFormMessage(form, text, type) {
     const message = getFormMessage(form);
-    if (!message) {
-        return;
-    }
+    if (!message) return;
 
     message.textContent = text;
+    message.hidden = false;
     message.classList.remove("form-message--error", "form-message--success");
+
     if (type === "error") {
         message.classList.add("form-message--error");
     }
+
     if (type === "success") {
         message.classList.add("form-message--success");
     }
@@ -89,19 +86,23 @@ function clearFormMessage(form) {
     const message = form ? form.querySelector(".form-message") : null;
     if (message) {
         message.textContent = "";
+        message.hidden = true;
         message.classList.remove("form-message--error", "form-message--success");
     }
 }
 
 function wireFieldClearOnInput(field) {
     const input = field ? field.querySelector(".field__input") : null;
-    if (!input) {
-        return;
-    }
+    if (!input) return;
 
     input.addEventListener("input", () => {
         clearFieldError(field);
     });
+}
+
+function clearAllFieldErrors(form) {
+    if (!form) return;
+    form.querySelectorAll(".field").forEach(clearFieldError);
 }
 
 function initLogin() {
@@ -118,6 +119,8 @@ function initLogin() {
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
+
+        clearAllFieldErrors(form);
         clearFormMessage(form);
 
         const users = getUsers();
@@ -132,7 +135,7 @@ function initLogin() {
         }
 
         if (!passValue) {
-            setFieldError(passInput.closest(".field"), "Introduce tu contrasena.");
+            setFieldError(passInput.closest(".field"), "Introduce tu contraseña.");
             hasError = true;
         }
 
@@ -146,12 +149,16 @@ function initLogin() {
         });
 
         if (!user || user.password !== passValue) {
-            setFormMessage(form, "Usuario o contrasena incorrectos.", "error");
+            setFormMessage(form, "Usuario o contraseña incorrectos.", "error");
             return;
         }
 
         setSession(user);
-        window.location.href = "../main.html";
+        setFormMessage(form, "Inicio de sesión correcto.", "success");
+
+        window.setTimeout(() => {
+            window.location.href = "../main.html";
+        }, 600);
     });
 }
 
@@ -168,12 +175,13 @@ function initRegister() {
     }
 
     [userInput, emailInput, emailRepeatInput, passInput, passRepeatInput].forEach((input) => {
-        const field = input.closest(".field");
-        wireFieldClearOnInput(field);
+        wireFieldClearOnInput(input.closest(".field"));
     });
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
+
+        clearAllFieldErrors(form);
         clearFormMessage(form);
 
         const users = getUsers();
@@ -192,7 +200,7 @@ function initRegister() {
         }
 
         if (!email || !emailInput.checkValidity()) {
-            setFieldError(emailInput.closest(".field"), "Introduce un correo valido.");
+            setFieldError(emailInput.closest(".field"), "Introduce un correo válido.");
             hasError = true;
         }
 
@@ -202,12 +210,12 @@ function initRegister() {
         }
 
         if (password.length < 6) {
-            setFieldError(passInput.closest(".field"), "La contrasena debe tener al menos 6 caracteres.");
+            setFieldError(passInput.closest(".field"), "La contraseña debe tener al menos 6 caracteres.");
             hasError = true;
         }
 
         if (passwordRepeat !== password) {
-            setFieldError(passRepeatInput.closest(".field"), "Las contrasenas no coinciden.");
+            setFieldError(passRepeatInput.closest(".field"), "Las contraseñas no coinciden.");
             hasError = true;
         }
 
@@ -220,7 +228,7 @@ function initRegister() {
         }
 
         if (users.some((item) => item.emailNorm === emailNorm)) {
-            setFieldError(emailInput.closest(".field"), "Ese correo ya esta registrado.");
+            setFieldError(emailInput.closest(".field"), "Ese correo ya está registrado.");
             hasError = true;
         }
 
@@ -239,37 +247,40 @@ function initRegister() {
         });
 
         saveUsers(users);
-        setFormMessage(form, "Registro completado. Ya puedes iniciar sesion.", "success");
+        setFormMessage(form, "Registro completado. Ya puedes iniciar sesión.", "success");
+
         window.setTimeout(() => {
             window.location.href = "./login.html";
-        }, 800);
+        }, 900);
     });
 }
 
 function initRecovery() {
     const form = document.querySelector(".auth-card__form");
-    const emailInput = document.getElementById("recover-email");
-    const emailRepeatInput = document.getElementById("recover-email-2");
+    const emailInput = document.getElementById("recovery-email");
+    const emailRepeatInput = document.getElementById("recovery-email-2");
 
     if (!form || !emailInput || !emailRepeatInput) {
         return;
     }
 
     [emailInput, emailRepeatInput].forEach((input) => {
-        const field = input.closest(".field");
-        wireFieldClearOnInput(field);
+        wireFieldClearOnInput(input.closest(".field"));
     });
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
+
+        clearAllFieldErrors(form);
         clearFormMessage(form);
 
         const email = String(emailInput.value || "").trim();
         const emailRepeat = String(emailRepeatInput.value || "").trim();
+
         let hasError = false;
 
         if (!email || !emailInput.checkValidity()) {
-            setFieldError(emailInput.closest(".field"), "Introduce un correo valido.");
+            setFieldError(emailInput.closest(".field"), "Introduce un correo válido.");
             hasError = true;
         }
 
@@ -291,12 +302,26 @@ function initRecovery() {
             return;
         }
 
-        setFormMessage(form, "Si el correo existe, recibiras instrucciones.", "success");
+        setFormMessage(form, "Si el correo existe, recibirás instrucciones.", "success");
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    initLogin();
-    initRegister();
-    initRecovery();
-});
+function initAuthPage() {
+    const page = document.body.dataset.authPage;
+
+    if (!page) return;
+
+    if (page === "login") {
+        initLogin();
+    }
+
+    if (page === "register") {
+        initRegister();
+    }
+
+    if (page === "recovery") {
+        initRecovery();
+    }
+}
+
+document.addEventListener("auth:ready", initAuthPage);

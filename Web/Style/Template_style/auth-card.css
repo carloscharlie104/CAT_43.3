@@ -70,6 +70,20 @@ body {
     gap: 12px;
 }
 
+.field[hidden] {
+    display: none !important;
+}
+
+.check[hidden] {
+    display: none !important;
+}
+
+.auth-card__description[hidden],
+.auth-card__links-row[hidden],
+.auth-card__link[hidden] {
+    display: none !important;
+}
+
 /* Accesibilidad: label solo para lectores */
 .field__label {
     position: absolute;

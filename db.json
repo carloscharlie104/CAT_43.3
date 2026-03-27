@@ -337,9 +337,166 @@
       "message": "",
       "createdAt": "2026-03-26T16:25:14.504Z",
       "id": "PIfz5HfE_x8"
+    },
+    {
+      "name": "",
+      "surname": "",
+      "email": "",
+      "message": "",
+      "createdAt": "2026-03-27T10:41:55.461Z",
+      "id": "vrX3u-q5XU4"
     }
   ],
-  "reservations": [
+  "auth": {
+    "login": {
+      "title": "Inicia sesión",
+      "formId": "login-form",
+      "fields": [
+        {
+          "key": "user",
+          "id": "login-user",
+          "name": "username",
+          "label": "Usuario",
+          "type": "text",
+          "placeholder": "Introduce tu usuario",
+          "autocomplete": "username",
+          "required": true,
+          "clearLabel": "Borrar usuario"
+        },
+        {
+          "key": "password",
+          "id": "login-pass",
+          "name": "password",
+          "label": "Contraseña",
+          "type": "password",
+          "placeholder": "Introduce tu contraseña",
+          "autocomplete": "current-password",
+          "required": true,
+          "clearLabel": "Borrar contraseña"
+        }
+      ],
+      "checkText": "Recuérdame",
+      "submitText": "Entrar",
+      "links": {
+        "primary": {
+          "text": "Recuperar contraseña",
+          "href": "./passRecovery.html"
+        },
+        "secondary": {
+          "text": "Registrarse",
+          "href": "./register.html"
+        }
+      }
+    },
+
+    "register": {
+      "title": "Crear cuenta",
+      "description": "Regístrate para continuar",
+      "formId": "register-form",
+      "fields": [
+        {
+          "key": "user",
+          "id": "reg-user",
+          "name": "username",
+          "label": "Usuario",
+          "type": "text",
+          "placeholder": "Elige tu usuario",
+          "autocomplete": "username",
+          "required": true,
+          "clearLabel": "Borrar usuario"
+        },
+        {
+          "key": "email",
+          "id": "reg-email",
+          "name": "email",
+          "label": "Correo electrónico",
+          "type": "email",
+          "placeholder": "Introduce tu correo",
+          "autocomplete": "email",
+          "required": true,
+          "clearLabel": "Borrar correo"
+        },
+        {
+          "key": "email-repeat",
+          "id": "reg-email-2",
+          "name": "emailRepeat",
+          "label": "Repetir correo electrónico",
+          "type": "email",
+          "placeholder": "Repite tu correo",
+          "autocomplete": "email",
+          "required": true,
+          "clearLabel": "Borrar repetición de correo"
+        },
+        {
+          "key": "password",
+          "id": "reg-pass",
+          "name": "password",
+          "label": "Contraseña",
+          "type": "password",
+          "placeholder": "Crea tu contraseña",
+          "autocomplete": "new-password",
+          "required": true,
+          "minLength": 6,
+          "clearLabel": "Borrar contraseña"
+        },
+        {
+          "key": "password-repeat",
+          "id": "reg-pass-2",
+          "name": "passwordRepeat",
+          "label": "Repetir contraseña",
+          "type": "password",
+          "placeholder": "Repite tu contraseña",
+          "autocomplete": "new-password",
+          "required": true,
+          "minLength": 6,
+          "clearLabel": "Borrar repetición de contraseña"
+        }
+      ],
+      "checkText": "Acepto las condiciones",
+      "submitText": "Crear cuenta",
+      "links": {
+        "primary": {
+          "text": "¿Ya tienes cuenta?",
+          "href": "./login.html"
+        }
+      }
+    },
+
+    "recovery": {
+      "title": "Recuperar contraseña",
+      "description": "Introduce tu correo",
+      "formId": "recovery-form",
+      "fields": [
+        {
+          "key": "email",
+          "id": "recovery-email",
+          "name": "email",
+          "label": "Correo electrónico",
+          "type": "email",
+          "placeholder": "Introduce tu correo",
+          "autocomplete": "email",
+          "required": true,
+          "clearLabel": "Borrar correo"
+        },
+        {
+          "key": "email-repeat",
+          "id": "recovery-email-2",
+          "name": "emailRepeat",
+          "label": "Repetir correo electrónico",
+          "type": "email",
+          "placeholder": "Repite tu correo",
+          "autocomplete": "email",
+          "required": true,
+          "clearLabel": "Borrar repetición de correo"
+        }
+      ],
+      "submitText": "Enviar",
+      "backLink": {
+        "text": "Volver al login",
+        "href": "./login.html"
+      }
+    }
+  },  "reservations": [
     {
       "id": "1",
       "carId": 1,
@@ -357,6 +514,16 @@
       "notes": "Reserva de ejemplo para pruebas.",
       "status": "pending",
       "totalPrice": 148
+    }
+  ],
+  "users": [
+    {
+      "username": "Tomas",
+      "usernameNorm": "tomas",
+      "email": "tomas@gmail.com",
+      "emailNorm": "tomas@gmail.com",
+      "password": "Tomas_2003",
+      "id": "IUd0uiKCkJs"
     }
   ],
   "paymentMethods": [

@@ -1,84 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
     <link rel="stylesheet" href="../../Style/global.css">
     <link rel="stylesheet" href="../../Style/Template_style/auth-card.css">
     <link rel="stylesheet" href="../../Style/Template_style/footer.css">
-    <link rel="stylesheet" href="../../Style/Template_style/header.css"/>
+    <link rel="stylesheet" href="../../Style/Template_style/header.css">
     <link rel="stylesheet" href="../../Style/Pages_style/loginRegisterRecovery/login.css">
     <link rel="stylesheet" href="../../Style/responsive.css">
-
 </head>
 
-<body>
+<body data-auth-page="login">
 
-<div id="header-placeholder" data-include="../../Template/header.html"></div>
+<div data-include="../../Template/header.html"></div>
 
 <main class="auth">
-    <section class="auth-card" aria-labelledby="login-title">
-        <h1 id="login-title" class="auth-card__title">Lorem Ipsum</h1>
-
-        <form class="auth-card__form" action="../main.html" method="get" novalidate>
-
-            <!-- Usuario -->
-            <div class="field">
-                <span class="field__icon-left" aria-hidden="true">×</span>
-
-                <label class="field__label" for="login-user">Usuario</label>
-                <input
-                        id="login-user"
-                        class="field__input"
-                        type="text"
-                        placeholder="Lorem Ipsum"
-                        autocomplete="username"
-                        required
-                />
-
-                <button class="field__clear" type="button" aria-label="Borrar usuario"></button>
-            </div>
-
-            <!-- Contraseña -->
-            <div class="field">
-                <span class="field__icon-left" aria-hidden="true">×</span>
-
-                <label class="field__label" for="login-pass">Contraseña</label>
-                <input
-                        id="login-pass"
-                        class="field__input"
-                        type="password"
-                        placeholder="Lorem Ipsum"
-                        autocomplete="current-password"
-                        required
-                />
-
-                <button class="field__clear" type="button" aria-label="Borrar contraseña"></button>
-            </div>
-
-            <!-- Recordarme -->
-            <label class="check">
-                <input class="check__input" type="checkbox"/>
-                <span class="check__text">Lorem Ipsum</span>
-            </label>
-
-            <!-- Botón -->
-            <button class="auth-card__btn" type="submit">Lorem Ipsum</button>
-
-            <div class="auth-card__links-row">
-                <a class="auth-card__link" href="./passRecovery.html">Recuperar contraseña</a>
-                <a class="auth-card__link auth-card__link--register" href="./register.html">Registrarse</a>
-            </div>
-        </form>
-    </section>
+    <section id="auth-root"></section>
 </main>
 
-<div id="footer-placeholder" data-include="../../Template/footer.html"></div>
+<div data-include="../../Template/footer.html"></div>
 
-<script src="../../Scripts/site.js" defer></script>
-<script src="../../Scripts/auth.js" defer></script>
+<!-- IMPORTANTE: módulos -->
+<script type="module" src="../../Scripts/site.js"></script>
+<script type="module" src="../../Scripts/authContent.js"></script>
+<script type="module" src="../../Scripts/auth.js"></script>
+
+
+
 
 </body>
 </html>

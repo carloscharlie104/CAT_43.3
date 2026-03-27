@@ -71,3 +71,4 @@ export const getReviews = () => getData("reviews");
 export const getFaqs = () => getData("faqs");
 export const getPaymentMethods = () => getData("paymentMethods");
 export const getCarById = (id) => getData(`cars/${id}`);
+export const getAuth = () => getData("auth");
