@@ -56,6 +56,54 @@ export async function postData(endpoint, data) {
     });
 }
 
+export async function getUsers() {
+    const users = await getData("users");
+    return Array.isArray(users) ? users : [];
+}
+
+export async function createUser(user) {
+    return postData("users", user);
+}
+
+export async function findUserByIdentity(identity) {
+    const normalizedIdentity = String(identity || "").trim().toLowerCase();
+
+    if (!normalizedIdentity) {
+        return null;
+    }
+
+    const users = await getUsers();
+
+    return users.find((user) => {
+        return (
+            String(user.usernameNorm || "").toLowerCase() === normalizedIdentity ||
+            String(user.emailNorm || "").toLowerCase() === normalizedIdentity
+        );
+    }) || null;
+}
+
+export async function userExistsByUsername(username) {
+    const normalizedUsername = String(username || "").trim().toLowerCase();
+
+    if (!normalizedUsername) {
+        return false;
+    }
+
+    const users = await getUsers();
+    return users.some((user) => String(user.usernameNorm || "").toLowerCase() === normalizedUsername);
+}
+
+export async function userExistsByEmail(email) {
+    const normalizedEmail = String(email || "").trim().toLowerCase();
+
+    if (!normalizedEmail) {
+        return false;
+    }
+
+    const users = await getUsers();
+    return users.some((user) => String(user.emailNorm || "").toLowerCase() === normalizedEmail);
+}
+
 export const getCompany = () => getData("company");
 export const getLocations = () => getData("locations");
 export const getCategories = () => getData("categories");

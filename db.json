@@ -365,7 +365,6 @@
         }
       }
     },
-
     "register": {
       "title": "Crear cuenta",
       "description": "Regístrate para continuar",
@@ -438,7 +437,6 @@
         }
       }
     },
-
     "recovery": {
       "title": "Recuperar contraseña",
       "description": "Introduce tu correo",
@@ -473,7 +471,8 @@
         "href": "./login.html"
       }
     }
-  },  "reservations": [
+  },
+  "reservations": [
     {
       "id": "1",
       "carId": 1,
@@ -494,14 +493,6 @@
     }
   ],
   "users": [
-    {
-      "username": "Tomas",
-      "usernameNorm": "tomas",
-      "email": "tomas@gmail.com",
-      "emailNorm": "tomas@gmail.com",
-      "password": "Tomas_2003",
-      "id": "IUd0uiKCkJs"
-    }
   ],
   "paymentMethods": [
     {

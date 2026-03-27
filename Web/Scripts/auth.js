@@ -1,3 +1,5 @@
+import { getUsers as getUsersFromApi, createUser, findUserByIdentity } from "./api.js";
+
 const USERS_KEY = "cat43_users";
 const SESSION_KEY = "cat43_session";
 
@@ -5,7 +7,7 @@ function normalize(value) {
     return String(value || "").trim().toLowerCase();
 }
 
-function getUsers() {
+function getUsersFromLocalStorage() {
     try {
         const raw = localStorage.getItem(USERS_KEY);
         const parsed = raw ? JSON.parse(raw) : [];
@@ -15,8 +17,66 @@ function getUsers() {
     }
 }
 
-function saveUsers(users) {
+function saveUsersToLocalStorage(users) {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
+async function getUsers() {
+    try {
+        const users = await getUsersFromApi();
+
+        if (Array.isArray(users)) {
+            saveUsersToLocalStorage(users);
+            return users;
+        }
+
+        return getUsersFromLocalStorage();
+    } catch (error) {
+        return getUsersFromLocalStorage();
+    }
+}
+
+async function saveUser(user) {
+    try {
+        const createdUser = await createUser(user);
+        const users = await getUsers();
+        const exists = users.some((item) => String(item.id) === String(createdUser.id));
+
+        if (!exists) {
+            saveUsersToLocalStorage([...users, createdUser]);
+        }
+
+        return createdUser;
+    } catch (error) {
+        const users = getUsersFromLocalStorage();
+        users.push(user);
+        saveUsersToLocalStorage(users);
+        return user;
+    }
+}
+
+async function getUserByIdentity(identity) {
+    try {
+        const user = await findUserByIdentity(identity);
+
+        if (user) {
+            return user;
+        }
+
+        const users = getUsersFromLocalStorage();
+        const identityNorm = normalize(identity);
+
+        return users.find((item) => {
+            return item.usernameNorm === identityNorm || item.emailNorm === identityNorm;
+        }) || null;
+    } catch (error) {
+        const users = getUsersFromLocalStorage();
+        const identityNorm = normalize(identity);
+
+        return users.find((item) => {
+            return item.usernameNorm === identityNorm || item.emailNorm === identityNorm;
+        }) || null;
+    }
 }
 
 function setSession(user) {
@@ -29,7 +89,9 @@ function setSession(user) {
 }
 
 function clearFieldError(field) {
-    if (!field) return;
+    if (!field) {
+        return;
+    }
 
     field.classList.remove("field--error");
     const error = field.querySelector(".field__error");
@@ -39,7 +101,9 @@ function clearFieldError(field) {
 }
 
 function setFieldError(field, message) {
-    if (!field) return;
+    if (!field) {
+        return;
+    }
 
     field.classList.add("field--error");
 
@@ -54,7 +118,9 @@ function setFieldError(field, message) {
 }
 
 function getFormMessage(form) {
-    if (!form) return null;
+    if (!form) {
+        return null;
+    }
 
     let message = form.querySelector(".form-message");
     if (!message) {
@@ -62,12 +128,15 @@ function getFormMessage(form) {
         message.className = "form-message";
         form.prepend(message);
     }
+
     return message;
 }
 
 function setFormMessage(form, text, type) {
     const message = getFormMessage(form);
-    if (!message) return;
+    if (!message) {
+        return;
+    }
 
     message.textContent = text;
     message.hidden = false;
@@ -84,6 +153,7 @@ function setFormMessage(form, text, type) {
 
 function clearFormMessage(form) {
     const message = form ? form.querySelector(".form-message") : null;
+
     if (message) {
         message.textContent = "";
         message.hidden = true;
@@ -93,7 +163,10 @@ function clearFormMessage(form) {
 
 function wireFieldClearOnInput(field) {
     const input = field ? field.querySelector(".field__input") : null;
-    if (!input) return;
+
+    if (!input) {
+        return;
+    }
 
     input.addEventListener("input", () => {
         clearFieldError(field);
@@ -101,7 +174,10 @@ function wireFieldClearOnInput(field) {
 }
 
 function clearAllFieldErrors(form) {
-    if (!form) return;
+    if (!form) {
+        return;
+    }
+
     form.querySelectorAll(".field").forEach(clearFieldError);
 }
 
@@ -117,13 +193,12 @@ function initLogin() {
     wireFieldClearOnInput(usernameInput.closest(".field"));
     wireFieldClearOnInput(passInput.closest(".field"));
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         clearAllFieldErrors(form);
         clearFormMessage(form);
 
-        const users = getUsers();
         const usernameValue = normalize(usernameInput.value);
         const passValue = passInput.value || "";
 
@@ -144,21 +219,23 @@ function initLogin() {
             return;
         }
 
-        const user = users.find((item) => {
-            return item.usernameNorm === usernameValue || item.emailNorm === usernameValue;
-        });
+        try {
+            const user = await getUserByIdentity(usernameValue);
 
-        if (!user || user.password !== passValue) {
-            setFormMessage(form, "Usuario o contraseña incorrectos.", "error");
-            return;
+            if (!user || user.password !== passValue) {
+                setFormMessage(form, "Usuario o contraseña incorrectos.", "error");
+                return;
+            }
+
+            setSession(user);
+            setFormMessage(form, "Inicio de sesión correcto.", "success");
+
+            window.setTimeout(() => {
+                window.location.href = "../main.html";
+            }, 600);
+        } catch (error) {
+            setFormMessage(form, "No se pudo iniciar sesión.", "error");
         }
-
-        setSession(user);
-        setFormMessage(form, "Inicio de sesión correcto.", "success");
-
-        window.setTimeout(() => {
-            window.location.href = "../main.html";
-        }, 600);
     });
 }
 
@@ -178,13 +255,11 @@ function initRegister() {
         wireFieldClearOnInput(input.closest(".field"));
     });
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         clearAllFieldErrors(form);
         clearFormMessage(form);
-
-        const users = getUsers();
 
         const username = String(userInput.value || "").trim();
         const email = String(emailInput.value || "").trim();
@@ -222,36 +297,43 @@ function initRegister() {
         const usernameNorm = normalize(username);
         const emailNorm = normalize(email);
 
-        if (users.some((item) => item.usernameNorm === usernameNorm)) {
-            setFieldError(userInput.closest(".field"), "Ese usuario ya existe.");
-            hasError = true;
+        try {
+            const users = await getUsers();
+
+            if (users.some((item) => item.usernameNorm === usernameNorm)) {
+                setFieldError(userInput.closest(".field"), "Ese usuario ya existe.");
+                hasError = true;
+            }
+
+            if (users.some((item) => item.emailNorm === emailNorm)) {
+                setFieldError(emailInput.closest(".field"), "Ese correo ya está registrado.");
+                hasError = true;
+            }
+
+            if (hasError) {
+                setFormMessage(form, "Revisa los campos marcados.", "error");
+                return;
+            }
+
+            const newUser = {
+                id: Date.now().toString(),
+                username,
+                usernameNorm,
+                email,
+                emailNorm,
+                password
+            };
+
+            await saveUser(newUser);
+
+            setFormMessage(form, "Registro completado. Ya puedes iniciar sesión.", "success");
+
+            window.setTimeout(() => {
+                window.location.href = "./login.html";
+            }, 900);
+        } catch (error) {
+            setFormMessage(form, "No se pudo completar el registro.", "error");
         }
-
-        if (users.some((item) => item.emailNorm === emailNorm)) {
-            setFieldError(emailInput.closest(".field"), "Ese correo ya está registrado.");
-            hasError = true;
-        }
-
-        if (hasError) {
-            setFormMessage(form, "Revisa los campos marcados.", "error");
-            return;
-        }
-
-        users.push({
-            id: Date.now(),
-            username,
-            usernameNorm,
-            email,
-            emailNorm,
-            password
-        });
-
-        saveUsers(users);
-        setFormMessage(form, "Registro completado. Ya puedes iniciar sesión.", "success");
-
-        window.setTimeout(() => {
-            window.location.href = "./login.html";
-        }, 900);
     });
 }
 
@@ -268,7 +350,7 @@ function initRecovery() {
         wireFieldClearOnInput(input.closest(".field"));
     });
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         clearAllFieldErrors(form);
@@ -294,22 +376,28 @@ function initRecovery() {
             return;
         }
 
-        const users = getUsers();
-        const exists = users.some((item) => item.emailNorm === normalize(email));
+        try {
+            const users = await getUsers();
+            const exists = users.some((item) => item.emailNorm === normalize(email));
 
-        if (!exists) {
-            setFormMessage(form, "No encontramos ese correo.", "error");
-            return;
+            if (!exists) {
+                setFormMessage(form, "No encontramos ese correo.", "error");
+                return;
+            }
+
+            setFormMessage(form, "Si el correo existe, recibirás instrucciones.", "success");
+        } catch (error) {
+            setFormMessage(form, "No se pudo comprobar el correo.", "error");
         }
-
-        setFormMessage(form, "Si el correo existe, recibirás instrucciones.", "success");
     });
 }
 
 function initAuthPage() {
     const page = document.body.dataset.authPage;
 
-    if (!page) return;
+    if (!page) {
+        return;
+    }
 
     if (page === "login") {
         initLogin();
