@@ -5,10 +5,12 @@
     "tagline": "Renting automotriz simple, dinámico y eficaz.",
     "about": "CAT Car Renting Service es una propuesta digital de renting automotriz centrada en la claridad, la rapidez y la facilidad de uso. Nuestro objetivo es que el usuario encuentre vehículo, compare opciones y formalice su solicitud de forma intuitiva.",
     "history": "Nacemos como una solución digital pensada para simplificar el proceso de alquiler y renting de vehículos turísticos, priorizando la experiencia del usuario por encima de funciones innecesarias.",
+    "historyImage": "../Assets/Logos/history.png",
     "email": "info@catrenting.com",
     "phone": "+34 928 000 111",
     "whatsapp": "+34 600 123 456",
     "address": "Calle León y Castillo 150, Las Palmas de Gran Canaria",
+    "locationImage": "../Assets/Logos/location.png",
     "schedule": "Lunes a sábado, de 08:00 a 20:00",
     "mobileIcons": {
       "home": "../Assets/Logos/inicio.png",
@@ -88,35 +90,6 @@
       "description": "Conducción más confortable y equipamiento superior."
     }
   ],
-  "offers": [
-    {
-      "id": "1",
-      "title": "Oferta fin de semana",
-      "subtitle": "Compactos desde 34 €/día",
-      "description": "Reserva de viernes a domingo con tarifa promocional en vehículos compactos.",
-      "image": "/Web/Assets/offers/offer-compact-weekend.jpg",
-      "ctaText": "Ver vehículos",
-      "ctaLink": "./reservation.html"
-    },
-    {
-      "id": "2",
-      "title": "Recogida en aeropuerto",
-      "subtitle": "Más rápido, más cómodo",
-      "description": "Recoge tu vehículo directamente al aterrizar en Gran Canaria o Tenerife Sur.",
-      "image": "/Web/Assets/offers/offer-airport.jpg",
-      "ctaText": "Reservar ahora",
-      "ctaLink": "./reservation.html"
-    },
-    {
-      "id": "3",
-      "title": "SUV para escapadas",
-      "subtitle": "Más espacio para tu viaje",
-      "description": "Modelos SUV preparados para familia, equipaje y trayectos largos.",
-      "image": "/Web/Assets/offers/offer-suv.jpg",
-      "ctaText": "Descubrir",
-      "ctaLink": "./reservation.html"
-    }
-  ],
   "cars": [
     {
       "id": "1",
@@ -179,6 +152,7 @@
       "brand": "Volkswagen",
       "model": "Golf",
       "fullName": "Volkswagen Golf",
+      "featured": true,
       "categoryId": "2",
       "locationIds": [
         "1",

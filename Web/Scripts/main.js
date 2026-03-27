@@ -1,9 +1,10 @@
-import { getCompany, getOffers, getCars } from "./api.js";
+import { getCars } from "./api.js";
 import { createImageFallback, getImageSource } from "./utils.js";
 
-function buildGalleryCard({ image, title, linkText, href, subtitle }) {
+function buildGalleryCard({ image, title, linkText, href, subtitle, priceText, showTitle = true }) {
     const safeTitle = title || "Contenido";
     const safeSubtitle = subtitle || "";
+    const safePriceText = priceText || "";
     const fallback = createImageFallback(safeTitle);
 
     return `
@@ -16,47 +17,81 @@ function buildGalleryCard({ image, title, linkText, href, subtitle }) {
                     onerror="this.onerror=null;this.src='${fallback}';"
                 >
             </div>
-            <p style="margin: 0 0 12px; font-size: 0.95rem;">${safeSubtitle}</p>
-            <a href="${href}" class="box-link">${linkText}</a>
+
+            ${showTitle ? `<p style="margin: 0 0 8px; font-size: 0.95rem; font-weight: 600;">${safeTitle}</p>` : ""}
+
+            <p style="margin: 0 0 8px; font-size: 0.95rem;">${safeSubtitle}</p>
+            <p style="margin: 0 0 12px; font-size: 0.95rem; font-weight: 600;">${safePriceText}</p>
+
+            <a href="${href}" class="box-link">Ver vehículo</a>
         </div>
     `;
 }
 
-function buildHeroSlides(company, cars) {
-    return cars.map((car) => ({
-        id: car.id,
-        html: buildGalleryCard({
-            image: car.image,
-            title: car.fullName || `${car.brand} ${car.model}` || "Vehículo",
-            subtitle: `${company.tagline} ${car.priceText}`.trim(),
-            href: `./carData.html?id=${car.id}`,
-            linkText: "Ver vehículo"
-        })
-    }));
+function buildCarCard(car, showTitle = true) {
+    const title = car.fullName || `${car.brand || ""} ${car.model || ""}`.trim() || "Vehículo";
+    const subtitle = car.shortDescription || "";
+    const priceText = car.priceText || "";
+
+    return buildGalleryCard({
+        image: car.image,
+        title,
+        subtitle,
+        priceText,
+        href: `./carData.html?id=${car.id}`,
+        linkText: "Ver vehículo",
+        showTitle
+    });
 }
 
-function initializeHeroCarousel(slides, startIndex = 0) {
-    const heroCard = document.querySelector(".hero-card");
+function getFeaturedCars(cars, limit = 3) {
+    const featuredCars = cars.filter((car) => car.featured);
+    const remainingCars = cars.filter((car) => !car.featured);
+
+    return [...featuredCars, ...remainingCars].slice(0, limit);
+}
+
+function initializeSynchronizedCarousel(cars) {
     const prevButton = document.querySelector(".main-card-arrow--left");
     const nextButton = document.querySelector(".main-card-arrow--right");
 
-    if (!heroCard || !prevButton || !nextButton || !Array.isArray(slides) || slides.length === 0) {
+    const placeholders = [...document.querySelectorAll(".card-placeholder")];
+    const secondaryTitles = [...document.querySelectorAll(".col-title")];
+
+    if (!prevButton || !nextButton || placeholders.length < 3 || !Array.isArray(cars) || cars.length === 0) {
         return;
     }
 
-    let currentIndex = startIndex;
+    // 🔥 eliminamos los títulos superiores
+    secondaryTitles.forEach(title => title.remove());
 
-    if (currentIndex < 0 || currentIndex >= slides.length) {
-        currentIndex = 0;
+    let startIndex = 0;
+
+    function getCircularIndex(baseIndex, offset) {
+        return (baseIndex + offset) % cars.length;
     }
 
-    function renderSlide(index) {
-        const slide = slides[index];
+    function render() {
+        const visibleCars = [
+            cars[getCircularIndex(startIndex, 0)],
+            cars[getCircularIndex(startIndex, 1)],
+            cars[getCircularIndex(startIndex, 2)]
+        ];
 
-        if (!slide) return;
+        const [leftCar, centerCar, rightCar] = visibleCars;
+        const [leftCard, centerCard, rightCard] = placeholders;
 
-        heroCard.innerHTML = slide.html;
-        heroCard.dataset.currentIndex = String(index);
+        if (leftCard && leftCar) {
+            leftCard.innerHTML = buildCarCard(leftCar, true);
+        }
+
+        if (centerCard && centerCar) {
+            centerCard.innerHTML = buildCarCard(centerCar, true);
+        }
+
+        if (rightCard && rightCar) {
+            rightCard.innerHTML = buildCarCard(rightCar, true);
+        }
     }
 
     prevButton.replaceWith(prevButton.cloneNode(true));
@@ -66,16 +101,16 @@ function initializeHeroCarousel(slides, startIndex = 0) {
     const freshNextButton = document.querySelector(".main-card-arrow--right");
 
     freshPrevButton.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        renderSlide(currentIndex);
+        startIndex = (startIndex - 1 + cars.length) % cars.length;
+        render();
     });
 
     freshNextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        renderSlide(currentIndex);
+        startIndex = (startIndex + 1) % cars.length;
+        render();
     });
 
-    if (slides.length <= 1) {
+    if (cars.length <= 1) {
         freshPrevButton.hidden = true;
         freshNextButton.hidden = true;
     } else {
@@ -83,7 +118,7 @@ function initializeHeroCarousel(slides, startIndex = 0) {
         freshNextButton.hidden = false;
     }
 
-    renderSlide(currentIndex);
+    render();
 }
 
 export async function initMainPage() {
@@ -94,58 +129,16 @@ export async function initMainPage() {
     }
 
     try {
-        const [company, offers, cars] = await Promise.all([
-            getCompany(),
-            getOffers(),
-            getCars()
-        ]);
+        const cars = await getCars();
 
         const mainTitle = document.querySelector(".main-title");
-        const secondaryTitles = [...document.querySelectorAll(".col-title")];
-        const [leftCard, centerCard, rightCard] = [...document.querySelectorAll(".card-placeholder")];
-
-        const firstOffer = offers[0];
-        const secondOffer = offers[1] || offers[0];
-        const heroSlides = buildHeroSlides(company, cars);
-
-        const featuredCar = cars.find((car) => car.featured) || cars[0];
-        const featuredIndex = cars.findIndex((car) => car.id === featuredCar?.id);
+        const featuredCars = getFeaturedCars(cars, 3);
 
         if (mainTitle) {
-            mainTitle.textContent = company.name;
+            mainTitle.textContent = "Best Sellers";
         }
 
-        if (secondaryTitles[0] && firstOffer) {
-            secondaryTitles[0].textContent = firstOffer.title;
-        }
-
-        if (secondaryTitles[1] && secondOffer) {
-            secondaryTitles[1].textContent = secondOffer.title;
-        }
-
-        if (leftCard && firstOffer) {
-            leftCard.innerHTML = buildGalleryCard({
-                image: firstOffer.image,
-                title: firstOffer.title,
-                subtitle: firstOffer.subtitle,
-                href: firstOffer.ctaLink,
-                linkText: firstOffer.ctaText
-            });
-        }
-
-        if (centerCard && heroSlides.length > 0) {
-            initializeHeroCarousel(heroSlides, featuredIndex >= 0 ? featuredIndex : 0);
-        }
-
-        if (rightCard && secondOffer) {
-            rightCard.innerHTML = buildGalleryCard({
-                image: secondOffer.image,
-                title: secondOffer.title,
-                subtitle: secondOffer.subtitle,
-                href: secondOffer.ctaLink,
-                linkText: secondOffer.ctaText
-            });
-        }
+        initializeSynchronizedCarousel(featuredCars);
     } catch (error) {
         console.error(error);
 

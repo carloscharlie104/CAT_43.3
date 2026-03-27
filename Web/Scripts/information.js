@@ -1,5 +1,11 @@
 import { getCompany, getLocations } from "./api.js";
 
+function createCardImage(src, alt) {
+    return `
+        <img class="card-image" src="${src}" alt="${alt}">
+    `;
+}
+
 function fillCardsTemplate(root, company, locations) {
     const wrappers = [...root.querySelectorAll(".card-wrapper")];
     const safeLocations = Array.isArray(locations) ? locations : [];
@@ -12,17 +18,23 @@ function fillCardsTemplate(root, company, locations) {
         {
             title: "Quiénes somos",
             text: company?.about || "",
-            subtitle: company?.name || ""
+            subtitle: "",
+            image: "",
+            imageAlt: ""
         },
         {
             title: "Historia",
             text: company?.history || "",
-            subtitle: company?.tagline || ""
+            subtitle: "",
+            image: company?.historyImage || "",
+            imageAlt: "Historia de CAT Car Renting Service"
         },
         {
             title: "Donde encontrarnos",
             text: company?.address || "",
-            subtitle: locationSummary || ""
+            subtitle: locationSummary || "",
+            image: company?.locationImage || "",
+            imageAlt: "Ubicación de CAT Car Renting Service"
         }
     ];
 
@@ -33,10 +45,48 @@ function fillCardsTemplate(root, company, locations) {
         const title = wrapper.querySelector("h2");
         const text = wrapper.querySelector(".card-text");
         const subtitle = wrapper.querySelector(".card-subtitle");
+        const cardIcon = wrapper.querySelector(".card-icon");
 
         if (title) title.textContent = info.title;
         if (text) text.textContent = info.text;
-        if (subtitle) subtitle.textContent = info.subtitle;
+
+        const oldImage = wrapper.querySelector(".card-image");
+        if (oldImage) {
+            oldImage.remove();
+        }
+
+        if (cardIcon) {
+            cardIcon.remove();
+        }
+
+        if (subtitle) {
+            if (info.subtitle) {
+                subtitle.textContent = info.subtitle;
+                subtitle.style.display = "";
+            } else {
+                subtitle.textContent = "";
+                subtitle.style.display = "none";
+            }
+        }
+
+        if (info.image) {
+            const subtitleNode = wrapper.querySelector(".card-subtitle");
+
+            if (subtitleNode) {
+                subtitleNode.insertAdjacentHTML(
+                    "beforebegin",
+                    createCardImage(info.image, info.imageAlt)
+                );
+            } else {
+                const card = wrapper.querySelector(".card");
+                if (card) {
+                    card.insertAdjacentHTML(
+                        "beforeend",
+                        createCardImage(info.image, info.imageAlt)
+                    );
+                }
+            }
+        }
     });
 }
 
@@ -107,10 +157,6 @@ export async function initInformationPage() {
 
         fillCardsTemplate(templateRoot, company, locations);
         updateBottomSection(company);
-
-        console.log("Página de información renderizada correctamente");
-        console.log("Company:", company);
-        console.log("Locations:", locations);
     } catch (error) {
         console.error("Error al inicializar la página de información:", error);
     }
