@@ -159,8 +159,8 @@ function setupTexts() {
     const button = document.querySelector(".btn-pink");
 
     if (title) title.textContent = "Reserva tu vehículo";
-    if (fullLabels[0]) fullLabels[0].childNodes[0].textContent = "Recogida ";
-    if (fullLabels[1]) fullLabels[1].childNodes[0].textContent = "Lugar de recogida ";
+    if (fullLabels[0]) fullLabels[0].childNodes[0].textContent = "Lugar de destino ";
+    if (fullLabels[1]) fullLabels[1].childNodes[0].textContent = "Recoge tu coche ";
     if (halfLabels[0]) halfLabels[0].childNodes[0].textContent = "Fecha inicio ";
     if (halfLabels[1]) halfLabels[1].childNodes[0].textContent = "Fecha fin ";
     if (button) button.textContent = "Explorar coches";

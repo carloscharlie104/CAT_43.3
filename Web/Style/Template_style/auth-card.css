@@ -224,6 +224,17 @@ body {
     user-select: none;
 }
 
+.check--error .check__text {
+    color: #8e1b0f;
+    font-weight: 600;
+}
+
+.check__error {
+    font-size: 12px;
+    color: #8e1b0f;
+    margin-left: 22px;
+}
+
 /* ============ Botón ============ */
 .auth-card__btn {
     align-self: center;

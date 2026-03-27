@@ -181,6 +181,33 @@ function clearAllFieldErrors(form) {
     form.querySelectorAll(".field").forEach(clearFieldError);
 }
 
+function clearCheckError(wrapper) {
+    if (!wrapper) {
+        return;
+    }
+
+    wrapper.classList.remove("check--error");
+    const error = wrapper.querySelector(".check__error");
+    if (error) {
+        error.textContent = "";
+    }
+}
+
+function setCheckError(wrapper, message) {
+    if (!wrapper) {
+        return;
+    }
+
+    wrapper.classList.add("check--error");
+    let error = wrapper.querySelector(".check__error");
+    if (!error) {
+        error = document.createElement("div");
+        error.className = "check__error";
+        wrapper.appendChild(error);
+    }
+    error.textContent = message;
+}
+
 function initLogin() {
     const form = document.querySelector(".auth-card__form");
     const usernameInput = document.getElementById("login-user");
@@ -246,6 +273,8 @@ function initRegister() {
     const emailRepeatInput = document.getElementById("reg-email-2");
     const passInput = document.getElementById("reg-pass");
     const passRepeatInput = document.getElementById("reg-pass-2");
+    const checkInput = form ? form.querySelector(".check__input") : null;
+    const checkWrapper = checkInput ? checkInput.closest(".check") : null;
 
     if (!form || !userInput || !emailInput || !emailRepeatInput || !passInput || !passRepeatInput) {
         return;
@@ -255,11 +284,18 @@ function initRegister() {
         wireFieldClearOnInput(input.closest(".field"));
     });
 
+    if (checkInput && checkWrapper) {
+        checkInput.addEventListener("change", () => {
+            clearCheckError(checkWrapper);
+        });
+    }
+
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         clearAllFieldErrors(form);
         clearFormMessage(form);
+        clearCheckError(checkWrapper);
 
         const username = String(userInput.value || "").trim();
         const email = String(emailInput.value || "").trim();
@@ -291,6 +327,11 @@ function initRegister() {
 
         if (passwordRepeat !== password) {
             setFieldError(passRepeatInput.closest(".field"), "Las contraseñas no coinciden.");
+            hasError = true;
+        }
+
+        if (checkInput && checkWrapper && !checkInput.checked) {
+            setCheckError(checkWrapper, "Debes aceptar las condiciones.");
             hasError = true;
         }
 
