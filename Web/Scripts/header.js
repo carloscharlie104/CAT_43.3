@@ -1,5 +1,3 @@
-import { getCompany } from "./api.js";
-
 function assetUrl(relativePath) {
     return new URL(relativePath, import.meta.url).href;
 }
@@ -15,6 +13,47 @@ function createXIcon() {
             <line x1="90" y1="10" x2="10" y2="90"></line>
         </svg>
     `;
+}
+
+const SESSION_KEY = "cat43_session";
+
+function getSession() {
+    try {
+        const raw = localStorage.getItem(SESSION_KEY);
+        return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+        return null;
+    }
+}
+
+function clearSession() {
+    localStorage.removeItem(SESSION_KEY);
+}
+
+function logout(event) {
+    if (event) {
+        event.preventDefault();
+    }
+
+    clearSession();
+    window.location.href = pageUrl("../Pages/main.html");
+}
+
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function getDisplayUsername(session) {
+    if (!session || typeof session !== "object") {
+        return "";
+    }
+
+    return session.username || session.userName || session.name || session.email || "";
 }
 
 function getHeaderConfig(company = {}) {
@@ -74,6 +113,8 @@ function injectDesktopHeader(header, config) {
     const logoHeader = header.querySelector(".logo-header");
     const navLinks = header.querySelector(".nav-links");
     const navActions = header.querySelector(".nav-actions");
+    const session = getSession();
+    const username = getDisplayUsername(session);
 
     if (logoHeader) {
         logoHeader.innerHTML = `
@@ -94,15 +135,28 @@ function injectDesktopHeader(header, config) {
     }
 
     if (navActions) {
-        navActions.innerHTML = `
-            <a href="${config.profileHref}" class="nav-pill yellow">Perfil</a>
-        `;
+        if (username) {
+            navActions.innerHTML = `
+                <div class="nav-session">
+                    <span class="nav-pill nav-user">${escapeHtml(username)}</span>
+                    <button type="button" class="nav-pill yellow nav-logout-btn" id="logout-btn">
+                        Salir
+                    </button>
+                </div>
+            `;
+        } else {
+            navActions.innerHTML = `
+                <a href="${config.profileHref}" class="nav-pill yellow">Perfil</a>
+            `;
+        }
     }
 }
 
 function injectMobileTop(header, config) {
     const mobileLogo = header.querySelector(".mobile-top-btn--logo");
     const mobileUser = header.querySelector(".mobile-top-btn--user");
+    const session = getSession();
+    const username = getDisplayUsername(session);
 
     if (mobileLogo) {
         mobileLogo.href = config.homeHref;
@@ -112,7 +166,18 @@ function injectMobileTop(header, config) {
     }
 
     if (mobileUser) {
-        mobileUser.href = config.profileHref;
+        if (username) {
+            mobileUser.href = "#";
+            mobileUser.setAttribute("aria-label", `Salir (${username})`);
+            mobileUser.setAttribute("title", `Salir (${username})`);
+            mobileUser.dataset.logout = "true";
+        } else {
+            mobileUser.href = config.profileHref;
+            mobileUser.setAttribute("aria-label", "Acceso o registro");
+            mobileUser.removeAttribute("title");
+            delete mobileUser.dataset.logout;
+        }
+
         mobileUser.innerHTML = config.mobileIcons.profile
             ? `<img src="${config.mobileIcons.profile}" alt="Perfil" class="header-mobile-icon">`
             : createXIcon();
@@ -144,6 +209,19 @@ function injectMobileBottom(header, config) {
         .join("");
 }
 
+function bindHeaderEvents(header) {
+    const logoutBtn = header.querySelector("#logout-btn");
+    const mobileLogoutBtn = header.querySelector(".mobile-top-btn--user[data-logout='true']");
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", logout);
+    }
+
+    if (mobileLogoutBtn) {
+        mobileLogoutBtn.addEventListener("click", logout);
+    }
+}
+
 export async function injectHeaderData() {
     const header = document.querySelector("header");
 
@@ -159,6 +237,7 @@ export async function injectHeaderData() {
         injectDesktopHeader(header, config);
         injectMobileTop(header, config);
         injectMobileBottom(header, config);
+        bindHeaderEvents(header);
     } catch (error) {
         console.error("Error al inyectar el header:", error);
     }

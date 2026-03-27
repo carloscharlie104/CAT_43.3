@@ -39,11 +39,31 @@ header {
     border-radius: 20px;
     padding: 8px 20px;
     font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
 }
 
 .nav-actions {
     display: flex;
     gap: 15px;
+    align-items: center;
+}
+
+.nav-session {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-user {
+    white-space: nowrap;
+}
+
+.nav-logout-btn {
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .nav-pill.yellow {
@@ -163,6 +183,4 @@ header {
     .mobile-bottom-text {
         display: block;
     }
-
-
 }

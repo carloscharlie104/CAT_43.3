@@ -19,7 +19,7 @@ function fillCardsTemplate(root, company, locations) {
             title: "Quiénes somos",
             text: company?.about || "",
             subtitle: "",
-            image: "",
+            image: company?.aboutImage || "",
             imageAlt: ""
         },
         {

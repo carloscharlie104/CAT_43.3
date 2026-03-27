@@ -4,6 +4,7 @@
     "name": "CAT Car Renting Service",
     "tagline": "Renting automotriz simple, dinámico y eficaz.",
     "about": "CAT Car Renting Service es una propuesta digital de renting automotriz centrada en la claridad, la rapidez y la facilidad de uso. Nuestro objetivo es que el usuario encuentre vehículo, compare opciones y formalice su solicitud de forma intuitiva.",
+    "aboutImage": "../Assets/Logos/about.png",
     "history": "Nacemos como una solución digital pensada para simplificar el proceso de alquiler y renting de vehículos turísticos, priorizando la experiencia del usuario por encima de funciones innecesarias.",
     "historyImage": "../Assets/Logos/history.png",
     "email": "info@catrenting.com",
