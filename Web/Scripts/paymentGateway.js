@@ -24,6 +24,7 @@ export async function initPaymentGatewayPage() {
     const labels = [...document.querySelectorAll(".form-label")];
     const inputs = [...document.querySelectorAll(".form-input")];
     const button = document.querySelector(".btn-pink");
+    const form = document.querySelector("#payment-form");
     const carId = getCarIdFromUrl();
     const session = getSession();
 
@@ -77,6 +78,91 @@ export async function initPaymentGatewayPage() {
     } catch (error) {
         console.error(error);
     }
+
+    if (form) {
+        setupPaymentValidation(form, inputs);
+    }
+}
+
+function getFormMessage(form) {
+    let message = form.querySelector(".form-message");
+    if (!message) {
+        message = document.createElement("div");
+        message.className = "form-message";
+        form.prepend(message);
+    }
+    return message;
+}
+
+function clearFormMessage(form) {
+    const message = form.querySelector(".form-message");
+    if (message) {
+        message.textContent = "";
+    }
+}
+
+function clearFieldError(group) {
+    if (!group) return;
+    group.classList.remove("form-group--error");
+    const error = group.querySelector(".form-error");
+    if (error) {
+        error.textContent = "";
+    }
+}
+
+function setFieldError(group, message) {
+    if (!group) return;
+    group.classList.add("form-group--error");
+    let error = group.querySelector(".form-error");
+    if (!error) {
+        error = document.createElement("div");
+        error.className = "form-error";
+        group.appendChild(error);
+    }
+    error.textContent = message;
+}
+
+function setupPaymentValidation(form, inputs) {
+    const fieldGroups = [
+        { input: inputs[0], message: "Introduce tu nombre completo." },
+        { input: inputs[1], message: "Introduce tu domicilio." },
+        { input: inputs[2], message: "Introduce un correo electrónico válido." },
+        { input: inputs[3], message: "Introduce un teléfono válido de 9 dígitos." },
+        { input: inputs[4], message: "Indica el método de pago o notas." }
+    ];
+
+    fieldGroups.forEach(({ input }) => {
+        if (!input) return;
+        const group = input.closest(".form-group1, .form-group2, .form-group3");
+        input.addEventListener("input", () => clearFieldError(group));
+    });
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearFormMessage(form);
+
+        let hasError = false;
+
+        fieldGroups.forEach(({ input, message }) => {
+            if (!input) return;
+            const group = input.closest(".form-group1, .form-group2, .form-group3");
+
+            if (!input.checkValidity()) {
+                setFieldError(group, message);
+                hasError = true;
+            } else {
+                clearFieldError(group);
+            }
+        });
+
+        if (hasError) {
+            const formMessage = getFormMessage(form);
+            formMessage.textContent = "Revisa los campos marcados.";
+            return;
+        }
+
+        form.submit();
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {

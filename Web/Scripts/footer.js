@@ -23,7 +23,7 @@ function injectLogos(footer, company) {
     if (socialIcons) {
         socialIcons.innerHTML = `
             ${createSocialIcon("../Assets/Logos/instagram.png")}
-            ${createSocialIcon("../Assets/Logos/tik-tok.png")}
+            ${createSocialIcon("../Assets/Logos/facebook.png")}
             ${createSocialIcon("../Assets/Logos/twitter.png")}
             ${createSocialIcon("../Assets/Logos/whatsapp.png")}
         `;

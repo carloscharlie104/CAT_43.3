@@ -87,6 +87,26 @@ main {
     min-width: 0;
 }
 
+.form-group--error .form-input {
+    border-color: #c0392b;
+    background: #fbeaea;
+}
+
+.form-error {
+    margin-left: 180px;
+    font-size: 0.85rem;
+    color: #8e1b0f;
+}
+
+.form-message {
+    border: 2px solid #c0392b;
+    background: #fbeaea;
+    color: #8e1b0f;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+}
+
 .form-group3 .form-input {
     width: 100%;
 }

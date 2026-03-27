@@ -20,37 +20,37 @@
             <h1 class="contact-title">Lorem Ipsum</h1>
         </div>
 
-        <form class="contact-form">
+        <form class="contact-form" id="payment-form" novalidate>
 
             <div class="form-group1">
                 <label class="form-label" for="name">Lorem Ipsum</label>
-                <input class="form-input" id="name" type="text">
+                <input class="form-input" id="name" type="text" required>
             </div>
 
             <div class="form-group1">
                 <label class="form-label" for="surname">Lorem Ipsum</label>
-                <input class="form-input" id="surname" type="text">
+                <input class="form-input" id="surname" type="text" required>
             </div>
 
             <div class="form-group2">
                 <label class="form-label" for="email">Lorem Ipsum</label>
-                <input class="form-input" id="email" type="text">
+                <input class="form-input" id="email" type="email" required>
             </div>
 
             <div class="form-group3">
                 <label class="form-label" for="phone">Lorem Ipsum</label>
-                <input class="form-input" id="phone" type="text">
+                <input class="form-input" id="phone" type="tel" required pattern="[0-9]{9}" maxlength="9" inputmode="numeric">
             </div>
 
             <div class="form-group3">
                 <label class="form-label" for="message">Lorem Ipsum</label>
-                <input class="form-input" id="message" type="text">
+                <input class="form-input" id="message" type="text" required>
             </div>
 
         </form>
 
         <div class="bottom-action">
-            <button class="btn-pink">Lorem Ipsum</button>
+            <button class="btn-pink" type="submit" form="payment-form">Lorem Ipsum</button>
         </div>
 
     </section>
