@@ -276,29 +276,6 @@
       "conditions": "Kilometraje estándar incluido. Edad mínima del conductor: 27 años."
     }
   ],
-  "reviews": [
-    {
-      "id": "1",
-      "carId": 1,
-      "author": "Laura M.",
-      "rating": 4,
-      "comment": "Muy práctico para movernos por la ciudad y fácil de aparcar."
-    },
-    {
-      "id": "2",
-      "carId": 4,
-      "author": "David R.",
-      "rating": 5,
-      "comment": "Muy cómodo para viajar por la isla con equipaje."
-    },
-    {
-      "id": "3",
-      "carId": 6,
-      "author": "Paula G.",
-      "rating": 5,
-      "comment": "Experiencia muy buena y coche en perfecto estado."
-    }
-  ],
   "faqs": [
     {
       "id": "1",

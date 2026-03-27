@@ -153,8 +153,8 @@ export async function injectHeaderData() {
     }
 
     try {
-        const company = await getCompany();
-        const config = getHeaderConfig(company || {});
+        const company = {};
+        const config = getHeaderConfig(company);
 
         injectDesktopHeader(header, config);
         injectMobileTop(header, config);

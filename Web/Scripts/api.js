@@ -7,17 +7,12 @@ function normalizeUrl(url) {
 function getCandidateApiUrls() {
     const urls = [];
     const configuredUrl = normalizeUrl(window.CAT_API_URL);
-    const currentOrigin = normalizeUrl(window.location.origin);
 
     if (configuredUrl) {
         urls.push(configuredUrl);
+    } else {
+        urls.push(DEFAULT_API_URL);
     }
-
-    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
-        urls.push(currentOrigin);
-    }
-
-    urls.push(DEFAULT_API_URL);
 
     return [...new Set(urls.filter(Boolean))];
 }
