@@ -18,6 +18,8 @@ Propuesta de digitalización del servicio de renting automotriz mediante una pla
   - Instalar Node.js
   - Instalar json-server: `npm install json-server`.
   - Iniciar desde la terminal el json-server con: `npm run server`.
+3. Debe crear un usuario a través de Register.html para luego poder poder iniciar sesión en Login.html con ese mismo usuario creado.
+
 
 
 *Siguiendo estos pasos la inyección tanto de las imágenes como el texto se verán correctamente, en caso contrario solamente podrá ver los "dummies" o fallos totales de la página.* 
