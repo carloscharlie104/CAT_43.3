@@ -1,175 +1,217 @@
-# (CAT) Concesionario Automóviles Turísticos.
+# (CAT) Concesionario Automóviles Turísticos
 
----
+## Componentes del proyecto
 
-## Componentes del proyecto:  
 Carlos Kilian Ortiz Viera, Tomás Fernández Sicilia y Alejandro Bolaños Briganty.
 
 ---
 
-## Descripción del proyecto:  
-Propuesta de digitalización del servicio de renting automotriz mediante una plataforma web escalable. Se prioriza una experiencia simple, dinámica y eficaz, reduciendo funciones innecesarias y dando claridad al usuario durante todo el proceso de búsqueda y reserva.
+## Descripción del proyecto
+
+Este proyecto trata de una propuesta de digitalización del servicio de renting automotriz mediante una plataforma web escalable, que busca dar una experiencia simple, dinámica y eficaz al usuario. Favoreciendo la simpleza y claridad por encima de funciones que no son necesarias.
 
 ---
 
-## IMPORTANTE
-1. **La página de inicio de la aplicación web es Web/Pages/main.html.**
-2. Pasos a seguir para que el proyecto funcione correctamente en su equipo:
-  - Instalar Node.js
-  - Instalar json-server: `npm install json-server`.
-  - Iniciar desde la terminal el json-server con: `npm run server`.
-3. Debe crear un usuario a través de Register.html para luego poder poder iniciar sesión en Login.html con ese mismo usuario creado.
+## Listado de Requisitos funcionales
 
+### Requisitos Funcionales
 
+### Información del servicio y generación de confianza
 
-*Siguiendo estos pasos la inyección tanto de las imágenes como el texto se verán correctamente, en caso contrario solamente podrá ver los "dummies" o fallos totales de la página.* 
+- La web debe explicar claramente qué es CAT Car Renting Service y cuál es su propuesta de valor.
+- La web debe mostrar las condiciones generales del servicio de forma comprensible.
+- La web debe incluir información de contacto visible y accesible.
+- La web debe incorporar una sección de Preguntas Frecuentes (FAQ) para resolver dudas habituales.
+- La web debe disponer de páginas de información legal básica (privacidad y cookies).
 
----
+### Catálogo de vehículos
 
-## Nombre y ubicación del archivo pdf con los mockups  
-Los archivos PDF con los mockups de Escritorio, Tablet y Móvil se encuentran en Web/MockupsFolder/ con nombres Escritorio.pdf, Tablet.pdf y Movil.pdf.
+- La web debe mostrar un listado de vehículos disponibles.
+- Cada vehículo debe incluir información esencial: modelo, categoría, precio orientativo y características principales.
+- El usuario debe poder filtrar el catálogo según criterios relevantes (mínimo dos).
+- El usuario debe poder ordenar los resultados según un criterio lógico (por ejemplo, precio).
+- Desde el catálogo debe poder accederse a la ficha detallada de cada vehículo.
 
-<img width="274" height="490" alt="image" src="https://github.com/user-attachments/assets/275911d6-01b6-4ecb-ad36-86cb0e8da228" />
+### Ficha de vehículo
 
----
+- Cada vehículo debe disponer de una página de detalle.
+- La ficha debe mostrar imágenes representativas y descripción.
+- Deben mostrarse claramente las características principales.
+- Deben indicarse precio orientativo y condiciones relevantes.
 
-## Listado de páginas html del proyecto. (Para cada página html indicar el nombre del mockup que implementa. Indicar la página de inicio de la aplicación web  
+### Solicitud de reserva
 
+- El usuario debe poder solicitar una reserva desde la ficha del vehículo.
+- La solicitud debe incluir fechas de inicio y fin.
+- Debe solicitarse información básica de contacto (nombre, email y teléfono).
+- Debe existir un campo opcional para observaciones.
+- El sistema debe validar los campos obligatorios y los formatos básicos.
+- Tras el envío, debe mostrarse una confirmación clara con indicación de los siguientes pasos.
 
-<img width="274" height="630" alt="image" src="https://github.com/user-attachments/assets/1a06d5da-c6d7-4f44-a042-c7cc3d817701" />
+### Página de contacto
 
-
----
-
-## Las páginas html:
-
-login.html (ubicación: Web/Pages/loginRegisterRecovery/login.html)  
-Mockup aplicado: Escritorio / Tablet / Móvil (responsive).  
-Descripción: pasarela de acceso con usuario y contraseña, opción “Recuérdame” y enlaces a recuperar contraseña y registro.  
-Responsive implementado: responsive.css, header.css (media), footer.css (media), auth-card.css (media), login.css (media).  
-Carga de templates: header.html, footer.html, auth-card.html (este último se inyecta por JS).  
-Carga de JSON: auth, users (API http://localhost:3000, datos en db.json).  
-Validaciones HTML en formularios: campos con required y tipos text/password. El formulario tiene novalidate y las validaciones reales se hacen por JS.  
-
----
-
-register.html (ubicación: Web/Pages/loginRegisterRecovery/register.html)  
-Mockup aplicado: Escritorio / Tablet / Móvil (responsive).  
-Descripción: registro con usuario, email, repetir email, contraseña y repetir contraseña, más aceptación de condiciones.  
-Responsive implementado: responsive.css, header.css (media), footer.css (media), auth-card.css (media).  
-Carga de templates: header.html, footer.html, auth-card.html.  
-Carga de JSON: auth, users (GET y POST a http://localhost:3000).  
-Validaciones HTML en formularios: required, type="email" en emails, type="password" en contraseñas y minLength=6 (configurado por JS). novalidate activo y validación principal en JS.  
+- La web debe incluir una página específica de contacto con formulario.
+- El formulario debe validar datos básicos y confirmar el envío.
+- Deben ofrecerse alternativas de contacto directo (teléfono y/o email).
 
 ---
 
-passRecovery.html (ubicación: Web/Pages/loginRegisterRecovery/passRecovery.html)  
-Mockup aplicado: Escritorio / Tablet / Móvil (responsive).  
-Descripción: formulario de recuperación con email y repetición de email.  
-Responsive implementado: responsive.css, header.css (media), footer.css (media), auth-card.css (media).  
-Carga de templates: header.html, footer.html, auth-card.html.  
-Carga de JSON: auth, users (GET a http://localhost:3000).  
-Validaciones HTML en formularios: required, type="email" y validación por JS; novalidate activo.  
+## Requisitos No Funcionales
+
+### Usabilidad
+
+- La navegación debe ser clara e intuitiva.
+- Las acciones principales deben ser fácilmente identificables.
+- El proceso de solicitud de reserva debe ser sencillo y directo.
+- Los mensajes de error deben ser claros y comprensibles.
+
+### Adaptación a dispositivos
+
+- La web debe visualizarse correctamente en móvil, tablet y ordenador.
+- El contenido no debe romperse ni perder legibilidad en pantallas pequeñas.
+- Los botones deben ser cómodos de usar en dispositivos táctiles.
+
+### Rendimiento
+
+- La web debe cargar de forma ágil.
+- No deben producirse bloqueos ni errores visibles.
+- La navegación debe ser fluida.
+
+### Claridad y accesibilidad
+
+- El texto debe ser legible.
+- Los formularios deben ser comprensibles.
+- Los mensajes de validación deben explicar el error de forma clara.
+
+### Evolución futura
+
+- La web debe permitir añadir nuevos vehículos con facilidad.
+- Debe poder ampliarse con nuevas secciones en el futuro.
+- El crecimiento del negocio no debe requerir rehacer el sitio completo.
 
 ---
 
-main.html (ubicación: Web/Pages/main.html)  
-Mockup aplicado: Escritorio / Tablet / Móvil (responsive).  
-Descripción: landing page con carrusel de ofertas destacadas y tarjetas enlazadas a detalle.  
-Responsive implementado: responsive.css, header.css (media), footer.css (media), main.css (media).  
-Carga de templates: header.html, footer.html, offertCard.html (placeholders de tarjetas).  
-Carga de JSON: cars (API http://localhost:3000).  
+## Relación con el Desarrollo del SPRINT 1
+
+Los requisitos definidos en este documento permitirán:
+
+- Diseñar los mockups del sitio web
+- Identificar templates reutilizables
+- Desarrollar plantillas modulares
+- Verificar la generación de páginas finales a partir de dichos templates
+
+Este proceso garantiza la trazabilidad entre análisis, diseño e implementación, cumpliendo los objetivos establecidos en el SPRINT 1.
 
 ---
 
-reservation.html (ubicación: Web/Pages/reservation.html)  
-Mockup aplicado: Escritorio / Tablet / Móvil (responsive).  
-Descripción: formulario de selección de isla, localización y fechas; listado de vehículos filtrables.  
-Responsive implementado: responsive.css, header.css (media), footer.css (media).  
-Carga de templates: header.html, footer.html, offertCard.html (placeholders que se reemplazan por JS).  
-Carga de JSON: cars, categories, locations (API http://localhost:3000).  
-Validaciones HTML en formularios: la selección y fechas se controlan por JS; fecha mínima = hoy y fecha fin no puede ser anterior a fecha inicio.  
+## Nombre y ubicación del archivo pdf con los mockups y storyboard (figma)
+
+El archivo PDF con las templates, se encuentra en la ubicación:  
+CAT_43.3/Web/MockupsFolder/Templates (con nombre templates.pdf).
+
+Y los mockups se encuentran en la ruta:  
+CAT_43.3/Web/MockupsFolder/NoTemplates con el nombre (noTemplates.pdf).
 
 ---
 
-information.html (ubicación: Web/Pages/information.html)  
-Mockup aplicado: Escritorio / Tablet / Móvil (responsive).  
-Descripción: historia, ubicación y “quiénes somos”, más CTA a contacto.  
-Responsive implementado: responsive.css, header.css (media), footer.css (media).  
-Carga de templates: header.html, footer.html, cards.html.  
-Carga de JSON: company, locations (API http://localhost:3000).  
-Validaciones HTML en formularios: N/A.  
+## Listado de páginas html del proyecto
+
+(Para cada página html indicar el nombre del mockup que implementa. Indicar la página de inicio de la aplicación web)
+
+Las páginas html de este proyecto son las siguientes:
+
+Se dotará del nombre del archivo como tal en el proyecto (x.html) y entre paréntesis y en mayúsculas el nombre que tiene en los mockups de Figma.
 
 ---
 
-contact.html (ubicación: Web/Pages/contact.html)  
-Mockup aplicado: Escritorio / Tablet / Móvil (responsive).  
-Descripción: formulario de contacto con nombre, apellidos, email y mensaje.  
-Responsive implementado: responsive.css, header.css (media), footer.css (media).  
-Carga de templates: header.html, footer.html.  
-Carga de JSON: company (GET) y contactMessages (POST) en http://localhost:3000.  
-Validaciones HTML en formularios: type="email" en el email, sin required ni novalidate.  
+### login.html (Figma: ACCESO)
+
+Este simplemente consiste en una pasarela para que el usuario pueda introducir sus credenciales y pueda acceder a su perfil dentro de la web.
+Se tiene en cuenta la funcionalidad de poder “Recordar credenciales” al igual que “recuperar contraseña”.
+
+<img width="1008" height="704" alt="image" src="https://github.com/user-attachments/assets/f5f4c117-f2f8-449f-acd8-ead6e3867ddd" />
+
 
 ---
 
-carData.html (ubicación: Web/Pages/carData.html)  
-Mockup aplicado: Escritorio / Tablet / Móvil (responsive).  
-Descripción: detalle del vehículo seleccionado con imagen, specs y CTA a reserva.  
-Responsive implementado: responsive.css, header.css (media), footer.css (media), carData.css (media).  
-Carga de templates: header.html, footer.html.  
-Carga de JSON: cars/:id y categories (fetch directo a http://localhost:3000).  
-Validaciones HTML en formularios: N/A.  
+### register.html (Figma: REGISTRO USUARIO)
+
+Página para que el usuario pueda registrarse con sus datos personales como nombre, apellidos, nombre de usuario, correo y contraseña.
+<img width="1008" height="725" alt="image" src="https://github.com/user-attachments/assets/122a6703-50f3-4eda-945b-2c699428ecf7" />
 
 ---
 
-paymentGateway.html (ubicación: Web/Pages/paymentGateway.html)  
-Mockup aplicado: Escritorio / Tablet / Móvil (responsive).  
-Descripción: formulario final de datos y método de pago.  
-Responsive implementado: responsive.css (no hay header), footer.css (media).  
-Carga de templates: footer.html.  
-Carga de JSON: company, paymentMethods, cars/:id (API http://localhost:3000).  
-Validaciones HTML en formularios: inputs con required, type="email", type="tel" y pattern="[0-9]{9}"; el formulario tiene novalidate y la validación se aplica por JS con checkValidity().  
+### passRecovery.html (Figma: RECUPERAR CONTRASEÑA)
+
+Formulario para poder solicitar una recuperación de contraseña en caso de haberla olvidado o perdido.
+<img width="1007" height="691" alt="image" src="https://github.com/user-attachments/assets/4b448a5e-4609-44bb-8144-a9974c255896" />
 
 ---
 
-faq.html (ubicación: Web/Pages/faq.html)  
-Mockup aplicado: Escritorio / Tablet / Móvil (responsive).  
-Descripción: preguntas frecuentes renderizadas como acordeón.  
-Responsive implementado: responsive.css, header.css (media), footer.css (media), faq.css (media), main.css (media).  
-Carga de templates: header.html, footer.html.  
-Carga de JSON: faqs (API http://localhost:3000).  
-Validaciones HTML en formularios: N/A.  
+### main.html (Figma: INICIO)
+
+Landing page, es decir, lo primero que vería el usuario nada más entrar a la web. En ésta se presenta un futuro carrusel de ofertas y novedades en el centro para un rápido acceso, siguiendo la filosofía del proyecto.
+<img width="1003" height="711" alt="image" src="https://github.com/user-attachments/assets/fd554a7e-554a-4ec5-8082-42b1ba1f83b6" />
 
 ---
 
-Los templates html:
+### reservation.html (Figma: RESERVA)
 
-auth-card.html  
-Plantilla del bloque central de login/registro/recuperación. Se inyecta por JS en login.html, register.html y passRecovery.html.  
-
-cards.html  
-Plantilla de las 3 tarjetas informativas de information.html.  
-
-footer.html  
-Pie de página común, con datos dinámicos de empresa y enlaces.  
-
-header.html  
-Navegación principal en desktop y barras de navegación móvil.  
-
-offertCard.html  
-Plantilla de tarjeta de oferta usada como placeholder en main.html y reservation.html antes de renderizar datos dinámicos.
+En esta página el usuario podrá elegir destino y rango de fechas en el recuadro de la izquierda y en el recuadro de la derecha se mostraran las opciones disponibles en consecuencia.
+<img width="1008" height="716" alt="image" src="https://github.com/user-attachments/assets/b4602461-5b12-4f34-a706-fbc3b066e81e" />
 
 ---
 
+### information.html (Figma: INFORMACIÓN)
 
-## Ubicación del contenido json 
+Página que muestra la historia de la empresa, localización y orígenes.
+<img width="1004" height="707" alt="image" src="https://github.com/user-attachments/assets/04a88b22-5bed-4d1f-9b7b-b75f7e82a73c" />
 
-El contenido JSON utilizado en el proyecto se gestiona mediante una API local accesible en http://localhost:3000, cuyos datos se encuentran definidos en el archivo `db.json` ubicado en la raíz del proyecto.  
+---
 
-Este archivo centraliza toda la información dinámica de la aplicación, incluyendo entidades como usuarios, vehículos, categorías, ubicaciones, empresa y preguntas frecuentes.  
+### contact.html (Figma: CONTACTO)
 
-Las distintas páginas del proyecto consumen estos datos mediante peticiones GET y POST, permitiendo simular un entorno real de backend durante el desarrollo.
+En esta página el usuario puede mandar un mensaje a través de la página para hacer una consulta.
+<img width="1012" height="712" alt="image" src="https://github.com/user-attachments/assets/d3a94eb7-e422-4ff7-88cb-3be8fe0e4c7c" />
 
+---
 
-<img width="274" height="419" alt="image" src="https://github.com/user-attachments/assets/73f57f40-82a9-4277-8ab4-f8fc713a2983" />
+### carData.html (Figma: RESERVA DATOS COCHE)
 
+Página pensada con dos usos dependiendo si el usuario ha iniciado sesión. El funcionamiento base permite ver los detalles y especificaciones del vehículo. Por otro lado, en caso de que el usuario haya iniciado sesión, verá los detalles del vehículo reservado, modificar o cancelar su pedido.
+<img width="1004" height="710" alt="image" src="https://github.com/user-attachments/assets/2ecafd78-f4d1-4a9c-a32e-46f66a7f2bbb" />
+
+---
+
+### paymentGateway.html (Figma: PREVIO PASARELA DE PAGO)
+
+En esta página el usuario ya ha elegido el vehículo y está listo para realizar su reserva asi que le solicitaremos el resto de datos personales para que pueda proceder a realizar el pago.
+<img width="1007" height="674" alt="image" src="https://github.com/user-attachments/assets/a8937418-1f88-48e1-89ec-c2155ce7336b" />
+
+---
+
+### faq.html (Figma: FAQ)
+
+En esta página el usuario puede ver las preguntas frecuentes de otros usuarios y las respuestas.
+<img width="815" height="557" alt="image" src="https://github.com/user-attachments/assets/4a1bb54b-92a7-4ec4-a816-b6cd5830b8af" />
+
+---
+
+## Listado de archivos y templates identificados y señalar en el archivo en el que se cargan
+<img width="514" height="1015" alt="image" src="https://github.com/user-attachments/assets/47c6e6bd-0a41-4d22-abfb-821310d83457" />
+
+Como podemos ver tenemos varios Templates en nuestro proyecto separados por archivos .html en la carpeta Template y por sus .css individuales guardados dentro de la carpeta Style con el resto de los .css
+
+- auth-card.html lo podemos encontrar en los archivos de la carpeta loginRegisterRecovery ya que es un template del cuadro de central de estos.
+- cards.html corresponde a las tarjetas con información de los vehículos de reservation.html y de main.html.
+- footer.html es el pie de página que tenemos en toda la web.
+- header.html es el menú de navegación que tenemos al principio de casi todas las páginas de nuestra web.
+- offertCard.html corresponde a las tres tarjetas centrales de la página information.html.
+
+---
+
+## Otros aspectos del proyecto que tener en consideración
+
+(tareas implementadas con javascript, organización de las hojas de estilo etc.)
+
+Como aspectos adicionales nos gustaría remarcar la funcionalidad ya implementada de los cuadros de texto y los acordeones del FAQ en los cuales el usuario ya podría interactuar con ellos para dar una experiencia, pese a ser un dummy, algo más viva.

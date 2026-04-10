@@ -1,0 +1,88 @@
+@import "../Web/Style/global.css";
+@import "../Web/Style/responsive.css";
+
+body {
+  margin: 0;
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-shell main {
+  flex: 1;
+}
+
+.header-main-logo,
+.header-mobile-logo {
+  display: block;
+  object-fit: contain;
+}
+
+.header-main-logo {
+  width: 50px;
+  height: 50px;
+}
+
+.header-mobile-logo {
+  width: 26px;
+  height: 26px;
+}
+
+.app-link-button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.car-card-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gallery-box p {
+  margin: 0;
+}
+
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-text {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.status-text--error {
+  color: #8e1b0f;
+}
+
+.status-text--success {
+  color: #1b5e20;
+}
+
+.payment-summary {
+  padding: 16px 18px;
+  border: 2px solid #000;
+  background: #f8f8f8;
+  border-radius: 12px;
+}
+
+.payment-summary p {
+  margin: 0 0 8px;
+}
+
+.payment-summary p:last-child {
+  margin-bottom: 0;
+}
+
+.faq-empty {
+  text-align: center;
+  color: #666;
+}

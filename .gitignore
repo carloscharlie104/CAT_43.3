@@ -1,7 +1,9 @@
 # Node
 node_modules/
 npm-debug.log*
-package-lock.json
+.angular/
+.npm-cache/
+dist/
 
 # IDE
 .idea/
@@ -13,3 +15,6 @@ Thumbs.db
 # Logs
 logs/
 *.log
+
+# Temporary scaffolding
+angular-seed/

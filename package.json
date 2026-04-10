@@ -1,25 +1,49 @@
 {
   "name": "cat_43.3",
   "version": "1.0.0",
-  "description": "Carlos Kilian Ortiz Viera, Tomás Fernández Sicilia y Alejandro Bolaños Briganty.",
-  "main": "index.js",
+  "private": true,
+  "description": "CAT Car Renting Service migrado a Angular para Sprint 3.",
   "scripts": {
-    "server": "json-server --watch db.json --port 3000",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "server": "json-server --watch db.json --port 3000"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/carloscharlie104/CAT_43.3.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/carloscharlie104/CAT_43.3/issues"
   },
   "homepage": "https://github.com/carloscharlie104/CAT_43.3#readme",
   "dependencies": {
-    "json-server": "^1.0.0-beta.15"
+    "@angular/common": "^20.3.18",
+    "@angular/compiler": "^20.3.18",
+    "@angular/core": "^20.3.18",
+    "@angular/forms": "^20.3.18",
+    "@angular/platform-browser": "^20.3.18",
+    "@angular/platform-browser-dynamic": "^20.3.18",
+    "@angular/router": "^20.3.18",
+    "json-server": "^1.0.0-beta.15",
+    "rxjs": "^7.8.2",
+    "tslib": "^2.8.1",
+    "zone.js": "^0.15.1"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.3.23",
+    "@angular/cli": "^20.3.23",
+    "@angular/compiler-cli": "^20.3.18",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.9.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.9.2"
   }
 }
