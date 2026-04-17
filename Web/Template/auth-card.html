@@ -1,4 +1,4 @@
-<section class="auth-card" aria-labelledby="auth-title">
+<section class="auth-card card mx-auto" aria-labelledby="auth-title">
   <h1 id="auth-title" class="auth-card__title" data-auth-title></h1>
 
   <p class="auth-card__description" data-auth-description hidden></p>
@@ -7,44 +7,44 @@
     <div class="field" data-auth-field="user" hidden>
       <span class="field__icon-left" aria-hidden="true">×</span>
       <label class="field__label">Usuario</label>
-      <input class="field__input" type="text" />
+      <input class="field__input form-control" type="text" />
       <button class="field__clear" type="button" aria-label="Borrar usuario"></button>
     </div>
 
     <div class="field" data-auth-field="email" hidden>
       <span class="field__icon-left" aria-hidden="true">×</span>
       <label class="field__label">Correo electrónico</label>
-      <input class="field__input" type="email" />
+      <input class="field__input form-control" type="email" />
       <button class="field__clear" type="button" aria-label="Borrar correo"></button>
     </div>
 
     <div class="field" data-auth-field="email-repeat" hidden>
       <span class="field__icon-left" aria-hidden="true">×</span>
       <label class="field__label">Repetir correo electrónico</label>
-      <input class="field__input" type="email" />
+      <input class="field__input form-control" type="email" />
       <button class="field__clear" type="button" aria-label="Borrar repetición de correo"></button>
     </div>
 
     <div class="field" data-auth-field="password" hidden>
       <span class="field__icon-left" aria-hidden="true">×</span>
       <label class="field__label">Contraseña</label>
-      <input class="field__input" type="password" />
+      <input class="field__input form-control" type="password" />
       <button class="field__clear" type="button" aria-label="Borrar contraseña"></button>
     </div>
 
     <div class="field" data-auth-field="password-repeat" hidden>
       <span class="field__icon-left" aria-hidden="true">×</span>
       <label class="field__label">Repetir contraseña</label>
-      <input class="field__input" type="password" />
+      <input class="field__input form-control" type="password" />
       <button class="field__clear" type="button" aria-label="Borrar repetición de contraseña"></button>
     </div>
 
     <label class="check" data-auth-check-wrapper hidden>
-      <input class="check__input" type="checkbox" />
+      <input class="check__input form-check-input" type="checkbox" />
       <span class="check__text" data-auth-check></span>
     </label>
 
-    <button class="auth-card__btn" type="submit" data-auth-submit></button>
+    <button class="auth-card__btn btn" type="submit" data-auth-submit></button>
 
     <div class="auth-card__links-row" data-auth-links-row hidden>
       <a class="auth-card__link" data-auth-link-primary hidden></a>

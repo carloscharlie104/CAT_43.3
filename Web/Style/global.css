@@ -116,6 +116,13 @@ section {
     gap: var(--section-gap);
 }
 
+.row.cards-grid,
+.row.cards-section,
+.row.footer-links-section,
+.row.form-row {
+    margin-inline: 0;
+}
+
 .card {
     background-color: var(--surface-color);
     border-radius: 16px;

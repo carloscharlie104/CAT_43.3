@@ -8,7 +8,7 @@ function buildGalleryCard({ image, title, linkText, href, subtitle, priceText, s
     const fallback = createImageFallback(safeTitle);
 
     return `
-        <div class="gallery-box">
+        <div class="gallery-box card h-100">
             <div class="image-placeholder">
                 <img
                     src="${getImageSource(image, safeTitle)}"
@@ -23,7 +23,7 @@ function buildGalleryCard({ image, title, linkText, href, subtitle, priceText, s
             <p style="margin: 0 0 8px; font-size: 0.95rem;">${safeSubtitle}</p>
             <p style="margin: 0 0 12px; font-size: 0.95rem; font-weight: 600;">${safePriceText}</p>
 
-            <a href="${href}" class="box-link">Ver vehículo</a>
+            <a href="${href}" class="box-link btn btn-link">Ver vehículo</a>
         </div>
     `;
 }

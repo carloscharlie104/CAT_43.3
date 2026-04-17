@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reserva Datos Coche</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../Style/global.css">
     <link rel="stylesheet" href="../Style/Template_style/header.css">
     <link rel="stylesheet" href="../Style/Template_style/footer.css">
@@ -15,8 +16,8 @@
 <body>
 <div id="header-placeholder" data-include="../Template/header.html"></div>
 
-<main class="carData-main" id="carData-container">
-    <section class="carData-left">
+<main class="carData-main container" id="carData-container">
+    <section class="carData-left col-12 col-lg-7">
         <h1 class="carData-title">Cargando vehículo...</h1>
 
         <div class="media-box">
@@ -27,11 +28,11 @@
         </div>
     </section>
 
-    <section class="carData-right">
+    <section class="carData-right col-12 col-lg-5">
         <p class="info-line">Cargando información...</p>
     </section>
 
-    <a class="cta" href="#" id="carData-cta">Reservar</a>
+    <a class="cta btn" href="#" id="carData-cta">Reservar</a>
 </main>
 
 <div id="footer-placeholder" data-include="../Template/footer.html"></div>

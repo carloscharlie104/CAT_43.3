@@ -32,6 +32,10 @@ body {
     max-width: 400px;
 }
 
+.reservation-form .input-group {
+    display: block;
+}
+
 .form-main-title {
     font-size: 2rem;
     font-weight: normal;
