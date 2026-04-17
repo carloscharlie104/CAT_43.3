@@ -15,10 +15,10 @@ function createCarCard(car, categories, locations) {
     const imageSrc = getImageSource(car.image, car.fullName);
 
     return `
-        <article class="grid-item col-12 col-md-6 col-xl-4">
+        <article class="grid-item">
             <h3 class="item-title">${car.fullName}</h3>
 
-            <div class="reservation-card card h-100">
+            <div class="reservation-card">
                 <img
                     class="reservation-card-image"
                     src="${imageSrc || fallback}"
@@ -38,7 +38,7 @@ function createCarCard(car, categories, locations) {
                         ${mainLocation}
                     </p>
 
-                    <a class="reservation-card-link btn btn-link" href="./carData.html?id=${car.id}">
+                    <a class="reservation-card-link" href="./carData.html?id=${car.id}">
                         Ver detalle
                     </a>
                 </div>
@@ -125,7 +125,7 @@ function setupInputs() {
 
     if (fullInputs[0]) {
         const islandSelect = document.createElement("select");
-        islandSelect.className = "input-full form-control form-select";
+        islandSelect.className = "input-full";
         islandSelect.id = "islandSelect";
         islandSelect.disabled = false;
         fullInputs[0].replaceWith(islandSelect);
@@ -133,7 +133,7 @@ function setupInputs() {
 
     if (fullInputs[1]) {
         const locationSelect = document.createElement("select");
-        locationSelect.className = "input-full form-control form-select";
+        locationSelect.className = "input-full";
         locationSelect.id = "locationSelect";
         locationSelect.disabled = true;
         fullInputs[1].replaceWith(locationSelect);

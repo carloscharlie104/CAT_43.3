@@ -128,7 +128,7 @@ function injectDesktopHeader(header, config) {
         navLinks.innerHTML = config.navItems
             .map(
                 (item) => `
-                    <a href="${item.href}" class="nav-pill btn btn-outline-primary nav-link">${item.label}</a>
+                    <a href="${item.href}" class="nav-pill">${item.label}</a>
                 `
             )
             .join("");
@@ -139,14 +139,14 @@ function injectDesktopHeader(header, config) {
             navActions.innerHTML = `
                 <div class="nav-session">
                     <span class="nav-pill nav-user">${escapeHtml(username)}</span>
-                    <button type="button" class="nav-pill yellow nav-logout-btn btn btn-warning" id="logout-btn">
+                    <button type="button" class="nav-pill yellow nav-logout-btn" id="logout-btn">
                         Salir
                     </button>
                 </div>
             `;
         } else {
             navActions.innerHTML = `
-                <a href="${config.profileHref}" class="nav-pill yellow btn btn-warning">Perfil</a>
+                <a href="${config.profileHref}" class="nav-pill yellow">Perfil</a>
             `;
         }
     }

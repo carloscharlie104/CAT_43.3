@@ -17,7 +17,7 @@
 
 <div id="header-placeholder" data-include="../Template/header.html"></div>
 
-<main class="contact-container container">
+<main class="contact-container">
 
     <div class="contact-header">
         <h1 class="contact-title">Lorem ipsum</h1>
@@ -26,32 +26,32 @@
 
     <form id="contactForm" class="contact-form" action="#" method="post">
 
-        <div class="form-row row g-3">
-            <div class="form-group col-12 col-md-6">
+        <div class="form-row">
+            <div class="form-group">
                 <label class="form-label" for="name">Lorem ipsum</label>
-                <input id="name" name="name" class="form-input form-control" type="text" placeholder="" autocomplete="given-name">
+                <input id="name" name="name" class="form-input" type="text" placeholder="" autocomplete="given-name" required>
             </div>
 
-            <div class="form-group col-12 col-md-6">
+            <div class="form-group">
                 <label class="form-label" for="surname">Lorem ipsum</label>
-                <input id="surname" name="surname" class="form-input form-control" type="text" placeholder="" autocomplete="family-name">
+                <input id="surname" name="surname" class="form-input" type="text" placeholder="" autocomplete="family-name" required>
             </div>
         </div>
 
         <div class="form-group">
             <label class="form-label" for="email">Lorem ipsum</label>
-            <input id="email" name="email" class="form-input form-control" type="email" placeholder="" autocomplete="email">
+            <input id="email" name="email" class="form-input" type="email" placeholder="" autocomplete="email" required>
         </div>
 
         <div class="form-group">
             <label class="form-label" for="message">Lorem ipsum</label>
-            <textarea id="message" name="message" class="form-textarea form-control" placeholder=""></textarea>
+            <textarea id="message" name="message" class="form-textarea" placeholder="" required></textarea>
         </div>
 
     </form>
 
     <div class="bottom-action">
-        <button class="btn btn-pink" type="submit" form="contactForm">Lorem ipsum</button>
+        <button class="btn-pink" type="submit" form="contactForm">Lorem ipsum</button>
     </div>
 
 </main>
