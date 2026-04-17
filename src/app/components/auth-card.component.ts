@@ -103,6 +103,10 @@ export class AuthCardComponent {
       return 'Este campo es obligatorio.';
     }
 
+    if (control.errors['requiredTrue']) {
+      return 'Debes aceptar las condiciones.';
+    }
+
     if (control.errors['email']) {
       return 'Introduce un correo válido.';
     }

@@ -332,11 +332,11 @@
       "links": {
         "primary": {
           "text": "Recuperar contraseña",
-          "href": "./passRecovery.html"
+          "href": "/recovery"
         },
         "secondary": {
           "text": "Registrarse",
-          "href": "./register.html"
+          "href": "/register"
         }
       }
     },
@@ -408,7 +408,7 @@
       "links": {
         "primary": {
           "text": "¿Ya tienes cuenta?",
-          "href": "./login.html"
+          "href": "/login"
         }
       }
     },
@@ -443,7 +443,7 @@
       "submitText": "Enviar",
       "backLink": {
         "text": "Volver al login",
-        "href": "./login.html"
+        "href": "/login"
       }
     }
   },

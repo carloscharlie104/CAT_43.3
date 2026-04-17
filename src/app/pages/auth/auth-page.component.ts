@@ -122,9 +122,11 @@ export class AuthPageComponent {
       this.form.get(fieldName)?.clearValidators();
     }
 
+    const screenValidators = this.getScreenValidators(screen);
+
     config.fields.forEach((field) => {
       const control = this.form.get(field.name);
-      const validators = [];
+      const validators = [...(screenValidators[field.name] ?? [])];
 
       if (field.required) {
         validators.push(Validators.required);
@@ -146,6 +148,31 @@ export class AuthPageComponent {
       this.form.get('acceptedTerms')?.setValidators(Validators.requiredTrue);
       this.form.get('acceptedTerms')?.updateValueAndValidity({ emitEvent: false });
     }
+  }
+
+  private getScreenValidators(screen: AuthScreen): Record<string, ValidatorFn[]> {
+    if (screen === 'login') {
+      return {
+        username: [Validators.required],
+        password: [Validators.required]
+      };
+    }
+
+    if (screen === 'register') {
+      return {
+        username: [Validators.required, Validators.minLength(3)],
+        email: [Validators.required, Validators.email],
+        emailRepeat: [Validators.required, Validators.email],
+        password: [Validators.required, Validators.minLength(6)],
+        passwordRepeat: [Validators.required, Validators.minLength(6)],
+        acceptedTerms: [Validators.requiredTrue]
+      };
+    }
+
+    return {
+      email: [Validators.required, Validators.email],
+      emailRepeat: [Validators.required, Validators.email]
+    };
   }
 
   private matchValidator(sourceKey: string, targetKey: string): ValidatorFn {
