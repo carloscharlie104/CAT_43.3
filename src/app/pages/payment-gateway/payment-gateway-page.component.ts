@@ -39,23 +39,38 @@ import { calculateDays } from '../../core/utils';
             <form class="contact-form" [formGroup]="form" (ngSubmit)="submit(vm)">
               <div class="form-group1">
                 <label class="form-label" for="name">Nombre</label>
-                <input class="form-input" id="name" type="text" formControlName="name">
+                <input class="form-input" [class.form-input--error]="controlInvalid('name')" id="name" type="text" formControlName="name">
+                @if (controlInvalid('name')) {
+                  <p class="status-text status-text--error">{{ firstError('name') }}</p>
+                }
               </div>
               <div class="form-group1">
                 <label class="form-label" for="address">Domicilio</label>
-                <input class="form-input" id="address" type="text" formControlName="address">
+                <input class="form-input" [class.form-input--error]="controlInvalid('address')" id="address" type="text" formControlName="address">
+                @if (controlInvalid('address')) {
+                  <p class="status-text status-text--error">{{ firstError('address') }}</p>
+                }
               </div>
               <div class="form-group2">
                 <label class="form-label" for="email">Correo electrónico</label>
-                <input class="form-input" id="email" type="email" formControlName="email">
+                <input class="form-input" [class.form-input--error]="controlInvalid('email')" id="email" type="email" formControlName="email">
+                @if (controlInvalid('email')) {
+                  <p class="status-text status-text--error">{{ firstError('email') }}</p>
+                }
               </div>
               <div class="form-group3">
                 <label class="form-label" for="phone">Teléfono</label>
-                <input class="form-input" id="phone" type="tel" formControlName="phone">
+                <input class="form-input" [class.form-input--error]="controlInvalid('phone')" id="phone" type="tel" formControlName="phone">
+                @if (controlInvalid('phone')) {
+                  <p class="status-text status-text--error">{{ firstError('phone') }}</p>
+                }
               </div>
               <div class="form-group3">
                 <label class="form-label" for="notes">Método de pago / notas</label>
-                <input class="form-input" id="notes" type="text" formControlName="notes" [placeholder]="'Métodos disponibles: ' + vm.paymentMethods">
+                <input class="form-input" [class.form-input--error]="controlInvalid('notes')" id="notes" type="text" formControlName="notes" [placeholder]="'Métodos disponibles: ' + vm.paymentMethods">
+                @if (controlInvalid('notes')) {
+                  <p class="status-text status-text--error">{{ firstError('notes') }}</p>
+                }
               </div>
 
               @if (statusMessage) {
@@ -83,13 +98,14 @@ export class PaymentGatewayPageComponent {
 
   protected statusMessage = '';
   protected statusType: 'error' | 'success' = 'success';
+  protected readonly todayDate = this.toIsoLocalDate(new Date());
 
   protected readonly form = this.formBuilder.nonNullable.group({
-    name: [this.session.snapshot?.username ?? '', Validators.required],
-    address: ['', Validators.required],
+    name: [this.session.snapshot?.username ?? '', [Validators.required, Validators.minLength(2)]],
+    address: ['', [Validators.required, Validators.minLength(5)]],
     email: [this.session.snapshot?.email ?? '', [Validators.required, Validators.email]],
     phone: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
-    notes: ['', Validators.required]
+    notes: ['', [Validators.required, Validators.minLength(3)]]
   });
 
   readonly vm$ = this.route.queryParamMap.pipe(
@@ -126,6 +142,7 @@ export class PaymentGatewayPageComponent {
 
   async submit(vm: { car: { id: string } | null; locationId: string; startDate: string; endDate: string; totalPrice: number }): Promise<void> {
     this.form.markAllAsTouched();
+    this.statusMessage = '';
 
     if (this.form.invalid) {
       this.statusType = 'error';
@@ -139,6 +156,13 @@ export class PaymentGatewayPageComponent {
       return;
     }
 
+    const dateError = this.validateReservationDates(vm.startDate, vm.endDate);
+    if (dateError) {
+      this.statusType = 'error';
+      this.statusMessage = dateError;
+      return;
+    }
+
     try {
       const values = this.form.getRawValue();
       await firstValueFrom(
@@ -146,8 +170,8 @@ export class PaymentGatewayPageComponent {
           carId: Number(vm.car.id),
           pickupLocationId: Number(vm.locationId || 1),
           returnLocationId: Number(vm.locationId || 1),
-          startDate: vm.startDate || new Date().toISOString().split('T')[0]!,
-          endDate: vm.endDate || new Date().toISOString().split('T')[0]!,
+          startDate: vm.startDate,
+          endDate: vm.endDate,
           customerName: values.name,
           customerEmail: values.email,
           customerPhone: values.phone,
@@ -164,5 +188,60 @@ export class PaymentGatewayPageComponent {
       this.statusType = 'error';
       this.statusMessage = 'No se pudo completar la reserva. Inténtalo de nuevo.';
     }
+  }
+
+  private validateReservationDates(startDate: string, endDate: string): string | null {
+    if (!startDate || !endDate) {
+      return 'Debes seleccionar fechas de recogida y devolución antes de finalizar la reserva.';
+    }
+
+    if (startDate < this.todayDate) {
+      return 'La fecha de recogida no puede ser anterior a hoy.';
+    }
+
+    if (endDate < this.todayDate) {
+      return 'La fecha de devolución no puede ser anterior a hoy.';
+    }
+
+    if (endDate < startDate) {
+      return 'La fecha de devolución no puede ser anterior a la de recogida.';
+    }
+
+    return null;
+  }
+
+  private toIsoLocalDate(date: Date): string {
+    const offsetMs = date.getTimezoneOffset() * 60000;
+    return new Date(date.getTime() - offsetMs).toISOString().slice(0, 10);
+  }
+
+  protected controlInvalid(name: keyof typeof this.form.controls): boolean {
+    const control = this.form.controls[name];
+    return control.invalid && (control.touched || control.dirty);
+  }
+
+  protected firstError(name: keyof typeof this.form.controls): string {
+    const control = this.form.controls[name];
+    if (!control.errors) {
+      return '';
+    }
+
+    if (control.errors['required']) {
+      return 'Este campo es obligatorio.';
+    }
+
+    if (control.errors['email']) {
+      return 'Introduce un correo electrónico válido.';
+    }
+
+    if (control.errors['pattern']) {
+      return 'El teléfono debe tener 9 dígitos.';
+    }
+
+    if (control.errors['minlength']) {
+      return `Debe tener al menos ${control.errors['minlength'].requiredLength} caracteres.`;
+    }
+
+    return 'Valor no válido.';
   }
 }
