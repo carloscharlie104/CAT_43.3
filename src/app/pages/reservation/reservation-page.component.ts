@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { catchError, forkJoin, of } from 'rxjs';
 
@@ -41,15 +41,19 @@ import { ApiService } from '../../services/api.service';
             <div class="input-row">
               <div class="input-group-half">
                 <label>Fecha inicio
-                  <input class="input-half" type="date" formControlName="startDate">
+                  <input class="input-half" type="date" formControlName="startDate" [attr.min]="todayDate">
                 </label>
               </div>
               <div class="input-group-half">
                 <label>Fecha fin
-                  <input class="input-half" type="date" formControlName="endDate">
+                  <input class="input-half" type="date" formControlName="endDate" [attr.min]="endDateMin">
                 </label>
               </div>
             </div>
+
+            @if (dateErrorMessage) {
+              <p class="reservation-empty">{{ dateErrorMessage }}</p>
+            }
 
             <div class="submit-container">
               <button class="btn-pink" type="submit">Explorar coches</button>
@@ -90,13 +94,20 @@ import { ApiService } from '../../services/api.service';
 export class ReservationPageComponent {
   private readonly api = inject(ApiService);
   private readonly formBuilder = inject(FormBuilder);
+  protected readonly todayDate = this.toIsoLocalDate(new Date());
+  protected dateErrorMessage = '';
 
-  protected readonly form = this.formBuilder.nonNullable.group({
-    island: '',
-    locationId: '',
-    startDate: '',
-    endDate: ''
-  });
+  protected readonly form = this.formBuilder.nonNullable.group(
+    {
+      island: '',
+      locationId: '',
+      startDate: '',
+      endDate: ''
+    },
+    {
+      validators: [this.reservationDatesValidator()]
+    }
+  );
 
   protected cars: Car[] = [];
   protected categories: Category[] = [];
@@ -106,6 +117,13 @@ export class ReservationPageComponent {
   protected filteredCars: Car[] = [];
 
   constructor() {
+    this.form.controls.startDate.valueChanges.subscribe((startDate) => {
+      const endDate = this.form.controls.endDate.value;
+      if (startDate && endDate && endDate < startDate) {
+        this.form.patchValue({ endDate: '' });
+      }
+    });
+
     forkJoin({
       cars: this.api.getCars(),
       categories: this.api.getCategories(),
@@ -134,6 +152,14 @@ export class ReservationPageComponent {
   }
 
   applyFilters(): void {
+    this.form.markAllAsTouched();
+    this.form.updateValueAndValidity({ onlySelf: false, emitEvent: false });
+    this.dateErrorMessage = this.resolveDateErrorMessage();
+
+    if (this.form.invalid) {
+      return;
+    }
+
     const { island, locationId } = this.form.getRawValue();
 
     this.filteredCars = this.cars.filter((car) => {
@@ -168,5 +194,57 @@ export class ReservationPageComponent {
       startDate,
       endDate
     };
+  }
+
+  get endDateMin(): string {
+    const startDate = this.form.controls.startDate.value;
+    return startDate && startDate > this.todayDate ? startDate : this.todayDate;
+  }
+
+  private reservationDatesValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const startDate = String(control.get('startDate')?.value ?? '');
+      const endDate = String(control.get('endDate')?.value ?? '');
+
+      if (startDate && startDate < this.todayDate) {
+        return { startDatePast: true };
+      }
+
+      if (endDate && endDate < this.todayDate) {
+        return { endDatePast: true };
+      }
+
+      if (startDate && endDate && endDate < startDate) {
+        return { endBeforeStart: true };
+      }
+
+      return null;
+    };
+  }
+
+  private resolveDateErrorMessage(): string {
+    const errors = this.form.errors;
+    if (!errors) {
+      return '';
+    }
+
+    if (errors['startDatePast']) {
+      return 'La fecha de recogida no puede ser anterior a hoy.';
+    }
+
+    if (errors['endDatePast']) {
+      return 'La fecha de devolución no puede ser anterior a hoy.';
+    }
+
+    if (errors['endBeforeStart']) {
+      return 'La fecha de devolución no puede ser anterior a la fecha de recogida.';
+    }
+
+    return '';
+  }
+
+  private toIsoLocalDate(date: Date): string {
+    const offsetMs = date.getTimezoneOffset() * 60000;
+    return new Date(date.getTime() - offsetMs).toISOString().slice(0, 10);
   }
 }
