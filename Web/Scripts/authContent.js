@@ -15,11 +15,35 @@ function setText(element, value) {
     element.textContent = value || "";
 }
 
+function normalizeStaticAuthHref(href) {
+    if (!href) {
+        return "#";
+    }
+
+    if (href.startsWith("http://") || href.startsWith("https://") || href.startsWith("#")) {
+        return href;
+    }
+
+    if (href.includes("register")) {
+        return "./register.html";
+    }
+
+    if (href.includes("passRecovery") || href.includes("recovery")) {
+        return "./passRecovery.html";
+    }
+
+    if (href.includes("login")) {
+        return "./login.html";
+    }
+
+    return href;
+}
+
 function setLink(element, config) {
     if (!element || !config) return;
 
     element.textContent = config.text || "";
-    element.href = config.href || "#";
+    element.href = normalizeStaticAuthHref(config.href);
     element.hidden = false;
 }
 
