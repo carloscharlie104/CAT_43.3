@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { AuthScreenConfig } from '../models/interfaces';
 
 @Component({
   selector: 'app-auth-card',
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule],
   template: `
     <section class="auth-card" aria-labelledby="auth-title">
       <h1 id="auth-title" class="auth-card__title">{{ config.title }}</h1>
@@ -54,16 +54,22 @@ import { AuthScreenConfig } from '../models/interfaces';
         @if (config.links?.primary || config.links?.secondary) {
           <div class="auth-card__links-row">
             @if (config.links?.primary) {
-              <a class="auth-card__link" [routerLink]="config.links?.primary?.href">{{ config.links?.primary?.text }}</a>
+              <a class="auth-card__link" [attr.href]="config.links?.primary?.href" (click)="navigate($event, config.links?.primary?.href)">
+                {{ config.links?.primary?.text }}
+              </a>
             }
             @if (config.links?.secondary) {
-              <a class="auth-card__link auth-card__link--register" [routerLink]="config.links?.secondary?.href">{{ config.links?.secondary?.text }}</a>
+              <a class="auth-card__link auth-card__link--register" [attr.href]="config.links?.secondary?.href" (click)="navigate($event, config.links?.secondary?.href)">
+                {{ config.links?.secondary?.text }}
+              </a>
             }
           </div>
         }
 
         @if (config.backLink) {
-          <a class="auth-card__link" [routerLink]="config.backLink.href">{{ config.backLink.text }}</a>
+          <a class="auth-card__link" [attr.href]="config.backLink.href" (click)="navigate($event, config.backLink.href)">
+            {{ config.backLink.text }}
+          </a>
         }
       </form>
     </section>
@@ -72,6 +78,8 @@ import { AuthScreenConfig } from '../models/interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthCardComponent {
+  private readonly router = inject(Router);
+
   @Input({ required: true }) config!: AuthScreenConfig;
   @Input({ required: true }) form!: FormGroup;
   @Input() message = '';
@@ -81,6 +89,15 @@ export class AuthCardComponent {
   clear(name: string): void {
     this.form.get(name)?.setValue('');
     this.form.get(name)?.markAsPristine();
+  }
+
+  navigate(event: MouseEvent, href: string | undefined): void {
+    if (!href) {
+      return;
+    }
+
+    event.preventDefault();
+    void this.router.navigateByUrl(href);
   }
 
   hasValue(name: string): boolean {

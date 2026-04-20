@@ -5,7 +5,8 @@
   "description": "CAT Car Renting Service migrado a Angular para Sprint 3.",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node scripts/start-dev.mjs",
+    "start:app": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
