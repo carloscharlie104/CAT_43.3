@@ -345,6 +345,14 @@
       "message": "asdad",
       "createdAt": "2026-04-20T17:13:19.230Z",
       "id": "KBf478nB87o"
+    },
+    {
+      "name": "asss",
+      "surname": "sdsd",
+      "email": "asdasd@sdff",
+      "message": "sadasd",
+      "createdAt": "2026-04-20T17:20:38.182Z",
+      "id": "yqI4sr2u14M"
     }
   ],
   "auth": {
@@ -527,6 +535,5 @@
       "name": "Pago en oficina",
       "enabled": true
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
