@@ -10,11 +10,11 @@ import { calculateDays } from '../../core/utils';
   selector: 'app-car-detail-page',
   imports: [AsyncPipe, RouterLink],
   template: `
-    <main>
+    <main class="container">
       @if (vm$ | async; as vm) {
           @if (vm.car) {
-            <article class="carData-main">
-              <section class="carData-left">
+            <article class="carData-main container">
+              <section class="carData-left col-12 col-lg-7">
                 <h1 class="carData-title">{{ vm.car.fullName }}</h1>
                 <p class="carData-subtitle">{{ vm.car.shortDescription }}</p>
                 <div class="media-box">
@@ -22,7 +22,7 @@ import { calculateDays } from '../../core/utils';
                 </div>
               </section>
 
-              <section class="carData-right">
+              <section class="carData-right col-12 col-lg-5">
                 <div class="detail-section">
                   <h2 class="detail-section-title">Ficha técnica</h2>
                   <div class="detail-grid">
@@ -49,7 +49,7 @@ import { calculateDays } from '../../core/utils';
               </section>
 
               <a
-                class="cta"
+                class="cta btn"
                 [routerLink]="['/payment']"
                 [queryParams]="{
                   carId: vm.car.id,
@@ -62,7 +62,7 @@ import { calculateDays } from '../../core/utils';
               </a>
             </article>
           } @else {
-            <section class="carData-main">
+            <section class="carData-main container">
               <p class="info-line">No se pudo cargar el vehículo solicitado.</p>
             </section>
           }

@@ -23,22 +23,22 @@ import { ApiService } from '../../services/api.service';
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="name">Nombre</label>
-                <input id="name" class="form-input" type="text" formControlName="name" autocomplete="given-name">
+                <input id="name" class="form-input form-control" type="text" formControlName="name" autocomplete="given-name">
               </div>
               <div class="form-group">
                 <label class="form-label" for="surname">Apellidos</label>
-                <input id="surname" class="form-input" type="text" formControlName="surname" autocomplete="family-name">
+                <input id="surname" class="form-input form-control" type="text" formControlName="surname" autocomplete="family-name">
               </div>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="email">Correo electrónico</label>
-              <input id="email" class="form-input" type="email" formControlName="email" autocomplete="email">
+              <input id="email" class="form-input form-control" type="email" formControlName="email" autocomplete="email">
             </div>
 
             <div class="form-group">
               <label class="form-label" for="message">Mensaje</label>
-              <textarea id="message" class="form-textarea" formControlName="message"></textarea>
+              <textarea id="message" class="form-textarea form-control" formControlName="message"></textarea>
             </div>
 
             @if (statusMessage) {
@@ -48,7 +48,7 @@ import { ApiService } from '../../services/api.service';
             }
 
             <div class="bottom-action">
-              <button class="btn-pink" type="submit">Enviar consulta</button>
+              <button class="btn btn-pink" type="submit">Enviar consulta</button>
             </div>
           </form>
       }

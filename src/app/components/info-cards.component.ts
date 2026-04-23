@@ -5,9 +5,9 @@ import { Company, Location } from '../models/interfaces';
 @Component({
   selector: 'app-info-cards',
   template: `
-    <section class="cards-section">
+    <section class="cards-section row g-4">
       @for (card of cards(); track card.title) {
-        <div class="card-wrapper">
+        <div class="card-wrapper col-12 col-md-4">
           <h2>{{ card.title }}</h2>
           <div class="card">
             <p class="card-text">{{ card.text }}</p>

@@ -9,7 +9,7 @@ import { ApiService } from '../../services/api.service';
   selector: 'app-home-page',
   imports: [AsyncPipe, FeaturedCarouselComponent],
   template: `
-    <main>
+    <main class="container">
       @if (featuredCars$ | async; as featuredCars) {
         <app-featured-carousel [cars]="featuredCars" />
       }

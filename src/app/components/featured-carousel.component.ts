@@ -8,15 +8,15 @@ import { OfferCardComponent } from './offer-card.component';
   imports: [OfferCardComponent],
   template: `
     @if (cars.length) {
-      <section class="gallery-section">
-        <div class="gallery-col small-col">
+      <section class="gallery-section row align-items-center justify-content-center g-4">
+        <div class="gallery-col small-col col-lg-3">
           <h2 class="col-title">Destacado</h2>
           <div class="card-placeholder">
             <app-offer-card [car]="visibleCar(0)" />
           </div>
         </div>
 
-        <div class="gallery-col large-col">
+        <div class="gallery-col large-col col-lg-5">
           <h1 class="main-title">Best Sellers</h1>
           <div class="main-card-shell">
             <button class="main-card-arrow main-card-arrow--left" type="button" aria-label="Oferta anterior" (click)="move(-1)">
@@ -33,7 +33,7 @@ import { OfferCardComponent } from './offer-card.component';
           </div>
         </div>
 
-        <div class="gallery-col small-col">
+        <div class="gallery-col small-col col-lg-3">
           <h2 class="col-title">Destacado</h2>
           <div class="card-placeholder">
             <app-offer-card [car]="visibleCar(2)" />

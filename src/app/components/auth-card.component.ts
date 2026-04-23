@@ -9,7 +9,7 @@ import { AuthScreenConfig } from '../models/interfaces';
   selector: 'app-auth-card',
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-    <section class="auth-card" aria-labelledby="auth-title">
+    <section class="auth-card card mx-auto" aria-labelledby="auth-title">
       <h1 id="auth-title" class="auth-card__title">{{ config.title }}</h1>
 
       @if (config.description) {
@@ -28,7 +28,7 @@ import { AuthScreenConfig } from '../models/interfaces';
             <span class="field__icon-left" aria-hidden="true">×</span>
             <label class="field__label" [for]="field.id">{{ field.label }}</label>
             <input
-              class="field__input"
+              class="field__input form-control"
               [id]="field.id"
               [type]="field.type"
               [attr.autocomplete]="field.autocomplete"
@@ -44,12 +44,12 @@ import { AuthScreenConfig } from '../models/interfaces';
 
         @if (config.checkText) {
           <label class="check" [class.check--error]="controlInvalid('acceptedTerms')">
-            <input class="check__input" type="checkbox" formControlName="acceptedTerms">
+            <input class="check__input form-check-input" type="checkbox" formControlName="acceptedTerms">
             <span class="check__text">{{ config.checkText }}</span>
           </label>
         }
 
-        <button class="auth-card__btn" type="submit">{{ config.submitText }}</button>
+        <button class="auth-card__btn btn" type="submit">{{ config.submitText }}</button>
 
         @if (config.links?.primary || config.links?.secondary) {
           <div class="auth-card__links-row">

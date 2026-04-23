@@ -12,7 +12,7 @@ import { calculateDays } from '../../core/utils';
   selector: 'app-payment-gateway-page',
   imports: [AsyncPipe, ReactiveFormsModule],
   template: `
-    <main>
+    <main class="container">
       @if (vm$ | async; as vm) {
           <section class="card">
             <div class="contact-header">
@@ -39,35 +39,35 @@ import { calculateDays } from '../../core/utils';
             <form class="contact-form" [formGroup]="form" (ngSubmit)="submit(vm)">
               <div class="form-group1">
                 <label class="form-label" for="name">Nombre</label>
-                <input class="form-input" [class.form-input--error]="controlInvalid('name')" id="name" type="text" formControlName="name">
+                <input class="form-input form-control" [class.form-input--error]="controlInvalid('name')" id="name" type="text" formControlName="name">
                 @if (controlInvalid('name')) {
                   <p class="status-text status-text--error">{{ firstError('name') }}</p>
                 }
               </div>
               <div class="form-group1">
                 <label class="form-label" for="address">Domicilio</label>
-                <input class="form-input" [class.form-input--error]="controlInvalid('address')" id="address" type="text" formControlName="address">
+                <input class="form-input form-control" [class.form-input--error]="controlInvalid('address')" id="address" type="text" formControlName="address">
                 @if (controlInvalid('address')) {
                   <p class="status-text status-text--error">{{ firstError('address') }}</p>
                 }
               </div>
               <div class="form-group2">
                 <label class="form-label" for="email">Correo electrónico</label>
-                <input class="form-input" [class.form-input--error]="controlInvalid('email')" id="email" type="email" formControlName="email">
+                <input class="form-input form-control" [class.form-input--error]="controlInvalid('email')" id="email" type="email" formControlName="email">
                 @if (controlInvalid('email')) {
                   <p class="status-text status-text--error">{{ firstError('email') }}</p>
                 }
               </div>
               <div class="form-group3">
                 <label class="form-label" for="phone">Teléfono</label>
-                <input class="form-input" [class.form-input--error]="controlInvalid('phone')" id="phone" type="tel" formControlName="phone">
+                <input class="form-input form-control" [class.form-input--error]="controlInvalid('phone')" id="phone" type="tel" formControlName="phone">
                 @if (controlInvalid('phone')) {
                   <p class="status-text status-text--error">{{ firstError('phone') }}</p>
                 }
               </div>
               <div class="form-group3">
                 <label class="form-label" for="notes">Método de pago / notas</label>
-                <input class="form-input" [class.form-input--error]="controlInvalid('notes')" id="notes" type="text" formControlName="notes" [placeholder]="'Métodos disponibles: ' + vm.paymentMethods">
+                <input class="form-input form-control" [class.form-input--error]="controlInvalid('notes')" id="notes" type="text" formControlName="notes" [placeholder]="'Métodos disponibles: ' + vm.paymentMethods">
                 @if (controlInvalid('notes')) {
                   <p class="status-text status-text--error">{{ firstError('notes') }}</p>
                 }
@@ -80,7 +80,7 @@ import { calculateDays } from '../../core/utils';
               }
 
               <div class="bottom-action">
-                <button class="btn-pink" type="submit">{{ vm.buttonText }}</button>
+                <button class="btn btn-pink" type="submit">{{ vm.buttonText }}</button>
               </div>
             </form>
           </section>

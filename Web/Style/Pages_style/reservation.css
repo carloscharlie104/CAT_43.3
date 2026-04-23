@@ -45,8 +45,15 @@ body {
 .input-full, .input-half {
     background-color: #d9d9d9;
     border: none;
+    border-radius: 0;
     height: 60px;
+    padding: 0 16px;
     width: 100%;
+}
+
+.input-full.form-select,
+.input-half.form-control {
+    box-shadow: none;
 }
 
 .input-row {
@@ -74,9 +81,15 @@ body {
 .btn-pink {
     background-color: #e08282;
     border: none;
+    border-radius: 0;
     padding: 15px 30px;
     font-size: 1.2rem;
     cursor: pointer;
+}
+
+.btn.btn-pink {
+    color: #000000;
+    box-shadow: none;
 }
 
 .reservation-gallery {

@@ -10,14 +10,14 @@ import { ApiService } from '../../services/api.service';
   selector: 'app-information-page',
   imports: [AsyncPipe, RouterLink, InfoCardsComponent],
   template: `
-    <main>
+    <main class="container">
       @if (vm$ | async; as vm) {
         <app-info-cards [company]="vm.company" [locations]="vm.locations" />
 
-        <section class="bottom-action">
+        <section class="bottom-action d-flex align-items-center justify-content-between gap-3">
           <p class="bottom-quote">"{{ vm.company.tagline }}"</p>
           <div class="bottom-btn-container">
-            <a class="btn-pink" routerLink="/contact">Contactar con CAT</a>
+            <a class="btn btn-pink" routerLink="/contact">Contactar con CAT</a>
           </div>
         </section>
       }

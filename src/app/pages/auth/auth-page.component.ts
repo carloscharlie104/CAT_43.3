@@ -15,7 +15,7 @@ type AuthScreen = keyof AuthConfig;
   selector: 'app-auth-page',
   imports: [AsyncPipe, ReactiveFormsModule, AuthCardComponent],
   template: `
-    <main class="auth">
+    <main class="auth container">
       @if (screen$ | async; as screen) {
         <app-auth-card
           [config]="screen.config"

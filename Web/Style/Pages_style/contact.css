@@ -69,10 +69,17 @@ body{
 .form-textarea{
     width:100%;
     border:4px solid #000;
+    border-radius:0;
     padding:14px;
     font-size:1.1rem;
     background:#cfcfcf;
     color:#000;
+}
+
+.form-input.form-control,
+.form-textarea.form-control{
+    box-shadow:none;
+    background-image:none;
 }
 
 .form-input::placeholder,
@@ -84,6 +91,7 @@ body{
 .form-textarea:focus{
     outline:none;
     background:#ffffff;
+    box-shadow:none;
 }
 
 .form-textarea{
@@ -101,9 +109,15 @@ body{
 .btn-pink{
     background:#e08282;
     border:none;
+    border-radius:0;
     padding:14px 26px;
     font-size:1.15rem;
     cursor:pointer;
+}
+
+.btn.btn-pink{
+    color:#000;
+    box-shadow:none;
 }
 
 .btn-pink:active{

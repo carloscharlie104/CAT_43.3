@@ -11,14 +11,14 @@ import { ApiService } from '../../services/api.service';
   selector: 'app-reservation-page',
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   template: `
-    <main class="reservation-main">
+    <main class="reservation-main container">
       <section class="reservation-form">
           <h1 class="form-main-title">Reserva tu vehículo</h1>
 
           <form [formGroup]="form" (ngSubmit)="applyFilters()">
             <div class="input-group">
               <label>Isla
-                <select class="input-full" formControlName="island" (change)="onIslandChange()">
+                <select class="input-full form-select" formControlName="island" (change)="onIslandChange()">
                   <option value="">Selecciona una isla</option>
                   @for (island of islands; track island) {
                     <option [value]="island">{{ island }}</option>
@@ -29,7 +29,7 @@ import { ApiService } from '../../services/api.service';
 
             <div class="input-group">
               <label>Recoge tu coche
-                <select class="input-full" formControlName="locationId">
+                <select class="input-full form-select" formControlName="locationId">
                   <option value="">Selecciona una localización</option>
                   @for (location of filteredLocations; track location.id) {
                     <option [value]="location.id">{{ location.name }}{{ location.isAirport ? ' (Aeropuerto)' : '' }}</option>
@@ -41,12 +41,12 @@ import { ApiService } from '../../services/api.service';
             <div class="input-row">
               <div class="input-group-half">
                 <label>Fecha inicio
-                  <input class="input-half" type="date" formControlName="startDate" [attr.min]="todayDate">
+                  <input class="input-half form-control" type="date" formControlName="startDate" [attr.min]="todayDate">
                 </label>
               </div>
               <div class="input-group-half">
                 <label>Fecha fin
-                  <input class="input-half" type="date" formControlName="endDate" [attr.min]="endDateMin">
+                  <input class="input-half form-control" type="date" formControlName="endDate" [attr.min]="endDateMin">
                 </label>
               </div>
             </div>
@@ -56,7 +56,7 @@ import { ApiService } from '../../services/api.service';
             }
 
             <div class="submit-container">
-              <button class="btn-pink" type="submit">Explorar coches</button>
+              <button class="btn btn-pink" type="submit">Explorar coches</button>
             </div>
           </form>
         </section>

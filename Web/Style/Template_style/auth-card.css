@@ -26,6 +26,10 @@ body {
     padding: 28px 26px 24px;
 }
 
+.auth-card.card {
+    margin-bottom: 0;
+}
+
 .auth-card__title {
     margin: 0 0 20px;
     text-align: center;
@@ -126,6 +130,11 @@ body {
     transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
+.field__input.form-control {
+    box-shadow: none;
+    background-image: none;
+}
+
 .field__input::placeholder {
     color: #111;
     opacity: 0.75;
@@ -220,6 +229,11 @@ body {
     height: 14px;
 }
 
+.check__input.form-check-input {
+    margin: 0;
+    box-shadow: none;
+}
+
 .check__text {
     user-select: none;
 }
@@ -251,6 +265,10 @@ body {
 
     box-shadow: 0 2px 0 rgba(0,0,0,0.25);
     transition: transform 140ms ease, filter 140ms ease;
+}
+
+.auth-card__btn.btn {
+    color: #fff;
 }
 
 .auth-card__btn:hover {

@@ -13,14 +13,14 @@ import { SessionService } from '../services/session.service';
     <header>
       @if (vm$ | async; as vm) {
         <div class="header-desktop">
-          <div class="header-container">
+          <div class="header-container container-fluid navbar">
             <div class="logo-header">
               <a routerLink="/" aria-label="Inicio" class="logo-header-link">
-                <img src="/Assets/Logos/CAT.jpeg" [alt]="vm.company.name" class="header-main-logo">
+                <img [src]="logoSrc" [alt]="vm.company.name" class="header-main-logo">
               </a>
             </div>
 
-            <nav class="nav-links" aria-label="Navegación principal">
+            <nav class="nav-links navbar-nav flex-row" aria-label="Navegación principal">
               <a routerLink="/" class="nav-pill">Inicio</a>
               <a routerLink="/information" class="nav-pill">Información</a>
               <a routerLink="/reservation" class="nav-pill">Reserva</a>
@@ -42,7 +42,7 @@ import { SessionService } from '../services/session.service';
 
         <div class="header-mobile-top">
           <a routerLink="/" class="mobile-top-btn mobile-top-btn--logo" aria-label="Inicio">
-            <img src="/Assets/Logos/CAT.jpeg" [alt]="vm.company.name" class="header-mobile-logo">
+            <img [src]="logoSrc" [alt]="vm.company.name" class="header-mobile-logo">
           </a>
 
           @if (vm.session) {
@@ -84,6 +84,7 @@ export class HeaderComponent {
   private readonly api = inject(ApiService);
   private readonly session = inject(SessionService);
   private readonly router = inject(Router);
+  protected readonly logoSrc = 'Assets/Logos/CAT.jpeg';
 
   readonly vm$ = combineLatest({
     company: this.api.getCompany(),

@@ -8,7 +8,7 @@ import { ApiService } from '../../services/api.service';
   selector: 'app-faq-page',
   imports: [AsyncPipe],
   template: `
-    <main class="faq-page">
+    <main class="faq-page container">
       <div class="faq-container">
           <section class="faq-filter">
             <div class="faq-filter__bar">

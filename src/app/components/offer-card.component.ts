@@ -8,7 +8,7 @@ import { formatPrice } from '../core/utils';
   selector: 'app-offer-card',
   imports: [RouterLink],
   template: `
-    <article class="gallery-box">
+    <article class="gallery-box card h-100">
       <div class="image-placeholder">
         <img [src]="car.image" [alt]="car.fullName">
       </div>
