@@ -15,12 +15,12 @@ body {
 
 .reservation-main {
     flex-grow: 1;
-    padding: 40px;
+    padding: 30px;
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
     display: flex;
-    gap: 60px;
+    gap: 40px;
     align-items: flex-start;
 }
 
@@ -29,7 +29,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    max-width: 400px;
+    max-width: 340px;
 }
 
 .reservation-form .input-group {
@@ -99,17 +99,15 @@ body {
 
 .gallery-border-container {
     border: 3px solid #000;
-    padding: 40px;
+    padding: 24px;
     width: 100%;
-}
-
-.cards-grid {
 }
 
 .grid-item {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    height: 100%;
 }
 
 .item-title {
@@ -133,6 +131,7 @@ body {
 .reservation-card {
     background-color: #d9d9d9;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -170,4 +169,82 @@ body {
 .reservation-empty {
     grid-column: 1 / -1;
     font-size: 1.1rem;
+}
+
+@media (min-width: 769px) {
+    .reservation-main {
+        max-width: 1680px;
+        padding: 40px;
+        gap: 56px;
+    }
+
+    .reservation-gallery {
+        flex: 1 1 auto;
+    }
+
+    .gallery-border-container {
+        padding: 28px;
+    }
+
+    .reservation-gallery .cards-grid {
+        display: flex;
+        row-gap: 1.5rem;
+        grid-template-columns: none;
+        margin-inline: -1.25rem;
+    }
+
+    .reservation-gallery .grid-item {
+        padding-inline: 1.25rem;
+    }
+
+    .reservation-gallery .reservation-card {
+        min-height: 430px;
+    }
+
+    .reservation-card-image {
+        aspect-ratio: 16 / 10;
+    }
+
+    .reservation-card-body {
+        gap: 10px;
+        padding: 18px;
+    }
+
+    .reservation-card-category,
+    .reservation-card-price,
+    .reservation-card-location {
+        font-size: 1rem;
+    }
+
+    .reservation-card-link {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 993px) {
+    .reservation-form {
+        flex: 0 0 320px;
+    }
+}
+
+@media (min-width: 992px) {
+    .reservation-gallery .reservation-card {
+        min-height: 420px;
+    }
+}
+
+/* =========================== */
+/* Responsivo                  */
+/* =========================== */
+@media (max-width: 992px) {
+    .reservation-main {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 40px;
+    }
+    
+    .reservation-form {
+        max-width: 100%;
+        width: 100%;
+    }
 }

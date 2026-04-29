@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { catchError, forkJoin, of } from 'rxjs';
@@ -11,7 +11,7 @@ import { ApiService } from '../../services/api.service';
   selector: 'app-reservation-page',
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   template: `
-    <main class="reservation-main container">
+    <main class="reservation-main">
       <section class="reservation-form">
           <h1 class="form-main-title">Reserva tu vehículo</h1>
 
@@ -63,10 +63,10 @@ import { ApiService } from '../../services/api.service';
 
         <section class="reservation-gallery">
           <div class="gallery-border-container">
-            <div class="cards-grid row justify-content-center g-4">
+            <div class="cards-grid row g-4">
               @if (filteredCars.length) {
                 @for (car of filteredCars; track car.id) {
-                  <article class="grid-item col-12 col-md-6 col-lg-4">
+                  <article class="grid-item col-12 col-md-4">
                     <h3 class="item-title">{{ car.fullName }}</h3>
                     <div class="reservation-card card">
                       <img class="reservation-card-image" [src]="car.image" [alt]="car.fullName">
@@ -94,6 +94,7 @@ import { ApiService } from '../../services/api.service';
 export class ReservationPageComponent {
   private readonly api = inject(ApiService);
   private readonly formBuilder = inject(FormBuilder);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
   protected readonly todayDate = this.toIsoLocalDate(new Date());
   protected dateErrorMessage = '';
 
@@ -137,6 +138,7 @@ export class ReservationPageComponent {
         this.islands = [...new Set(locations.map((location) => location.island))];
         this.filteredLocations = locations;
         this.filteredCars = cars;
+        this.changeDetectorRef.markForCheck();
       });
   }
 
