@@ -11,7 +11,7 @@ import { ApiService } from '../../services/api.service';
     <main class="faq-page container">
       <div class="faq-container">
           <section class="faq-filter">
-            <div class="faq-filter__bar">
+            <div class="faq-filter__bar d-flex flex-wrap gap-2 mb-4">
               <button type="button" class="faq-chip">Reservas</button>
               <button type="button" class="faq-chip">Recogida</button>
               <button type="button" class="faq-chip">Pagos</button>

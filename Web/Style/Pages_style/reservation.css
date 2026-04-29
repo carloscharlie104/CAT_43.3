@@ -54,6 +54,7 @@ body {
 .input-full.form-select,
 .input-half.form-control {
     box-shadow: none;
+    background-image: none;
 }
 
 .input-row {
@@ -103,10 +104,6 @@ body {
 }
 
 .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    row-gap: 50px;
 }
 
 .grid-item {

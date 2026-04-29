@@ -63,12 +63,12 @@ import { ApiService } from '../../services/api.service';
 
         <section class="reservation-gallery">
           <div class="gallery-border-container">
-            <div class="cards-grid">
+            <div class="cards-grid row justify-content-center g-4">
               @if (filteredCars.length) {
                 @for (car of filteredCars; track car.id) {
-                  <article class="grid-item">
+                  <article class="grid-item col-12 col-md-6 col-lg-4">
                     <h3 class="item-title">{{ car.fullName }}</h3>
-                    <div class="reservation-card">
+                    <div class="reservation-card card">
                       <img class="reservation-card-image" [src]="car.image" [alt]="car.fullName">
 
                       <div class="reservation-card-body">

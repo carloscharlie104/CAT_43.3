@@ -27,8 +27,6 @@ header {
 }
 
 .nav-links {
-    display: flex;
-    gap: 15px;
     flex-grow: 1;
 }
 
@@ -46,9 +44,6 @@ header {
 }
 
 .nav-actions {
-    display: flex;
-    gap: 15px;
-    align-items: center;
 }
 
 .nav-session {
@@ -77,6 +72,30 @@ header {
     stroke-width: 6;
     stroke-linecap: round;
     fill: none;
+}
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    header {
+        padding: 15px 20px;
+    }
+
+    .header-container {
+        padding: 10px 20px;
+        gap: 10px;
+    }
+
+    .nav-pill {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+
+    .nav-links {
+        gap: 8px !important;
+    }
 }
 
 /* =========================

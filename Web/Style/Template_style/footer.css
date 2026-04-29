@@ -36,6 +36,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    min-width: 0;
 }
 
 .footer-column h4 {
@@ -47,11 +48,14 @@ footer {
     color: #fff;
     text-decoration: none;
     font-size: 0.85rem;
+    word-break: break-word;
 }
 
 .footer-divider {
     width: 1px;
     background-color: #fff;
+    padding: 0;
+    margin: 0;
 }
 
 /* ===== Normalización interna del footer (evita tamaños distintos entre páginas) ===== */
@@ -124,6 +128,19 @@ footer .social-icons .icon-x {
     object-fit: contain;
     display: block;
 }
+
+/* === Tablet === */
+@media (min-width: 769px) and (max-width: 1024px) {
+    footer {
+        padding: 40px;
+        gap: 30px;
+    }
+    
+    .footer-links-section {
+        gap: 30px;
+    }
+}
+
 /* === Móvil ===*/
 @media (max-width: 768px) {
     footer {

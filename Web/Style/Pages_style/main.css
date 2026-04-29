@@ -37,10 +37,6 @@ main {
 }
 
 .gallery-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
     margin-top: 20px;
 }
 
@@ -63,8 +59,8 @@ main {
 }
 
 .small-col .card-placeholder {
-    width: 300px;
-    height: 380px;
+    width: 100%;
+    max-width: 300px;
 }
 
 .small-col .image-placeholder .icon-x {
@@ -74,8 +70,8 @@ main {
 }
 
 .large-col .card-placeholder {
-    width: 450px;
-    height: 520px;
+    width: 100%;
+    max-width: 450px;
 }
 
 .large-col .image-placeholder .icon-x {
@@ -94,6 +90,26 @@ main {
     display: none;
 }
 
+
+/* ======================= */
+/* ======== TABLET ======== */
+/* ======================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    main {
+        padding: 20px 15px;
+    }
+
+    .gallery-col.small-col {
+        flex: 0 0 31% !important;
+        max-width: 31% !important;
+    }
+
+    .gallery-col.large-col {
+        flex: 0 0 38% !important;
+        max-width: 38% !important;
+    }
+}
 
 /* ======================= */
 /* ======== MOVIL ======== */

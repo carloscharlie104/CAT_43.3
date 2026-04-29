@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { catchError, map, of } from 'rxjs';
 
 import { FeaturedCarouselComponent } from '../../components/featured-carousel.component';
@@ -16,7 +16,8 @@ import { ApiService } from '../../services/api.service';
     </main>
   `,
   styleUrl: '../../../../Web/Style/Pages_style/main.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class HomePageComponent {
   private readonly api = inject(ApiService);

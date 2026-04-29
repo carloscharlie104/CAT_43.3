@@ -13,7 +13,7 @@ import { calculateDays } from '../../core/utils';
     <main class="container">
       @if (vm$ | async; as vm) {
           @if (vm.car) {
-            <article class="carData-main container">
+            <article class="carData-main row g-4">
               <section class="carData-left col-12 col-lg-7">
                 <h1 class="carData-title">{{ vm.car.fullName }}</h1>
                 <p class="carData-subtitle">{{ vm.car.shortDescription }}</p>

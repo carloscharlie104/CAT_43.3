@@ -46,13 +46,9 @@ body{
 
 .form-row{
     width:80%;
-    display:flex;
-    gap:24px;
 }
 
 .form-row .form-group{
-    flex:1 1 0;
-    min-width:0;
 }
 
 .form-group{

@@ -9,7 +9,7 @@ import { ApiService } from '../../services/api.service';
   selector: 'app-contact-page',
   imports: [AsyncPipe, ReactiveFormsModule],
   template: `
-    <main class="contact-container">
+    <main class="contact-container container">
       @if (company$ | async; as company) {
           <div class="contact-header">
             <h1 class="contact-title">Contacto</h1>
@@ -20,12 +20,12 @@ import { ApiService } from '../../services/api.service';
           </div>
 
           <form class="contact-form" [formGroup]="form" (ngSubmit)="submit()">
-            <div class="form-row">
-              <div class="form-group">
+            <div class="form-row row g-3">
+              <div class="form-group col-12 col-md-6">
                 <label class="form-label" for="name">Nombre</label>
                 <input id="name" class="form-input form-control" type="text" formControlName="name" autocomplete="given-name">
               </div>
-              <div class="form-group">
+              <div class="form-group col-12 col-md-6">
                 <label class="form-label" for="surname">Apellidos</label>
                 <input id="surname" class="form-input form-control" type="text" formControlName="surname" autocomplete="family-name">
               </div>
