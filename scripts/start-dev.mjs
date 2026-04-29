@@ -7,16 +7,19 @@ const root = dirname(fileURLToPath(import.meta.url));
 const projectRoot = join(root, "..");
 const commands = [
   {
-    name: "api",
-    command: process.execPath,
-    args: [join(projectRoot, "node_modules", "json-server", "lib", "bin.js"), "db.json", "--port", "3000"]
-  },
-  {
     name: "app",
     command: process.execPath,
     args: [join(projectRoot, "node_modules", "@angular", "cli", "bin", "ng.js"), "serve"]
   }
 ];
+
+if (process.env.USE_JSON_SERVER === "true") {
+  commands.unshift({
+    name: "api",
+    command: process.execPath,
+    args: [join(projectRoot, "node_modules", "json-server", "lib", "bin.js"), "db.json", "--port", "3000"]
+  });
+}
 
 const children = [];
 let shuttingDown = false;
