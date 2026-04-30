@@ -12,60 +12,66 @@ import { calculateDays } from '../../core/utils';
   selector: 'app-payment-gateway-page',
   imports: [AsyncPipe, ReactiveFormsModule],
   template: `
-    <main class="container">
+    <main class="payment-main container-fluid d-flex justify-content-center px-3 px-md-4">
       @if (vm$ | async; as vm) {
-          <section class="card">
-            <div class="contact-header">
-              <h1 class="contact-title">{{ vm.title }}</h1>
-            </div>
+          <section class="payment-card my-4 p-4 p-md-5 rounded-3">
+            <div class="row g-4 g-lg-5 align-items-start">
+              <aside class="payment-sidebar col-12 col-lg-4 row gx-4 gy-3">
+                <div class="col-12">
+                  <h1 class="contact-title">{{ vm.title }}</h1>
+                  <p class="payment-intro">Revisa los datos de tu reserva y completa la información de contacto.</p>
+                </div>
 
-            @if (vm.car) {
-              <div class="payment-summary">
-                <p><strong>Vehículo:</strong> {{ vm.car.fullName }}</p>
-                <p><strong>Precio base:</strong> {{ vm.car.priceText }}</p>
-                @if (vm.locationName) {
-                  <p><strong>Recogida:</strong> {{ vm.locationName }}</p>
+                @if (vm.car) {
+                  <div class="col-12">
+                    <div class="payment-summary rounded-3 p-3 p-md-4">
+                      <p><strong>Vehículo:</strong> {{ vm.car.fullName }}</p>
+                      <p><strong>Precio base:</strong> {{ vm.car.priceText }}</p>
+                      @if (vm.locationName) {
+                        <p><strong>Recogida:</strong> {{ vm.locationName }}</p>
+                      }
+                      @if (vm.startDate && vm.endDate) {
+                        <p><strong>Fechas:</strong> {{ vm.startDate }} - {{ vm.endDate }}</p>
+                      }
+                      @if (vm.days > 0) {
+                        <p><strong>Total estimado:</strong> {{ vm.totalPrice }} €</p>
+                      }
+                      <p><strong>Métodos disponibles:</strong> {{ vm.paymentMethods }}</p>
+                    </div>
+                  </div>
                 }
-                @if (vm.startDate && vm.endDate) {
-                  <p><strong>Fechas:</strong> {{ vm.startDate }} - {{ vm.endDate }}</p>
-                }
-                @if (vm.days > 0) {
-                  <p><strong>Total estimado:</strong> {{ vm.totalPrice }} €</p>
-                }
-                <p><strong>Métodos disponibles:</strong> {{ vm.paymentMethods }}</p>
-              </div>
-            }
+              </aside>
 
-            <form class="contact-form" [formGroup]="form" (ngSubmit)="submit(vm)">
-              <div class="form-group1">
+              <form class="contact-form col-12 col-lg-8 row gx-4 gy-3" [formGroup]="form" (ngSubmit)="submit(vm)">
+              <div class="form-group col-12">
                 <label class="form-label" for="name">Nombre</label>
                 <input class="form-input form-control" [class.form-input--error]="controlInvalid('name')" id="name" type="text" formControlName="name">
                 @if (controlInvalid('name')) {
                   <p class="status-text status-text--error">{{ firstError('name') }}</p>
                 }
               </div>
-              <div class="form-group1">
+              <div class="form-group col-12">
                 <label class="form-label" for="address">Domicilio</label>
                 <input class="form-input form-control" [class.form-input--error]="controlInvalid('address')" id="address" type="text" formControlName="address">
                 @if (controlInvalid('address')) {
                   <p class="status-text status-text--error">{{ firstError('address') }}</p>
                 }
               </div>
-              <div class="form-group2">
+              <div class="form-group col-12">
                 <label class="form-label" for="email">Correo electrónico</label>
                 <input class="form-input form-control" [class.form-input--error]="controlInvalid('email')" id="email" type="email" formControlName="email">
                 @if (controlInvalid('email')) {
                   <p class="status-text status-text--error">{{ firstError('email') }}</p>
                 }
               </div>
-              <div class="form-group3">
+              <div class="form-group col-12">
                 <label class="form-label" for="phone">Teléfono</label>
                 <input class="form-input form-control" [class.form-input--error]="controlInvalid('phone')" id="phone" type="tel" formControlName="phone">
                 @if (controlInvalid('phone')) {
                   <p class="status-text status-text--error">{{ firstError('phone') }}</p>
                 }
               </div>
-              <div class="form-group3">
+              <div class="form-group col-12">
                 <label class="form-label" for="notes">Método de pago / notas</label>
                 <input class="form-input form-control" [class.form-input--error]="controlInvalid('notes')" id="notes" type="text" formControlName="notes" [placeholder]="'Métodos disponibles: ' + vm.paymentMethods">
                 @if (controlInvalid('notes')) {
@@ -74,15 +80,16 @@ import { calculateDays } from '../../core/utils';
               </div>
 
               @if (statusMessage) {
-                <p class="status-text" [class.status-text--error]="statusType === 'error'" [class.status-text--success]="statusType === 'success'">
+                <p class="status-text col-12" [class.status-text--error]="statusType === 'error'" [class.status-text--success]="statusType === 'success'">
                   {{ statusMessage }}
                 </p>
               }
 
-              <div class="bottom-action">
+              <div class="bottom-action col-12 d-flex justify-content-end pt-3">
                 <button class="btn btn-pink" type="submit">{{ vm.buttonText }}</button>
               </div>
             </form>
+            </div>
           </section>
       }
     </main>

@@ -1,203 +1,92 @@
 .carData-main {
     max-width: 1120px;
-    margin: 2rem auto 3rem;
-    padding: 1.2rem 1.9rem 1.8rem;
-    border: 2px solid #5a5a5a;
-    display: grid;
-    grid-template-columns: 1fr 0.95fr;
-    grid-template-areas:
-        "left right"
-        "left cta";
-    column-gap: 4.5rem;
-    row-gap: 1.8rem;
-    align-items: start;
-    background-color: transparent;
-}
-
-.carData-left {
-    grid-area: left;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
+    border: 2px solid #000;
+    background-color: #e9e9e9;
 }
 
 .carData-title {
-    margin: 0;
-    font-size: 1.05rem;
+    font-size: 2rem;
     font-weight: 700;
     line-height: 1.2;
-    color: #222;
+    color: #111111;
 }
 
 .carData-subtitle {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #555;
+    font-size: 1.2rem;
+    line-height: 1.45;
+    color: #555555;
 }
+
 .media-box {
     width: 100%;
-    max-width: 370px;
-    aspect-ratio: 1 / 1;
-    border: 2px solid #5a5a5a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: 2px solid #000;
+    background-color: #f7f7f7;
     overflow: hidden;
 }
 
-.media-box .icon-x {
-    width: 72%;
-    height: 72%;
-    color: #000;
-}
-
-.carData-right {
-    grid-area: right;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding-top: 6rem;
-}
-
-.info-line {
-    margin: 0;
-    font-size: 0.95rem;
-    font-weight: 600;
-    line-height: 1.2;
-    color: #222;
+.media-box img {
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
 }
 
 .detail-section {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #d7d7d7;
+    gap: 0.9rem;
+    border-bottom: 1px solid #cfcfcf;
 }
 
 .detail-section-title {
-    margin: 0;
-    font-size: 1rem;
+    font-size: 1.45rem;
     font-weight: 700;
-    color: #222;
-}
-
-.detail-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem 1rem;
+    color: #111111;
 }
 
 .detail-item {
-    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
-    font-size: 0.92rem;
-    color: #333;
+    font-size: 1.05rem;
+    color: #333333;
+}
+
+.detail-item strong,
+.info-line {
+    font-weight: 700;
 }
 
 .detail-item span {
-    color: #777;
+    color: #777777;
 }
 
-.detail-list {
-    margin: 0;
-    padding-left: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
+.info-line {
+    font-size: 1.05rem;
+    line-height: 1.25;
+    color: #222222;
 }
 
-.review-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
+.btn-pink,
+.cta.btn-pink {
+    background-color: #e08282;
+    border: none;
+    color: #000000;
+    padding: 15px 30px;
+    font-size: 1.1rem;
 }
 
-.review-item {
-    padding: 0.85rem 1rem;
-    background-color: #f5f5f5;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
+.btn-pink:hover,
+.cta.btn-pink:hover {
+    background-color: #d97878;
+    color: #000000;
 }
 
-.review-author,
-.review-rating,
-.review-comment {
-    margin: 0;
-}
-
-.review-author {
-    font-weight: 700;
-    margin-bottom: 0.2rem;
-}
-
-.review-rating {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 0.35rem;
-}
-
-.cta {
-    grid-area: cta;
-    justify-self: end;
-    align-self: end;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 120px;
-    padding: 0.65rem 1rem;
-    border: 1px solid #555;
-    background-color: #ee8f8f;
-    color: #222;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    line-height: 1;
-}
-
-/* TABLET */
-@media (max-width: 1024px) {
-    .carData-main {
-        max-width: 92%;
-        column-gap: 2.5rem;
-        padding: 1.2rem 1.4rem 1.6rem;
+@media (max-width: 768px) {
+    .carData-title {
+        font-size: 1.6rem;
     }
 
-    .media-box {
-        max-width: 320px;
-    }
-}
-
-/* MÓVIL */
-@media (max-width: 700px) {
-    .carData-main {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "left"
-            "right"
-            "cta";
-        row-gap: 1.5rem;
-        margin: 1.2rem auto 2rem;
-        padding: 1rem;
-    }
-
-    .carData-right {
-        gap: 1.2rem;
-        padding-top: 0;
-    }
-
-    .detail-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .media-box {
-        max-width: 100%;
-    }
-
-    .cta {
-        justify-self: start;
+    .detail-grid .detail-item {
+        width: 100%;
     }
 }

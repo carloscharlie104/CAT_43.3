@@ -9,21 +9,13 @@ import { ApiService } from '../../services/api.service';
   imports: [AsyncPipe],
   template: `
     <main class="faq-page container">
-      <div class="faq-container">
-          <section class="faq-filter">
-            <div class="faq-filter__bar d-flex flex-wrap gap-2 mb-4">
-              <button type="button" class="faq-chip">Reservas</button>
-              <button type="button" class="faq-chip">Recogida</button>
-              <button type="button" class="faq-chip">Pagos</button>
-            </div>
-          </section>
-
-          <section class="accordion">
+      <div class="faq-container mx-auto px-3 px-md-4">
+          <section class="accordion d-flex flex-column gap-3 mx-auto" aria-label="Preguntas frecuentes">
             @if (faqs$ | async; as faqs) {
               @if (faqs.length) {
                 @for (faq of faqs; track faq.id) {
                   <details class="acc-item">
-                    <summary class="acc-summary">
+                    <summary class="acc-summary d-flex align-items-center justify-content-between">
                       <span class="acc-title">{{ faq.question }}</span>
                       <span class="acc-icon" aria-hidden="true"></span>
                     </summary>

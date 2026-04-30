@@ -67,15 +67,15 @@ import { ApiService } from '../../services/api.service';
               @if (filteredCars.length) {
                 @for (car of filteredCars; track car.id) {
                   <article class="grid-item col-12 col-md-4">
-                    <div class="reservation-card card">
-                      <img class="reservation-card-image" [src]="car.image" [alt]="car.fullName">
+                    <div class="reservation-card card h-100 d-flex flex-column overflow-hidden rounded-3">
+                      <img class="reservation-card-image w-100 rounded-3" [src]="car.image" [alt]="car.fullName">
 
-                      <div class="reservation-card-body">
+                      <div class="reservation-card-body card-body d-flex flex-column flex-grow-1 text-center pb-2">
                         <h3 class="reservation-card-title">{{ car.fullName }}</h3>
                         <p class="reservation-card-category">{{ categoryLabel(car.categoryId) }}</p>
                         <p class="reservation-card-price">{{ car.priceText }}</p>
                         <p class="reservation-card-location">{{ primaryLocation(car.locationIds) }}</p>
-                        <a class="reservation-card-link" [routerLink]="['/car', car.id]" [queryParams]="currentQueryParams()">Ver detalle</a>
+                        <a class="reservation-card-link align-self-end mt-auto" [routerLink]="['/car', car.id]" [queryParams]="currentQueryParams()">Ver detalle</a>
                       </div>
                     </div>
                   </article>

@@ -9,48 +9,48 @@ import { ApiService } from '../../services/api.service';
   selector: 'app-contact-page',
   imports: [AsyncPipe, ReactiveFormsModule],
   template: `
-    <main class="contact-container container">
+    <main class="contact-container container my-4 p-4 p-md-5">
       @if (company$ | async; as company) {
-          <div class="contact-header">
+        <div class="row align-items-center g-4 g-lg-5">
+          <section class="contact-header col-12 col-md-5">
             <h1 class="contact-title">Contacto</h1>
             <p class="contact-description">
               Escríbenos y te responderemos por email o teléfono. También puedes contactar directamente con {{ company.name }}
               en {{ company.email }} o {{ company.phone }}.
             </p>
-          </div>
+          </section>
 
-          <form class="contact-form" [formGroup]="form" (ngSubmit)="submit()">
-            <div class="form-row row gx-md-5 gy-3">
-              <div class="form-group col-12 col-md-6">
-                <label class="form-label" for="name">Nombre</label>
-                <input id="name" class="form-input form-control" type="text" formControlName="name" autocomplete="given-name">
-              </div>
-              <div class="form-group col-12 col-md-6">
-                <label class="form-label" for="surname">Apellidos</label>
-                <input id="surname" class="form-input form-control" type="text" formControlName="surname" autocomplete="family-name">
-              </div>
+          <form class="contact-form col-12 col-md-7 row gx-4 gx-lg-5 gy-3" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="form-group col-12 col-md-6">
+              <label class="form-label" for="name">Nombre</label>
+              <input id="name" class="form-input form-control" type="text" formControlName="name" autocomplete="given-name">
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="form-label" for="surname">Apellidos</label>
+              <input id="surname" class="form-input form-control" type="text" formControlName="surname" autocomplete="family-name">
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-12">
               <label class="form-label" for="email">Correo electrónico</label>
               <input id="email" class="form-input form-control" type="email" formControlName="email" autocomplete="email">
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-12">
               <label class="form-label" for="message">Mensaje</label>
               <textarea id="message" class="form-textarea form-control" formControlName="message"></textarea>
             </div>
 
             @if (statusMessage) {
-              <p class="status-text" [class.status-text--error]="statusType === 'error'" [class.status-text--success]="statusType === 'success'">
+              <p class="status-text col-12" [class.status-text--error]="statusType === 'error'" [class.status-text--success]="statusType === 'success'">
                 {{ statusMessage }}
               </p>
             }
 
-            <div class="bottom-action">
+            <div class="bottom-action col-12 d-flex justify-content-end mt-auto pt-4">
               <button class="btn btn-pink" type="submit">Enviar consulta</button>
             </div>
           </form>
+        </div>
       }
     </main>
   `,

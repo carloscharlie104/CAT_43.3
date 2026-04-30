@@ -5,11 +5,11 @@ import { Company, Location } from '../models/interfaces';
 @Component({
   selector: 'app-info-cards',
   template: `
-    <section class="cards-section row g-4">
+    <section class="cards-section row g-4 mb-5">
       @for (card of cards(); track card.title) {
-        <div class="card-wrapper col-12 col-md-4">
+        <div class="card-wrapper col-12 col-md-4 d-flex flex-column align-items-center">
           <h2>{{ card.title }}</h2>
-          <div class="card">
+          <div class="card h-100 w-100 d-flex flex-column align-items-center text-center">
             <p class="card-text">{{ card.text }}</p>
             <img class="card-image" [src]="card.image" [alt]="card.title">
             @if (card.subtitle) {

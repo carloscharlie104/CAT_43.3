@@ -13,31 +13,31 @@ import { calculateDays } from '../../core/utils';
     <main class="container">
       @if (vm$ | async; as vm) {
           @if (vm.car) {
-            <article class="carData-main row g-4">
-              <section class="carData-left col-12 col-lg-7">
+            <article class="carData-main row g-4 g-lg-5 align-items-start my-4 p-4 p-md-5 rounded-3">
+              <section class="carData-left col-12 col-lg-6 d-flex flex-column gap-3">
                 <h1 class="carData-title">{{ vm.car.fullName }}</h1>
                 <p class="carData-subtitle">{{ vm.car.shortDescription }}</p>
-                <div class="media-box">
-                  <img [src]="vm.car.image" [alt]="vm.car.fullName">
+                <div class="media-box rounded-3">
+                  <img class="rounded-3" [src]="vm.car.image" [alt]="vm.car.fullName">
                 </div>
               </section>
 
-              <section class="carData-right col-12 col-lg-5">
-                <div class="detail-section">
+              <section class="carData-right col-12 col-lg-6 d-flex flex-column gap-4">
+                <div class="detail-section pb-4">
                   <h2 class="detail-section-title">Ficha técnica</h2>
-                  <div class="detail-grid">
-                    <p class="detail-item"><strong>Marca</strong><span>{{ vm.car.brand }}</span></p>
-                    <p class="detail-item"><strong>Modelo</strong><span>{{ vm.car.model }}</span></p>
-                    <p class="detail-item"><strong>Categoría</strong><span>{{ vm.category }}</span></p>
-                    <p class="detail-item"><strong>Transmisión</strong><span>{{ vm.car.transmission }}</span></p>
-                    <p class="detail-item"><strong>Combustible</strong><span>{{ vm.car.fuel }}</span></p>
-                    <p class="detail-item"><strong>Plazas</strong><span>{{ vm.car.seats }}</span></p>
-                    <p class="detail-item"><strong>Equipaje</strong><span>{{ vm.car.luggage }}</span></p>
-                    <p class="detail-item"><strong>A/C</strong><span>{{ vm.car.airConditioning ? 'Sí' : 'No' }}</span></p>
+                  <div class="detail-grid row g-3">
+                    <p class="detail-item col-6"><strong>Marca</strong><span>{{ vm.car.brand }}</span></p>
+                    <p class="detail-item col-6"><strong>Modelo</strong><span>{{ vm.car.model }}</span></p>
+                    <p class="detail-item col-6"><strong>Categoría</strong><span>{{ vm.category }}</span></p>
+                    <p class="detail-item col-6"><strong>Transmisión</strong><span>{{ vm.car.transmission }}</span></p>
+                    <p class="detail-item col-6"><strong>Combustible</strong><span>{{ vm.car.fuel }}</span></p>
+                    <p class="detail-item col-6"><strong>Plazas</strong><span>{{ vm.car.seats }}</span></p>
+                    <p class="detail-item col-6"><strong>Equipaje</strong><span>{{ vm.car.luggage }}</span></p>
+                    <p class="detail-item col-6"><strong>A/C</strong><span>{{ vm.car.airConditioning ? 'Sí' : 'No' }}</span></p>
                   </div>
                 </div>
 
-                <div class="detail-section">
+                <div class="detail-section pb-4">
                   <h2 class="detail-section-title">Condiciones</h2>
                   <p class="info-line">{{ vm.car.conditions }}</p>
                   <p class="info-line">Precio por día: {{ vm.car.pricePerDay }} €</p>
@@ -46,23 +46,25 @@ import { calculateDays } from '../../core/utils';
                     <p class="info-line">Reserva estimada de {{ vm.days }} día(s).</p>
                   }
                 </div>
-              </section>
 
-              <a
-                class="cta btn"
-                [routerLink]="['/payment']"
-                [queryParams]="{
-                  carId: vm.car.id,
-                  locationId: vm.locationId,
-                  startDate: vm.startDate,
-                  endDate: vm.endDate
-                }"
-              >
-                Reservar vehículo
-              </a>
+                <div class="d-flex justify-content-end">
+                  <a
+                    class="cta btn btn-pink"
+                    [routerLink]="['/payment']"
+                    [queryParams]="{
+                      carId: vm.car.id,
+                      locationId: vm.locationId,
+                      startDate: vm.startDate,
+                      endDate: vm.endDate
+                    }"
+                  >
+                    Reservar vehículo
+                  </a>
+                </div>
+              </section>
             </article>
           } @else {
-            <section class="carData-main container">
+            <section class="carData-main container my-4 p-4 rounded-3">
               <p class="info-line">No se pudo cargar el vehículo solicitado.</p>
             </section>
           }
