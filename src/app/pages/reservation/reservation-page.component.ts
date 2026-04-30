@@ -63,15 +63,15 @@ import { ApiService } from '../../services/api.service';
 
         <section class="reservation-gallery">
           <div class="gallery-border-container">
-            <div class="cards-grid row g-4">
+            <div class="reservation-cards row gx-4 gy-5">
               @if (filteredCars.length) {
                 @for (car of filteredCars; track car.id) {
                   <article class="grid-item col-12 col-md-4">
-                    <h3 class="item-title">{{ car.fullName }}</h3>
                     <div class="reservation-card card">
                       <img class="reservation-card-image" [src]="car.image" [alt]="car.fullName">
 
                       <div class="reservation-card-body">
+                        <h3 class="reservation-card-title">{{ car.fullName }}</h3>
                         <p class="reservation-card-category">{{ categoryLabel(car.categoryId) }}</p>
                         <p class="reservation-card-price">{{ car.priceText }}</p>
                         <p class="reservation-card-location">{{ primaryLocation(car.locationIds) }}</p>
@@ -81,7 +81,7 @@ import { ApiService } from '../../services/api.service';
                   </article>
                 }
               } @else {
-                <p class="reservation-empty">No hay coches disponibles con ese filtro.</p>
+                <p class="reservation-empty col-12">No hay coches disponibles con ese filtro.</p>
               }
             </div>
           </div>

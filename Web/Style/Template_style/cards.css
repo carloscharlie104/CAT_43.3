@@ -1,7 +1,7 @@
 /* cards.css */
 .cards-section {
     display: flex;
-    gap: 40px;
+    gap: 0;
     margin-bottom: 60px;
 }
 
@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 0;
 }
 
 .card-wrapper h2 {
@@ -21,17 +22,20 @@
 .card {
     background-color: #d9d9d9; /* Gris claro */
     width: 100%;
-    padding: 40px 30px;
+    height: 100%;
+    padding: clamp(20px, 3vw, 40px) clamp(18px, 2.5vw, 30px);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    min-height: 350px;
+    min-height: clamp(300px, 42vw, 430px);
 }
 
 .card-text {
-    font-size: 1.2rem;
-    margin-bottom: auto;
+    font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+    line-height: 1.45;
+    margin-bottom: clamp(16px, 2vw, 28px);
+    overflow-wrap: anywhere;
 }
 
 .card-icon {

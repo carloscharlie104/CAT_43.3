@@ -52,6 +52,9 @@ main {
 }
 
 .card-image {
+    width: min(100%, clamp(140px, 18vw, 220px));
+    height: auto;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
     margin: 15px auto 12px;
     border-radius: 8px;

@@ -114,6 +114,7 @@ body {
     font-size: 1.2rem;
     font-weight: normal;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .grid-item .card-placeholder {
@@ -148,8 +149,17 @@ body {
 .reservation-card-body {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    flex: 1;
+    gap: 8px;
     padding: 16px;
+    text-align: center;
+}
+
+.reservation-card-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    text-align: center;
 }
 
 .reservation-card-category,
@@ -160,7 +170,8 @@ body {
 }
 
 .reservation-card-link {
-    margin-top: 8px;
+    align-self: flex-end;
+    margin-top: auto;
     text-decoration: none;
     color: #000000;
     font-weight: 600;
@@ -186,28 +197,24 @@ body {
         padding: 28px;
     }
 
-    .reservation-gallery .cards-grid {
-        display: flex;
-        row-gap: 1.5rem;
-        grid-template-columns: none;
-        margin-inline: -1.25rem;
-    }
-
-    .reservation-gallery .grid-item {
-        padding-inline: 1.25rem;
+    .reservation-gallery .reservation-cards {
+        row-gap: 3.5rem;
     }
 
     .reservation-gallery .reservation-card {
+        width: calc(100% - 24px);
+        margin-inline: auto;
         min-height: 430px;
     }
 
     .reservation-card-image {
-        aspect-ratio: 16 / 10;
+        height: 220px;
+        aspect-ratio: auto;
     }
 
     .reservation-card-body {
-        gap: 10px;
-        padding: 18px;
+        gap: 8px;
+        padding: 16px 18px;
     }
 
     .reservation-card-category,
@@ -246,5 +253,11 @@ body {
     .reservation-form {
         max-width: 100%;
         width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .reservation-gallery .reservation-cards {
+        row-gap: 2.5rem;
     }
 }
