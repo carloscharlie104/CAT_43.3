@@ -20,7 +20,7 @@ import { ApiService } from '../../services/api.service';
           </div>
 
           <form class="contact-form" [formGroup]="form" (ngSubmit)="submit()">
-            <div class="form-row row g-3">
+            <div class="form-row row gx-md-5 gy-3">
               <div class="form-group col-12 col-md-6">
                 <label class="form-label" for="name">Nombre</label>
                 <input id="name" class="form-input form-control" type="text" formControlName="name" autocomplete="given-name">

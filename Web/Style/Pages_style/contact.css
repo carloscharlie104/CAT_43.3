@@ -23,7 +23,8 @@ body{
     gap:26px;
 
     background:#e9e9e9;
-    border:4px solid #000;
+    border:2px solid #000;
+    border-radius: 10px;
 }
 
 .contact-title{
@@ -38,14 +39,15 @@ body{
 }
 
 .contact-form{
-    width:min(760px, 100%);
+    width:100%;
+    max-width:920px;
     display:flex;
     flex-direction:column;
     gap:18px;
 }
 
 .form-row{
-    width:80%;
+    width:100%;
 }
 
 .form-row .form-group{
@@ -64,8 +66,8 @@ body{
 .form-input,
 .form-textarea{
     width:100%;
-    border:4px solid #000;
-    border-radius:0;
+    border:2px solid #000;
+    border-radius: 10px;
     padding:14px;
     font-size:1.1rem;
     background:#cfcfcf;
@@ -102,13 +104,13 @@ body{
     padding-top:28px;
 }
 
-.btn-pink{
-    background:#e08282;
-    border:none;
-    border-radius:0;
-    padding:14px 26px;
-    font-size:1.15rem;
-    cursor:pointer;
+
+.btn-pink {
+    background-color: #e08282;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .btn.btn-pink{
@@ -118,4 +120,38 @@ body{
 
 .btn-pink:active{
     transform:translateY(1px);
+}
+
+@media (min-width: 769px) {
+    .contact-container {
+        display: grid;
+        grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.45fr);
+        align-items: start;
+        column-gap: clamp(36px, 5vw, 72px);
+        row-gap: 28px;
+    }
+
+    .contact-header {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .contact-description {
+        max-width: 34ch;
+    }
+
+    .contact-form {
+        max-width: none;
+    }
+
+    .contact-form .form-row {
+        --bs-gutter-x: 4rem;
+        margin-inline: -0.25rem;
+    }
+
+    .contact-form .form-row > .form-group {
+        padding-inline: 0.25rem;
+    }
 }
