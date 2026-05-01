@@ -7,9 +7,11 @@ import { HeaderComponent } from './shared/header.component';
   selector: 'app-root',
   imports: [HeaderComponent, RouterOutlet, FooterComponent],
   template: `
-    <div class="page-shell">
+    <div class="page-shell min-vh-100 d-flex flex-column">
       <app-header />
-      <router-outlet />
+      <div class="router-shell flex-grow-1 d-flex flex-column">
+        <router-outlet />
+      </div>
       <app-footer />
     </div>
   `,

@@ -52,14 +52,14 @@ import { AuthScreenConfig } from '../models/interfaces';
         <button class="auth-card__btn btn" type="submit">{{ config.submitText }}</button>
 
         @if (config.links?.primary || config.links?.secondary) {
-          <div class="auth-card__links-row">
+          <div class="auth-card__links-row d-flex align-items-center w-100">
             @if (config.links?.primary) {
               <a class="auth-card__link" [attr.href]="config.links?.primary?.href" (click)="navigate($event, config.links?.primary?.href)">
                 {{ config.links?.primary?.text }}
               </a>
             }
             @if (config.links?.secondary) {
-              <a class="auth-card__link auth-card__link--register" [attr.href]="config.links?.secondary?.href" (click)="navigate($event, config.links?.secondary?.href)">
+              <a class="auth-card__link auth-card__link--register ms-auto" [attr.href]="config.links?.secondary?.href" (click)="navigate($event, config.links?.secondary?.href)">
                 {{ config.links?.secondary?.text }}
               </a>
             }
