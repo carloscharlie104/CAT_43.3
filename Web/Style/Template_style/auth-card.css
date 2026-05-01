@@ -415,3 +415,16 @@ body {
         font-size: 0.8rem;
     }
 }
+
+.field__icon-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.field__icon-img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    display: block;
+}

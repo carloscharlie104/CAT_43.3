@@ -1,78 +1,63 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
-import { Session, User } from '../models/interfaces';
+import { auth, db } from '../core/firebase';
+import { Session } from '../models/interfaces';
 
-// Provisional client-side session storage until Firebase Auth is integrated.
-const SESSION_KEY = 'cat43_session_temp';
-const LEGACY_SESSION_KEY = 'cat43_session';
-
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class SessionService {
-  private readonly sessionSubject = new BehaviorSubject<Session | null>(this.readSession());
+  private readonly sessionSubject = new BehaviorSubject<Session | null>(null);
+
   readonly session$ = this.sessionSubject.asObservable();
 
   get snapshot(): Session | null {
     return this.sessionSubject.value;
   }
 
-  setSession(user: User): void {
-    const session: Session = {
-      username: user.username,
-      email: user.email,
-      loginAt: new Date().toISOString()
-    };
+  constructor() {
+    onAuthStateChanged(auth, async (firebaseUser) => {
+      if (!firebaseUser || !firebaseUser.email) {
+        this.sessionSubject.next(null);
+        return;
+      }
 
-    this.writeSession(session);
+      const profile = await this.getUserProfile(firebaseUser.uid);
+
+      const session: Session = {
+        uid: firebaseUser.uid,
+        username: profile?.username ?? firebaseUser.displayName ?? firebaseUser.email,
+        email: firebaseUser.email,
+        role: profile?.role ?? 'user',
+        loginAt: new Date().toISOString()
+      };
+
+      this.sessionSubject.next(session);
+    });
+  }
+
+  setSession(session: Session): void {
     this.sessionSubject.next(session);
   }
 
   clearSession(): void {
-    this.removeSession();
     this.sessionSubject.next(null);
   }
 
-  private readSession(): Session | null {
+  private async getUserProfile(uid: string): Promise<{ username?: string; role?: 'user' | 'admin' } | null> {
     try {
-      if (typeof localStorage === 'undefined') {
-        return null;
-      }
-      const currentRaw = localStorage.getItem(SESSION_KEY);
-      if (currentRaw) {
-        return JSON.parse(currentRaw) as Session;
-      }
+      const profileDoc = await getDoc(doc(db, 'users', uid));
 
-      const legacyRaw = localStorage.getItem(LEGACY_SESSION_KEY);
-      if (!legacyRaw) {
+      if (!profileDoc.exists()) {
         return null;
       }
 
-      const legacySession = JSON.parse(legacyRaw) as Session;
-      this.writeSession(legacySession);
-      localStorage.removeItem(LEGACY_SESSION_KEY);
-      return legacySession;
+      return profileDoc.data() as { username?: string; role?: 'user' | 'admin' };
     } catch {
       return null;
-    }
-  }
-
-  private writeSession(session: Session): void {
-    try {
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-      }
-    } catch {
-      // Ignore local storage errors in provisional mode.
-    }
-  }
-
-  private removeSession(): void {
-    try {
-      if (typeof localStorage !== 'undefined') {
-        localStorage.removeItem(SESSION_KEY);
-      }
-    } catch {
-      // Ignore local storage errors in provisional mode.
     }
   }
 }

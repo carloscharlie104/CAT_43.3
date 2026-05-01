@@ -1,12 +1,18 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom, map, switchMap } from 'rxjs';
 
 import { AuthCardComponent } from '../../components/auth-card.component';
-import { AuthConfig, AuthScreenConfig } from '../../models/interfaces';
-import { ApiService } from '../../services/api.service';
+import { AuthConfig, AuthFieldConfig, AuthScreenConfig } from '../../models/interfaces';import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 
 type AuthScreen = keyof AuthConfig;
@@ -18,11 +24,11 @@ type AuthScreen = keyof AuthConfig;
     <main class="auth container">
       @if (screen$ | async; as screen) {
         <app-auth-card
-          [config]="screen.config"
-          [form]="form"
-          [message]="message"
-          [messageType]="messageType"
-          (submitted)="submit(screen.key)"
+            [config]="screen.config"
+            [form]="form"
+            [message]="message"
+            [messageType]="messageType"
+            (submitted)="submit(screen.key)"
         />
       }
     </main>
@@ -41,26 +47,39 @@ export class AuthPageComponent {
   protected messageType: 'error' | 'success' = 'error';
 
   protected readonly form = this.formBuilder.group(
-    {
-      username: [''],
-      password: [''],
-      email: [''],
-      emailRepeat: [''],
-      passwordRepeat: [''],
-      acceptedTerms: [false]
-    },
-    {
-      validators: [this.matchValidator('email', 'emailRepeat'), this.matchValidator('password', 'passwordRepeat')]
-    }
+      {
+        username: [''],
+        password: [''],
+        email: [''],
+        emailRepeat: [''],
+        passwordRepeat: [''],
+        acceptedTerms: [false]
+      },
+      {
+        validators: [
+          this.matchValidator('email', 'emailRepeat'),
+          this.matchValidator('password', 'passwordRepeat')
+        ]
+      }
   );
 
   readonly screen$ = this.route.data.pipe(
-    map((data) => (data['screen'] as AuthScreen) ?? 'login'),
-    switchMap(async (screenKey) => {
-      const config = await firstValueFrom(this.api.getAuthConfig());
-      this.configureForm(screenKey, config[screenKey]);
-      return { key: screenKey, config: config[screenKey] };
-    })
+      map((data) => (data['screen'] as AuthScreen) ?? 'login'),
+      switchMap(async (screenKey) => {
+        const config = await firstValueFrom(this.api.getAuthConfig());
+
+        const screenConfig = this.normalizeScreenConfigForFirebaseAuth(
+            screenKey,
+            config[screenKey]
+        );
+
+        this.configureForm(screenKey, screenConfig);
+
+        return {
+          key: screenKey,
+          config: screenConfig
+        };
+      })
   );
 
   async submit(screen: AuthScreen): Promise<void> {
@@ -77,9 +96,11 @@ export class AuthPageComponent {
 
     try {
       if (screen === 'login') {
-        await this.auth.login(values.username ?? '', values.password ?? '');
+        await this.auth.login(values.email ?? '', values.password ?? '');
+
         this.messageType = 'success';
         this.message = 'Inicio de sesión correcto.';
+
         await this.router.navigateByUrl('/');
         return;
       }
@@ -90,42 +111,61 @@ export class AuthPageComponent {
           email: values.email ?? '',
           password: values.password ?? ''
         });
+
         this.messageType = 'success';
-        this.message = 'Registro completado. Ya puedes iniciar sesión.';
-        await this.router.navigateByUrl('/login');
+        this.message = 'Registro completado correctamente.';
+
+        await this.router.navigateByUrl('/');
         return;
       }
 
       await this.auth.recover(values.email ?? '');
+
       this.messageType = 'success';
       this.message = 'Si el correo existe, recibirás instrucciones.';
     } catch (error) {
       this.messageType = 'error';
-      this.message = error instanceof Error ? error.message : 'No se pudo completar la operación.';
+      this.message =
+          error instanceof Error
+              ? error.message
+              : 'No se pudo completar la operación.';
     }
   }
 
   private configureForm(screen: AuthScreen, config: AuthScreenConfig): void {
     this.form.reset(
-      {
-        username: '',
-        password: '',
-        email: '',
-        emailRepeat: '',
-        passwordRepeat: '',
-        acceptedTerms: false
-      },
-      { emitEvent: false }
+        {
+          username: '',
+          password: '',
+          email: '',
+          emailRepeat: '',
+          passwordRepeat: '',
+          acceptedTerms: false
+        },
+        { emitEvent: false }
     );
 
-    for (const fieldName of ['username', 'password', 'email', 'emailRepeat', 'passwordRepeat', 'acceptedTerms']) {
+    for (const fieldName of [
+      'username',
+      'password',
+      'email',
+      'emailRepeat',
+      'passwordRepeat',
+      'acceptedTerms'
+    ]) {
       this.form.get(fieldName)?.clearValidators();
+      this.form.get(fieldName)?.updateValueAndValidity({ emitEvent: false });
     }
 
     const screenValidators = this.getScreenValidators(screen);
 
     config.fields.forEach((field) => {
       const control = this.form.get(field.name);
+
+      if (!control) {
+        return;
+      }
+
       const validators = [...(screenValidators[field.name] ?? [])];
 
       if (field.required) {
@@ -140,20 +180,22 @@ export class AuthPageComponent {
         validators.push(Validators.minLength(field.minLength));
       }
 
-      control?.setValidators(validators);
-      control?.updateValueAndValidity({ emitEvent: false });
+      control.setValidators(validators);
+      control.updateValueAndValidity({ emitEvent: false });
     });
 
     if (screen === 'register') {
       this.form.get('acceptedTerms')?.setValidators(Validators.requiredTrue);
       this.form.get('acceptedTerms')?.updateValueAndValidity({ emitEvent: false });
     }
+
+    this.form.updateValueAndValidity({ emitEvent: false });
   }
 
   private getScreenValidators(screen: AuthScreen): Record<string, ValidatorFn[]> {
     if (screen === 'login') {
       return {
-        username: [Validators.required],
+        email: [Validators.required, Validators.email],
         password: [Validators.required]
       };
     }
@@ -175,27 +217,74 @@ export class AuthPageComponent {
     };
   }
 
+  private normalizeScreenConfigForFirebaseAuth(
+      screen: AuthScreen,
+      config: AuthScreenConfig
+  ): AuthScreenConfig {
+    if (screen !== 'login') {
+      return config;
+    }
+
+    const fieldsWithoutUsername = config.fields.filter((field) => field.name !== 'username');
+    const hasEmailField = fieldsWithoutUsername.some((field) => field.name === 'email');
+
+    const emailField: AuthFieldConfig = {
+      key: 'login-email',
+      id: 'login-email',
+      name: 'email',
+      label: 'Correo electrónico',
+      type: 'email',
+      placeholder: 'Introduce tu correo electrónico',
+      autocomplete: 'email',
+      required: true,
+      clearLabel: 'Borrar correo electrónico'
+    };
+
+    return {
+      ...config,
+      fields: hasEmailField ? fieldsWithoutUsername : [emailField, ...fieldsWithoutUsername]
+    };
+  }
+
   private matchValidator(sourceKey: string, targetKey: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const source = control.get(sourceKey)?.value;
-      const target = control.get(targetKey)?.value;
+      const sourceControl = control.get(sourceKey);
+      const targetControl = control.get(targetKey);
+
+      if (!sourceControl || !targetControl) {
+        return null;
+      }
+
+      const source = sourceControl.value;
+      const target = targetControl.value;
 
       if (!source || !target) {
+        this.removeMismatchError(targetControl);
         return null;
       }
 
       if (source !== target) {
-        control.get(targetKey)?.setErrors({ mismatch: true });
+        targetControl.setErrors({
+          ...(targetControl.errors ?? {}),
+          mismatch: true
+        });
+
         return { mismatch: true };
       }
 
-      if (control.get(targetKey)?.hasError('mismatch')) {
-        const errors = { ...(control.get(targetKey)?.errors ?? {}) };
-        delete errors['mismatch'];
-        control.get(targetKey)?.setErrors(Object.keys(errors).length ? errors : null);
-      }
-
+      this.removeMismatchError(targetControl);
       return null;
     };
+  }
+
+  private removeMismatchError(control: AbstractControl): void {
+    if (!control.hasError('mismatch')) {
+      return;
+    }
+
+    const errors = { ...(control.errors ?? {}) };
+    delete errors['mismatch'];
+
+    control.setErrors(Object.keys(errors).length ? errors : null);
   }
 }

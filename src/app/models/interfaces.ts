@@ -61,16 +61,20 @@ export interface Car {
 
 export interface User {
   id: string;
+  uid?: string;
   username: string;
   usernameNorm: string;
   email: string;
   emailNorm: string;
-  password: string;
+  role?: 'user' | 'admin';
+  createdAt?: string;
 }
 
 export interface Session {
+  uid: string;
   username: string;
   email: string;
+  role?: 'user' | 'admin';
   loginAt: string;
 }
 
