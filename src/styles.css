@@ -1,6 +1,16 @@
 @import "../Web/Style/global.css";
 @import "../Web/Style/responsive.css";
 
+/* Force scrolling on Android WebView and fix touch issues */
+html, body {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
 body {
   margin: 0;
 }

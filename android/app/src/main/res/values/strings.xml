@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">CAT Car Renting Service</string>
+    <string name="title_activity_main">CAT Car Renting Service</string>
+    <string name="package_name">com.cat.renting</string>
+    <string name="custom_url_scheme">com.cat.renting</string>
+</resources>
