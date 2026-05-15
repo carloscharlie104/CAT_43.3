@@ -29,10 +29,13 @@
     "@angular/platform-browser": "^20.3.18",
     "@angular/platform-browser-dynamic": "^20.3.18",
     "@angular/router": "^20.3.18",
+    "@capacitor-community/sqlite": "^8.1.0",
     "@capacitor/android": "^8.3.4",
     "@capacitor/cli": "^8.3.4",
     "@capacitor/core": "^8.3.4",
-    "@ionic/angular": "^8.8.6",
+    "@capacitor/device": "^8.0.2",
+    "@capacitor/preferences": "^8.0.1",
+    "@ionic/angular": "^8.8.7",
     "bootstrap": "^5.3.8",
     "firebase": "^12.12.1",
     "rxjs": "^7.8.2",
@@ -40,6 +43,7 @@
     "zone.js": "^0.15.1"
   },
   "devDependencies": {
+    "@angular-devkit/core": "^21.2.11",
     "@angular/build": "^20.3.23",
     "@angular/cli": "^20.3.23",
     "@angular/compiler-cli": "^20.3.18",
