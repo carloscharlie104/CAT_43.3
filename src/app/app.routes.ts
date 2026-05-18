@@ -3,11 +3,13 @@ import { Routes } from '@angular/router';
 import { AuthPageComponent } from './pages/auth/auth-page.component';
 import { CarDetailPageComponent } from './pages/car-detail/car-detail-page.component';
 import { ContactPageComponent } from './pages/contact/contact-page.component';
+import { FavoritesPageComponent } from './pages/favorites/favorites-page.component';
 import { FaqPageComponent } from './pages/faq/faq-page.component';
 import { HomePageComponent } from './pages/home/home-page.component';
 import { InformationPageComponent } from './pages/information/information-page.component';
 import { PaymentGatewayPageComponent } from './pages/payment-gateway/payment-gateway-page.component';
 import { ReservationPageComponent } from './pages/reservation/reservation-page.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomePageComponent },
@@ -16,6 +18,7 @@ export const routes: Routes = [
   { path: 'information', component: InformationPageComponent },
   { path: 'contact', component: ContactPageComponent },
   { path: 'payment', component: PaymentGatewayPageComponent },
+  { path: 'favorites', component: FavoritesPageComponent, canActivate: [authGuard] },
   { path: 'faq', component: FaqPageComponent },
   { path: 'login', component: AuthPageComponent, data: { screen: 'login' } },
   { path: 'register', component: AuthPageComponent, data: { screen: 'register' } },

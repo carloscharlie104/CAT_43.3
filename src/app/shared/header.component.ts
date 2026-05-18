@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { combineLatest } from 'rxjs';
 
 import { ApiService } from '../services/api.service';
+import { AuthService } from '../services/auth.service';
 import { SessionService } from '../services/session.service';
 
 @Component({
@@ -24,6 +25,7 @@ import { SessionService } from '../services/session.service';
               <a routerLink="/" class="nav-pill">Inicio</a>
               <a routerLink="/information" class="nav-pill">Información</a>
               <a routerLink="/reservation" class="nav-pill">Reserva</a>
+              <a routerLink="/favorites" class="nav-pill">Favoritos</a>
               <a routerLink="/contact" class="nav-pill">Contacto</a>
             </nav>
 
@@ -73,6 +75,10 @@ import { SessionService } from '../services/session.service';
             <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.contact" alt="Contacto" class="mobile-bottom-icon-image"></span>
             <span class="mobile-bottom-text">Contacto</span>
           </a>
+          <a routerLink="/favorites" class="mobile-bottom-item">
+            <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.profile" alt="Favoritos" class="mobile-bottom-icon-image"></span>
+            <span class="mobile-bottom-text">Fav</span>
+          </a>
         </nav>
       }
     </header>
@@ -83,6 +89,7 @@ import { SessionService } from '../services/session.service';
 export class HeaderComponent {
   private readonly api = inject(ApiService);
   private readonly session = inject(SessionService);
+  private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   protected readonly logoSrc = 'Assets/Logos/CAT.jpeg';
 
@@ -92,7 +99,8 @@ export class HeaderComponent {
   });
 
   logout(): void {
-    this.session.clearSession();
-    void this.router.navigateByUrl('/');
+    void this.auth.logout().finally(() => {
+      void this.router.navigateByUrl('/');
+    });
   }
 }
