@@ -5,6 +5,8 @@ import { catchError, combineLatest, map, of, switchMap } from 'rxjs';
 
 import { ApiService } from '../../services/api.service';
 import { calculateDays } from '../../core/utils';
+import { FavoritesService } from '../../services/favorites.service';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-car-detail-page',
@@ -48,6 +50,17 @@ import { calculateDays } from '../../core/utils';
                 </div>
 
                 <div class="d-flex justify-content-end">
+                  @if (vm.isLogged) {
+                    <button
+                      type="button"
+                      class="btn me-2"
+                      [class.btn-outline-warning]="!vm.isFavorite"
+                      [class.btn-warning]="vm.isFavorite"
+                      (click)="toggleFavorite(vm.car.id)"
+                    >
+                      {{ vm.isFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos' }}
+                    </button>
+                  }
                   <a
                     class="cta btn btn-pink"
                     [routerLink]="['/payment']"
@@ -77,22 +90,32 @@ import { calculateDays } from '../../core/utils';
 export class CarDetailPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly api = inject(ApiService);
+  private readonly favorites = inject(FavoritesService);
+  private readonly session = inject(SessionService);
 
   readonly vm$ = this.route.paramMap.pipe(
     switchMap((params) =>
       combineLatest({
         car: this.api.getCarById(params.get('id') ?? '').pipe(catchError(() => of(null))),
         categories: this.api.getCategories(),
-        queryParams: this.route.queryParamMap
+        queryParams: this.route.queryParamMap,
+        favoriteIds: this.favorites.favorites$,
+        session: this.session.session$
       })
     ),
-    map(({ car, categories, queryParams }) => ({
+    map(({ car, categories, queryParams, favoriteIds, session }) => ({
       car,
       category: categories.find((item) => item.id === car?.categoryId)?.label ?? 'Sin categoría',
       locationId: queryParams.get('locationId'),
       startDate: queryParams.get('startDate'),
       endDate: queryParams.get('endDate'),
-      days: calculateDays(queryParams.get('startDate') ?? '', queryParams.get('endDate') ?? '')
+      days: calculateDays(queryParams.get('startDate') ?? '', queryParams.get('endDate') ?? ''),
+      isFavorite: car ? favoriteIds.has(car.id) : false,
+      isLogged: Boolean(session)
     }))
   );
+
+  async toggleFavorite(carId: string): Promise<void> {
+    await this.favorites.toggleFavorite(carId);
+  }
 }
