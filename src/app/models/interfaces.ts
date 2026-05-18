@@ -63,6 +63,9 @@ export interface User {
   id: string;
   uid?: string;
   username: string;
+  firstName?: string;
+  lastName?: string;
+  avatarUrl?: string;
   usernameNorm: string;
   email: string;
   emailNorm: string;

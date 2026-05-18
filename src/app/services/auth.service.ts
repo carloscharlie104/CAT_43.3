@@ -40,11 +40,21 @@ export class AuthService {
     }
   }
 
-  async register(payload: { username: string; email: string; password: string }): Promise<void> {
+  async register(payload: {
+    username: string;
+    firstName: string;
+    lastName: string;
+    avatarUrl: string;
+    email: string;
+    password: string;
+  }): Promise<void> {
     const username = payload.username.trim();
+    const firstName = payload.firstName.trim();
+    const lastName = payload.lastName.trim();
+    const avatarUrl = payload.avatarUrl.trim();
     const email = payload.email.trim();
 
-    if (!username || !email || !payload.password) {
+    if (!username || !firstName || !lastName || !avatarUrl || !email || !payload.password) {
       throw new Error('Completa todos los campos obligatorios.');
     }
 
@@ -58,6 +68,9 @@ export class AuthService {
       await setDoc(doc(db, 'users', credential.user.uid), {
         uid: credential.user.uid,
         username,
+        firstName,
+        lastName,
+        avatarUrl,
         usernameNorm: normalizeIdentity(username),
         email,
         emailNorm: normalizeIdentity(email),

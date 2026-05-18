@@ -12,7 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom, map, switchMap } from 'rxjs';
 
 import { AuthCardComponent } from '../../components/auth-card.component';
-import { AuthConfig, AuthFieldConfig, AuthScreenConfig } from '../../models/interfaces';import { ApiService } from '../../services/api.service';
+import { AuthConfig, AuthFieldConfig, AuthScreenConfig } from '../../models/interfaces';
+import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 
 type AuthScreen = keyof AuthConfig;
@@ -49,6 +50,9 @@ export class AuthPageComponent {
   protected readonly form = this.formBuilder.group(
       {
         username: [''],
+        firstName: [''],
+        lastName: [''],
+        avatarUrl: [''],
         password: [''],
         email: [''],
         emailRepeat: [''],
@@ -108,6 +112,9 @@ export class AuthPageComponent {
       if (screen === 'register') {
         await this.auth.register({
           username: values.username ?? '',
+          firstName: values.firstName ?? '',
+          lastName: values.lastName ?? '',
+          avatarUrl: values.avatarUrl ?? '',
           email: values.email ?? '',
           password: values.password ?? ''
         });
@@ -136,6 +143,9 @@ export class AuthPageComponent {
     this.form.reset(
         {
           username: '',
+          firstName: '',
+          lastName: '',
+          avatarUrl: '',
           password: '',
           email: '',
           emailRepeat: '',
@@ -147,6 +157,9 @@ export class AuthPageComponent {
 
     for (const fieldName of [
       'username',
+      'firstName',
+      'lastName',
+      'avatarUrl',
       'password',
       'email',
       'emailRepeat',
@@ -203,6 +216,9 @@ export class AuthPageComponent {
     if (screen === 'register') {
       return {
         username: [Validators.required, Validators.minLength(3)],
+        firstName: [Validators.required, Validators.minLength(2)],
+        lastName: [Validators.required, Validators.minLength(2)],
+        avatarUrl: [Validators.required],
         email: [Validators.required, Validators.email],
         emailRepeat: [Validators.required, Validators.email],
         password: [Validators.required, Validators.minLength(6)],
@@ -221,6 +237,54 @@ export class AuthPageComponent {
       screen: AuthScreen,
       config: AuthScreenConfig
   ): AuthScreenConfig {
+    if (screen === 'register') {
+      const requiredRegisterFields: AuthFieldConfig[] = [
+        {
+          key: 'register-first-name',
+          id: 'register-first-name',
+          name: 'firstName',
+          label: 'Nombre',
+          type: 'text',
+          placeholder: 'Introduce tu nombre',
+          autocomplete: 'given-name',
+          required: true,
+          clearLabel: 'Borrar nombre'
+        },
+        {
+          key: 'register-last-name',
+          id: 'register-last-name',
+          name: 'lastName',
+          label: 'Apellidos',
+          type: 'text',
+          placeholder: 'Introduce tus apellidos',
+          autocomplete: 'family-name',
+          required: true,
+          clearLabel: 'Borrar apellidos'
+        },
+        {
+          key: 'register-avatar-url',
+          id: 'register-avatar-url',
+          name: 'avatarUrl',
+          label: 'Imagen de perfil (URL)',
+          type: 'url',
+          placeholder: 'https://...',
+          autocomplete: 'url',
+          required: true,
+          clearLabel: 'Borrar URL de imagen'
+        }
+      ];
+
+      return {
+        ...config,
+        fields: [
+          ...requiredRegisterFields,
+          ...config.fields.filter(
+            (field) => !requiredRegisterFields.some((requiredField) => requiredField.name === field.name)
+          )
+        ]
+      };
+    }
+
     if (screen !== 'login') {
       return config;
     }
