@@ -6,8 +6,7 @@ header {
     padding: 20px 40px;
 }
 
-.header-mobile-top,
-.mobile-bottom-nav {
+.header-mobile-top {
     display: none;
 }
 
@@ -105,7 +104,7 @@ header {
 @media (max-width: 768px) {
     header {
         padding: 0;
-        background: #fff;
+        background: transparent;
     }
 
     .header-desktop {
@@ -149,54 +148,4 @@ header {
         display: block;
     }
 
-    .mobile-bottom-nav {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 0;
-        width: calc(100% - 24px);
-        max-width: 340px;
-        margin: 8px auto 0;
-        background: #d9d9d9;
-        border-radius: 18px;
-        padding: 10px 8px 8px;
-    }
-
-    .mobile-bottom-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-        text-decoration: none;
-        color: #111;
-        font-size: 0.72rem;
-        line-height: 1;
-    }
-
-    .mobile-bottom-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: #f4f4f4;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .mobile-bottom-icon .icon-x {
-        width: 18px;
-        height: 18px;
-        stroke-width: 7;
-    }
-
-    .mobile-bottom-icon-image {
-        width: 18px;
-        height: 18px;
-        object-fit: contain;
-        display: block;
-    }
-
-    .mobile-bottom-text {
-        display: block;
-    }
 }

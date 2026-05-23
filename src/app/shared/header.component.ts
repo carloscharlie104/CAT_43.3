@@ -57,29 +57,6 @@ import { SessionService } from '../services/session.service';
             </a>
           }
         </div>
-
-        <nav class="mobile-bottom-nav" aria-label="Navegación móvil">
-          <a routerLink="/" class="mobile-bottom-item">
-            <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.home" alt="Inicio" class="mobile-bottom-icon-image"></span>
-            <span class="mobile-bottom-text">Inicio</span>
-          </a>
-          <a routerLink="/information" class="mobile-bottom-item">
-            <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.info" alt="Información" class="mobile-bottom-icon-image"></span>
-            <span class="mobile-bottom-text">Info</span>
-          </a>
-          <a routerLink="/reservation" class="mobile-bottom-item">
-            <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.reservation" alt="Reserva" class="mobile-bottom-icon-image"></span>
-            <span class="mobile-bottom-text">Reserva</span>
-          </a>
-          <a routerLink="/favorites" class="mobile-bottom-item">
-            <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.profile" alt="Favoritos" class="mobile-bottom-icon-image"></span>
-            <span class="mobile-bottom-text">Fav</span>
-          </a>
-          <a routerLink="/contact" class="mobile-bottom-item">
-            <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.contact" alt="Contacto" class="mobile-bottom-icon-image"></span>
-            <span class="mobile-bottom-text">Contacto</span>
-          </a>
-        </nav>
       }
     </header>
   `,

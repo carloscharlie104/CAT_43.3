@@ -11,6 +11,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(),
     provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
-    provideIonicAngular({}), provideIonicAngular({})
+    provideIonicAngular({})
   ]
 };
