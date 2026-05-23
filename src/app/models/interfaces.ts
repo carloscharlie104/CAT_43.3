@@ -65,7 +65,6 @@ export interface User {
   username: string;
   firstName?: string;
   lastName?: string;
-  avatarUrl?: string;
   usernameNorm: string;
   email: string;
   emailNorm: string;

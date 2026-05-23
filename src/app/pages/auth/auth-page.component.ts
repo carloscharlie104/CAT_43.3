@@ -52,7 +52,6 @@ export class AuthPageComponent {
         username: [''],
         firstName: [''],
         lastName: [''],
-        avatarUrl: [''],
         password: [''],
         email: [''],
         emailRepeat: [''],
@@ -114,7 +113,6 @@ export class AuthPageComponent {
           username: values.username ?? '',
           firstName: values.firstName ?? '',
           lastName: values.lastName ?? '',
-          avatarUrl: values.avatarUrl ?? '',
           email: values.email ?? '',
           password: values.password ?? ''
         });
@@ -145,7 +143,6 @@ export class AuthPageComponent {
           username: '',
           firstName: '',
           lastName: '',
-          avatarUrl: '',
           password: '',
           email: '',
           emailRepeat: '',
@@ -159,7 +156,6 @@ export class AuthPageComponent {
       'username',
       'firstName',
       'lastName',
-      'avatarUrl',
       'password',
       'email',
       'emailRepeat',
@@ -218,7 +214,6 @@ export class AuthPageComponent {
         username: [Validators.required, Validators.minLength(3)],
         firstName: [Validators.required, Validators.minLength(2)],
         lastName: [Validators.required, Validators.minLength(2)],
-        avatarUrl: [Validators.required],
         email: [Validators.required, Validators.email],
         emailRepeat: [Validators.required, Validators.email],
         password: [Validators.required, Validators.minLength(6)],
@@ -260,17 +255,6 @@ export class AuthPageComponent {
           autocomplete: 'family-name',
           required: true,
           clearLabel: 'Borrar apellidos'
-        },
-        {
-          key: 'register-avatar-url',
-          id: 'register-avatar-url',
-          name: 'avatarUrl',
-          label: 'Imagen de perfil (URL)',
-          type: 'url',
-          placeholder: 'https://...',
-          autocomplete: 'url',
-          required: true,
-          clearLabel: 'Borrar URL de imagen'
         }
       ];
 

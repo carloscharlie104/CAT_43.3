@@ -44,17 +44,15 @@ export class AuthService {
     username: string;
     firstName: string;
     lastName: string;
-    avatarUrl: string;
     email: string;
     password: string;
   }): Promise<void> {
     const username = payload.username.trim();
     const firstName = payload.firstName.trim();
     const lastName = payload.lastName.trim();
-    const avatarUrl = payload.avatarUrl.trim();
     const email = payload.email.trim();
 
-    if (!username || !firstName || !lastName || !avatarUrl || !email || !payload.password) {
+    if (!username || !firstName || !lastName || !email || !payload.password) {
       throw new Error('Completa todos los campos obligatorios.');
     }
 
@@ -70,7 +68,6 @@ export class AuthService {
         username,
         firstName,
         lastName,
-        avatarUrl,
         usernameNorm: normalizeIdentity(username),
         email,
         emailNorm: normalizeIdentity(email),
