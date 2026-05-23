@@ -105,9 +105,6 @@ header {
 @media (max-width: 768px) {
     header {
         padding: 0;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
         background: #fff;
     }
 
@@ -154,18 +151,14 @@ header {
 
     .mobile-bottom-nav {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 0;
-        position: fixed;
-        left: 50%;
-        bottom: 14px;
-        transform: translateX(-50%);
-        width: calc(100% - 32px);
+        width: calc(100% - 24px);
         max-width: 340px;
+        margin: 8px auto 0;
         background: #d9d9d9;
         border-radius: 18px;
         padding: 10px 8px 8px;
-        z-index: 1000;
     }
 
     .mobile-bottom-item {

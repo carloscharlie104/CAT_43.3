@@ -48,9 +48,9 @@ import { SessionService } from '../services/session.service';
           </a>
 
           @if (vm.session) {
-            <button type="button" class="mobile-top-btn mobile-top-btn--user app-link-button" (click)="logout()" [attr.aria-label]="'Salir (' + vm.session.username + ')'">
+            <a routerLink="/favorites" class="mobile-top-btn mobile-top-btn--user" [attr.aria-label]="'Favoritos de ' + vm.session.username">
               <img [src]="vm.company.mobileIcons.profile" alt="Perfil" class="header-mobile-icon">
-            </button>
+            </a>
           } @else {
             <a routerLink="/login" class="mobile-top-btn mobile-top-btn--user" aria-label="Acceso o registro">
               <img [src]="vm.company.mobileIcons.profile" alt="Perfil" class="header-mobile-icon">
@@ -71,13 +71,13 @@ import { SessionService } from '../services/session.service';
             <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.reservation" alt="Reserva" class="mobile-bottom-icon-image"></span>
             <span class="mobile-bottom-text">Reserva</span>
           </a>
-          <a routerLink="/contact" class="mobile-bottom-item">
-            <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.contact" alt="Contacto" class="mobile-bottom-icon-image"></span>
-            <span class="mobile-bottom-text">Contacto</span>
-          </a>
           <a routerLink="/favorites" class="mobile-bottom-item">
             <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.profile" alt="Favoritos" class="mobile-bottom-icon-image"></span>
             <span class="mobile-bottom-text">Fav</span>
+          </a>
+          <a routerLink="/contact" class="mobile-bottom-item">
+            <span class="mobile-bottom-icon"><img [src]="vm.company.mobileIcons.contact" alt="Contacto" class="mobile-bottom-icon-image"></span>
+            <span class="mobile-bottom-text">Contacto</span>
           </a>
         </nav>
       }
